@@ -4,26 +4,32 @@ import React, { useEffect, useState } from "react";
 
 const pages = [
     {
+        id: "1",
         title: "Trang chủ",
         link: "/"
     },
     {
+        id: "2",
         title: "Nhiếp Ảnh gia",
         link: "/user"
     },
     {
+        id: "3",
         title: "Lịch",
         link: "/user"
     },
     {
+        id: "4",
         title: "Tin tức",
         link: "/news"
     },
     {
+        id: "5",
         title: "Cộng đồng",
         link: "/communications"
     },
     {
+        id: "6",
         title: "Dịch vụ",
         link: "/services"
     }
@@ -37,7 +43,7 @@ export default function HeaderMenu() {
                 {
                     pages.map(e => (
                         <Link
-                            key={e.link}
+                            key={e.id}
                             href={e.link}
                             onClick={() => setActivePage(e.link)}
                             className={`px-3 text-[16px] ${activePage == e.link ? 'font-bold' : ''}`}

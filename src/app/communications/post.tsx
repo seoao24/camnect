@@ -10,7 +10,7 @@ interface PostProps {
 }
 export default function Post(props: PostProps) {
     return (
-        <div className='card shadow-lg py-5 px-10 my-5'>
+        <div className='card shadow-lg py-5 px-10 my-5 rounded-[20px]'>
             <div className="flex">
                 <div className="w-[67px] h-[67px] bg-no-repeat bg-cover rounded-[50%]"
                     style={{

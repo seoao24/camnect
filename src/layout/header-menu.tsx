@@ -9,11 +9,11 @@ const pages = [
     },
     {
         title: "Nhiếp Ảnh gia",
-        link: "/photographers"
+        link: "/user"
     },
     {
         title: "Lịch",
-        link: "/orders"
+        link: "/user"
     },
     {
         title: "Tin tức",

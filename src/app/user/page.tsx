@@ -3,6 +3,10 @@ import React, { useState } from 'react'
 import UserHero from './user-hero'
 import Post from './post';
 import PostFeature from './post';
+import FollowFeature from './follow';
+import ChatFeature from './chat';
+import ProfileFeature from './profile';
+import CalendarFeature from './calendar';
 
 const menu = [
   {
@@ -81,7 +85,21 @@ export default function Personal() {
               ))
             }
           </div>
-          <PostFeature />
+          {
+            selectedMenu == menu[0].link ? (
+              <PostFeature />
+            ) : selectedMenu == menu[1].link ? (
+              <FollowFeature />
+            ) : selectedMenu == menu[2].link ? (
+              <ChatFeature />
+            ): selectedMenu == menu[3].link ? (
+              <ProfileFeature />
+            ) : selectedMenu == menu[4].link ? (
+              <CalendarFeature />
+            ) : (
+              <></>
+            )
+          }
         </div>
       </div>
     </div>

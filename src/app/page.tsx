@@ -1,3 +1,4 @@
+'use client';
 import Feedback from "./home/feedback";
 import FQA from "./home/FQA";
 import HomeHere from "./home/hero";

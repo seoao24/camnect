@@ -5,7 +5,6 @@ import YellowButton from "@/components/buttons/YellowButton";
 import BorderedInput from "@/components/inputs/BorderedInput";
 import React from "react";
 import HeaderMenu from "./header-menu";
-import { useWindowSize } from "react-use";
 
 export default function AppHeader() {
     return (
@@ -17,7 +16,6 @@ export default function AppHeader() {
 }
 
 const TopHeader = () => {
-    const { width, height } = useWindowSize();
     return (
         <div className="w-[100vw] h-[72px] bg-[url('/assets/images/header-top.png')] bg-no-repeat bg-cover flex justify-center">
             <div className="container flex justify-between items-center">

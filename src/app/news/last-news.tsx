@@ -1,16 +1,17 @@
 import React from 'react'
-import LastNewsCard from '../news-detail/last-news-card'
 import HintNews from '../news-detail/hint-news'
 
 export default function LastNews() {
     return (
         <div className='shadow-lg rounded-[10px] px-4 py-4'>
-            <div className="flex">
-                <div className="w-[30px] h-[30px] bg-cover bg-bo-repeat"
-                    style={{
-                        backgroundImage: "url('/assets/images/organe-clock.png')"
-                    }}></div>
-                <div className="text-[#F07202] text-[20px] font-bold ml-2">BÀI ĐĂNG MỚI NHẤT</div>
+            <div className="border-b-[4px] border-b-[#D9D9D9] w-full my-3">
+                <div className="flex border-b-[4px] border-b-[#F07202] w-[250px] py-2">
+                    <div className="w-[30px] h-[30px] bg-cover bg-bo-repeat"
+                        style={{
+                            backgroundImage: "url('/assets/images/organe-clock.png')"
+                        }}></div>
+                    <div className="text-[#F07202] text-[20px] font-bold ml-2">BÀI ĐĂNG MỚI NHẤT</div>
+                </div>
             </div>
             <div>
                 <HintNews

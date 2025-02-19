@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react'
 import UserHero from './user-hero'
-import Post from './post';
 import PostFeature from './post';
 import FollowFeature from './follow';
 import ChatFeature from './chat';

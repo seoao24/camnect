@@ -13,7 +13,8 @@ export default function TopNewsCard(props: TopNewsCardProps) {
                 style={{
                     backgroundImage: `url('${props.imageUrl}')`
                 }}></div>
-            <div className="my-3 text-[11px] font-bold">{props.title}</div>
+            <div className="mt-3 text-[11px] font-bold">{props.title}</div>
+            <hr className='w-[70px] h-[1px] bg-[#BBB9B9] mb-3 mt-1'/>
             <div className="border-t-[1px[ border-[#BBB9B9] flex">
                 <div className="w-[12px] h-[12px] bg-cover bg-no-repeat"
                     style={{

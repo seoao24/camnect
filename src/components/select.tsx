@@ -1,3 +1,4 @@
+import { SelectItem } from '@/types/select'
 import React from 'react'
 
 interface SelectCustom {

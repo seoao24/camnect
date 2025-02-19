@@ -1,7 +1,7 @@
 'use client';
-import OrgangeButton from '@/components/buttons/OrganeButton'
 import OutlineInput from '@/components/inputs/OutlineInput'
 import SelectCustom from '@/components/select'
+import { SelectItem } from '@/types/select';
 import React from 'react'
 
 const option1: SelectItem[] = [

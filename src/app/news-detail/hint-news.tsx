@@ -19,6 +19,7 @@ export default function HintNews(props: HintNewsProps) {
             </div>
             <div className='px-3 flex flex-col justify-between'>
                 <div className='font-bold text-[11px]'>{props.title}</div>
+                <hr className='w-[70px] h-[1.5px] bg-[#BBB9B9]'/>
                 <div className="flex text-[10px] text-[#6B716E]">
                     <div className="w-[11px] h-[11px] relative">
                         <Image src="/assets/images/clock-icon.png" alt='clock' fill />

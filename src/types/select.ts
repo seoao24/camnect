@@ -1,4 +1,4 @@
-interface SelectItem {
+export interface SelectItem {
     value: string,
     title: string
 }

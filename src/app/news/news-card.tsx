@@ -18,7 +18,7 @@ export default function NewsCard(props: NewsCardProps) {
                     style={{
                         backgroundImage: "url('/assets/images/clock-icon.png')"
                     }}></div>
-                <div>{props.lastPost}</div>
+                <div className='ml-2'>{props.lastPost}</div>
             </div>
         </div>
     )

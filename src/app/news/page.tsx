@@ -31,22 +31,22 @@ export default function News() {
           <NewsCard
             title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
             imageUrl='/assets/images/news11.png'
-            lastPost='1 giờ trước'
+            lastPost='8 giờ trước'
           />
           <NewsCard
             title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
             imageUrl='/assets/images/news11.png'
-            lastPost='1 giờ trước'
+            lastPost='8 giờ trước'
           />
           <NewsCard
             title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
             imageUrl='/assets/images/news11.png'
-            lastPost='1 giờ trước'
+            lastPost='8 giờ trước'
           />
           <NewsCard
             title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
             imageUrl='/assets/images/news11.png'
-            lastPost='1 giờ trước'
+            lastPost='8 giờ trước'
           />
         </div>
       </div>
@@ -83,7 +83,7 @@ export default function News() {
       </div>
       <div className="flex justify-center">
         <div className="container">
-          <RelativeNews/>
+          <RelativeNews />
         </div>
       </div>
     </div>

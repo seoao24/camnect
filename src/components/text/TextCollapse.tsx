@@ -7,7 +7,7 @@ interface TextCollapseProps {
     isOpen: boolean
 }
 export default function TextCollapse(props: TextCollapseProps) {
-    var [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
     return (
         <div className={`px-10 my-5 py-10 rounded-[30px] flex justify-between items-center transition-all duration-500 overflow-hidden ${open ? 'bg-[#F07202] text-white' : 'bg-[#EBEBEB] text-[#6E6E6E]'}`}>
             <div className="max-w-[90%]">

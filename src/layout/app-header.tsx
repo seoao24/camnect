@@ -1,6 +1,5 @@
 'use client';
 import OrgangeButton from "@/components/buttons/OrganeButton";
-import OutlineButton from "@/components/buttons/OutlineButton";
 import YellowButton from "@/components/buttons/YellowButton";
 import BorderedInput from "@/components/inputs/BorderedInput";
 import React from "react";

@@ -17,7 +17,7 @@ export default function CardPhotographers(props: CardPhotographersProps) {
         return amount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.').replace('.', ',');
     }
     return (
-        <div className="rounded-[20px] bg-white px-5 py-5 flex mt-[5rem]">
+        <div className="rounded-[20px] bg-white px-5 py-5 flex my-4">
             <div className="w-[300px] border-r-[1px] border-r-[#F07202] px-10">
                 <div className="flex justify-center">
                     <Image src={props.avatarUrl} alt="search1" width={180} height={180} className="rounded-[50%]" />
@@ -34,7 +34,7 @@ export default function CardPhotographers(props: CardPhotographersProps) {
                     </div>
                 </div>
                 <div className="text-center font-bold text-[22px]">{props.fullname}</div>
-                <div className="text-center text-[#F07202] text-[16px]">
+                <div className="text-center text-[#F07202] text-[16px] text-nowrap">
                     {formatMoney(props.minPrice)} - {formatMoney(props.maxPrice)}
                 </div>
             </div>
@@ -55,7 +55,9 @@ export default function CardPhotographers(props: CardPhotographersProps) {
                         }
                     </div>
                     <div>
-                        <OrgangeButton title="Xem thêm" onClick={() => { }} />
+                        <button className="uppercase px-5 py-1 rounded-[20px] bg-[#FF9900] text-[15px] font-bold text-white">
+                            Xem thêm
+                        </button>
                     </div>
                 </div>
             </div>

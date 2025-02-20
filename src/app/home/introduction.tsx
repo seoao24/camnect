@@ -4,8 +4,8 @@ import React from "react";
 export default function Introduction() {
     return (
         <div className="flex justify-center z-[50] relative mt-[100px] pb-[10rem]">
-            {/* <div className="container flex">
-                <div className="text-[#777777] pr-[5rem] w-[40%]">
+            <div className="container flex">
+                <div className="text-[#777777] pr-5 w-[80%]">
                     <div className="font-bold text-[40px] text-[#F07202]">GIỚI THIỆU VỀ CAMNECT</div>
                     <p className="text-[18px] mt-5">
                         Camnect là nền tảng trực tuyến hàng đầu, chuyên kết nối khách hàng với các nhiếp ảnh gia chuyên nghiệp, đáp ứng mọi nhu cầu chụp ảnh từ sự kiện, chân dung, thời trang đến sản phẩm và bất động sản.
@@ -52,8 +52,8 @@ export default function Introduction() {
                 }}>
                     
                 </div>
-            </div> */}
-            <div className="bg-contain bg-no-repeat w-full h-[50vw] container relative"
+            </div>
+            {/* <div className="bg-contain bg-no-repeat w-full h-[50vw] container relative"
                 style={{
                     backgroundImage: `url('/assets/images/introduction-full.png')`
                 }}>
@@ -81,7 +81,7 @@ export default function Introduction() {
                         </g>
                     </svg>
                 </button>
-            </div>
+            </div> */}
         </div>
     )
 }

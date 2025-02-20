@@ -7,21 +7,21 @@ export default function Reason() {
             <div className="container grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-[5rem] pr-[50px] px-5">
                     <div className="mt-[4.5rem]">
-                        <div className="bg-contain bg-no-repeat w-[280px] h-[360px]"
+                        <div className="bg-contain bg-no-repeat w-[250px] h-[338px]"
                             style={{
                                 backgroundImage: `url('/assets/images/reason11.png')`
                             }}></div>
-                        <div className="bg-contain bg-no-repeat w-[280px] h-[360px] mt-4"
+                        <div className="bg-contain bg-no-repeat w-[250px] h-[338px] mt-4"
                             style={{
                                 backgroundImage: `url('/assets/images/reason13.png')`
                             }}></div>
                     </div>
                     <div>
-                        <div className="bg-contain bg-no-repeat w-[280px] h-[360px]"
+                        <div className="bg-contain bg-no-repeat w-[250px] h-[338px]"
                             style={{
                                 backgroundImage: `url('/assets/images/reason12.png')`
                             }}></div>
-                        <div className="bg-contain bg-no-repeat w-[280px] h-[360px] mt-4"
+                        <div className="bg-contain bg-no-repeat w-[250px] h-[338px] mt-4"
                             style={{
                                 backgroundImage: `url('/assets/images/reason14.png')`
                             }}></div>

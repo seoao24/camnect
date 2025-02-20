@@ -4,14 +4,17 @@ import HintNews from '../news-detail/hint-news'
 export default function LastNews() {
     return (
         <div className='shadow-lg rounded-[10px] px-4 py-4'>
-            <div className="border-b-[4px] border-b-[#D9D9D9] w-full my-3">
-                <div className="flex border-b-[4px] border-b-[#F07202] w-[250px] py-2">
+            <div className="w-full my-3">
+                <div className="flex py-2">
                     <div className="w-[30px] h-[30px] bg-cover bg-bo-repeat"
                         style={{
                             backgroundImage: "url('/assets/images/organe-clock.png')"
                         }}></div>
                     <div className="text-[#F07202] text-[20px] font-bold ml-2">BÀI ĐĂNG MỚI NHẤT</div>
                 </div>
+                <div className="bg-none bg-no-repeat w-full h-[2px]" style={{
+                    backgroundImage: `url('/assets/images/news-line2.png')`
+                }}></div>
             </div>
             <div>
                 <HintNews

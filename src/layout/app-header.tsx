@@ -5,6 +5,7 @@ import YellowButton from "@/components/buttons/YellowButton";
 import BorderedInput from "@/components/inputs/BorderedInput";
 import React from "react";
 import HeaderMenu from "./header-menu";
+import Link from "next/link";
 
 export default function AppHeader() {
     return (
@@ -41,7 +42,8 @@ const MainHeader = () => {
                     <HeaderMenu />
                 </div>
                 <div className="flex items-center">
-                    <OutlineButton title="Đăng ký" onClick={() => { }} />
+                    <Link className="bg-none border-[#F07202] border-[1px] px-[2rem] text-[#F07202] rounded-[20px] py-[10px] text-[16px] font-bold mx-2"
+                        href='/sign-up'>Đăng ký</Link>
                     <OrgangeButton title="Đăng nhập" onClick={() => { }} />
                 </div>
             </div>

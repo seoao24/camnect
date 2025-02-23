@@ -39,7 +39,7 @@ export default function Personal() {
   return (
     <div>
       <UserHero />
-      <div className="flex justify-center">
+      {/* <div className="flex justify-center">
         <div className="container">
           <div className="flex justify-between items-center">
             <div>
@@ -100,7 +100,7 @@ export default function Personal() {
             )
           }
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

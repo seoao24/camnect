@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function UserHero() {
     return (
-        <div className='w-full h-[500px] bg-cover bg-no-repeat my-10 flex justify-center items-center'
+        <div className='w-full h-[500px] bg-cover bg-no-repeat py-10 flex justify-center items-center'
             style={{
                 backgroundImage: `url('/assets/images/background.png')`
             }}>

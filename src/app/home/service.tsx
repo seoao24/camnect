@@ -4,14 +4,13 @@ import React from "react";
 export default function Service() {
     return (
         <div className="relative w-full bg-white rounded-[20px] px-5">
-            <div className="absolute top-[-40px] flex justify-center w-full">
+            <div className="absolute top-[-40px] flex justify-center w-full left-0">
                 <div className="w-[80px] h-[80px] rounded-[50%] flex justify-center items-center shadow-md bg-white">
                     <Image
                         src="/assets/images/service1.png"
                         alt="Service 1"
                         width={36}
                         height={36}
-                        priority
                     />
                 </div>
             </div>

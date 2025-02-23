@@ -9,7 +9,7 @@ export default function HomeHere() {
         <div>
             <div className="w-[100vw] h-[calc(100vw/2)] bg-[url('/assets/images/hero.png')] bg-cover bg-no-repeat px-0 mx-0 md:relative">
                 <div className="md:absolute top-[200px] right-[150px] md:w-[550px] sm:w-full">
-                    <div className="px-10 py-7 rounded-[20px] bg-cover bg-no-repeatS"
+                    <div className="px-10 py-7 rounded-[20px] bg-cover bg-no-repeat"
                     style={{
                         backgroundImage: "url('/assets/images/hero-home-orange.png')"
                     }}>

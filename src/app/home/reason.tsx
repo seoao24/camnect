@@ -5,7 +5,7 @@ export default function Reason() {
     return (
         <div className="flex justify-center mt-[5rem]">
             <div className="container grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-[5rem] pr-[50px] px-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-[3rem] pr-[50px] px-5">
                     <div className="mt-[4.5rem]">
                         <div className="bg-contain bg-no-repeat w-[250px] h-[338px]"
                             style={{

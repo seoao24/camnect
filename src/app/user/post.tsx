@@ -41,7 +41,7 @@ export default function PostFeature() {
                         status="Thành viên mới"
                     />
                 </div>
-                <div className="w-[300px] ml-4">
+                <div className="w-[400px] ml-4">
                     <ContactForm />
                     <div className='w-full h-[200px] rounded-[10px] bg-cover bg-no-repeat mt-4'
                     style={{

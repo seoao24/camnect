@@ -8,7 +8,7 @@ import SearchPhotographers from "./home/search";
 
 export default function Home() {
   return (
-    <div className="mt-[3rem] p-0 m-0 relative">
+    <div className="mt-[3rem] relative">
       <HomeHere />
       <Introduction />
       <Reason />

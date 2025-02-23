@@ -22,10 +22,12 @@ export default function ClientLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#F9F8F8]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#F9F8F8] m-0 p-0`}
       >
         <AppHeader />
-        {children}
+        <div className="p-0 m-0">
+          {children}
+        </div>
       </body>
     </html>
   );

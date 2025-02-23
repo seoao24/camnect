@@ -16,7 +16,7 @@ const pages = [
     {
         id: "3",
         title: "Lịch",
-        link: "/user"
+        link: "/calendar"
     },
     {
         id: "4",

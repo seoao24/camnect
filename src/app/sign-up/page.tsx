@@ -3,26 +3,31 @@ import React from 'react';
 export default function SignIn() {
   return (
     <div className='flex justify-center mt-[5rem]'>
-      <div className="container flex items-center">
+      <div className="container flex items-center justify-center">
         <div className='max-w-[450px]'>
           <div className="text-[#777777] text-[30px]">Form Đăng ký Camect</div>
           <div className="text-[#F07202] font-bold text-[36px]">Đăng ký ngay để trải nghiệm dịch vụ Camnect!</div>
           <div className="text-[18px] text-[#777777] ">Chào mừng bạn đến với Camnect – nền tảng kết nối nhiếp ảnh chuyên nghiệp và đáng tin cậy. Hãy hoàn thành form đăng ký ngay nhé!</div>
+          <div className='bg-contain bg-no-repeat w-[209px] h-[38px] mt-[5rem]'
+            style={{
+              backgroundImage: `url('/assets/images/dot-signup.png')`
+            }}>
+          </div>
         </div>
         <div className="p-10 bg-[#F07202] rounded-tl-[20px] rounded-bl-[20px] rounded-br-[20px] max-w-[740px]">
           <div className="grid grid-cols-2 gap-4">
-            <input type="text" className='bg-white outline-none border-none p-2' placeholder='Số điện thoại*' />
-            <input type="text" className='bg-white outline-none border-none p-2' placeholder='Email*' />
+            <input type="text" className='bg-white outline-none border-none p-4' placeholder='Số điện thoại*' />
+            <input type="text" className='bg-white outline-none border-none p-4' placeholder='Email*' />
           </div>
-          <input type="text" className='bg-white outline-none border-none p-2 w-full mt-4' placeholder='Tên người dùng*' />
-          <input type="password" className='bg-white outline-none border-none p-2 w-full mt-4' placeholder='Mật khẩu*' />
-          <input type="password" className='bg-white outline-none border-none p-2 w-full mt-4' placeholder='Xác nhận mật khẩu*' />
-          <button className='flex text-[#F07202] bg-white rounded-[20px] w-[274px] py-2 justify-center mt-5'>
-            <div className="flex">
-              Đăng ký
+          <input type="text" className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Tên người dùng*' />
+          <input type="password" className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Mật khẩu*' />
+          <input type="password" className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Xác nhận mật khẩu*' />
+          <button className='flex text-[#F07202] bg-white rounded-[20px] w-[274px] py-4 justify-center mt-5'>
+            <div className="flex items-center">
+              <div className='mx-1'>Đăng ký</div>
               <svg
-                width="24px"
-                height="24px"
+                width="20px"
+                height="20px"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

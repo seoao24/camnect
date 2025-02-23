@@ -91,11 +91,11 @@ export default function Communications() {
                         </div>
                         <div className="w-[315px] rounded-[20px] shadow-lg px-5 py-5">
                             <div className="text-[16px] font-bold text-[#F07202]">BẢNG XẾP HẠNG</div>
-                            <div className="flex justify-between">
+                            <div className="flex justify-between items-center mt-5">
                                 {
                                     SortTime.map(time => {
                                         return (
-                                            <div key={time} className={`px-5 py-2 cursor-pointer font-bold ${selectedSortTime == time ? 'text-[#F07202] border-[1px] rounded-[10px] border-[#F07202]' : ''}`}
+                                            <div key={time} className={`px-2 cursor-pointer font-bold ${selectedSortTime == time ? 'text-[#F07202] border-[1px] rounded-[10px] border-[#F07202]' : ''}`}
                                                 onClick={() => setSelectedSortTime(time)}>
                                                 {time}
                                             </div>

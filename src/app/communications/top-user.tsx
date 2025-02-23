@@ -9,7 +9,7 @@ interface TopUserProps {
 export default function TopUser(props: TopUserProps) {
     return (
         <div className='flex items-center my-5'>
-            <div className="text-[20px] text-[#F07202] font-bold">{props.top}</div>
+            <div className="text-[20px] text-[#F07202] font-bold w-[20px]">{props.top}</div>
             <div className="w-[44px] h-[44px] rounded-[50%] mx-3 bg-contain"
             style={{
                 backgroundImage: `url('${props.avatarUrl}')`

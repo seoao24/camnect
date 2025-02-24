@@ -10,7 +10,7 @@ interface PostProps {
 }
 export default function Post(props: PostProps) {
     return (
-        <div className='card shadow-lg py-5 px-10 my-5 rounded-[20px]'>
+        <div className='card shadow-lg py-5 md:px-10 px-5 my-5 rounded-[20px]'>
             <div className="flex items-center">
                 <div className="w-[67px] h-[67px] bg-no-repeat bg-cover rounded-[50%]"
                     style={{
@@ -35,7 +35,7 @@ export default function Post(props: PostProps) {
                 {
                     props.imageUrls.map((url, index) => {
                         return (
-                            <div key={"image" + index} className="rounded-[10px] bg-cover bg-no-repeat w-full h-[500px]"
+                            <div key={"image" + index} className="rounded-[10px] bg-cover bg-no-repeat w-full md:h-[500px] h-[152px]"
                                 style={{
                                     backgroundImage: `url('${url}')`
                                 }}></div>

@@ -17,7 +17,7 @@ export default function AppHeader() {
 
 const TopHeader = () => {
     return (
-        <div className="hidden md:block w-[100vw] h-[72px] bg-[url('/assets/images/header-top.png')] bg-no-repeat bg-cover flex justify-center">
+        <div className="hidden md:flex w-[100vw] h-[72px] bg-[url('/assets/images/header-top.png')] bg-no-repeat bg-cover justify-center">
             <div className="container flex justify-between items-center">
                 <div className="font-bold text-[24px] uppercase">Giảm giá 25% cho lần đầu đăng ký</div>
                 <div className="flex items-center">

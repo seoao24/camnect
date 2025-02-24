@@ -2,16 +2,11 @@
 import Link from "next/link";
 import React, { useState } from "react";
 
-const pages = [
+export const pages = [
     {
         id: "1",
         title: "Trang chủ",
         link: "/"
-    },
-    {
-        id: "2",
-        title: "Nhiếp Ảnh gia",
-        link: "/user"
     },
     {
         id: "3",

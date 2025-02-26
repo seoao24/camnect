@@ -31,3 +31,17 @@ body {
 .slick-slide {
   margin-right: 15px; /* Tạo khoảng cách giữa các item */
 }
+
+.slick-center {
+  background: linear-gradient(to bottom, #FF902E, #D94E0D);
+  color: white !important;
+  border-radius: 20px;
+}
+
+.service-item-home .slick-slide {
+  color: #8E8B8B;
+}
+
+.service-item-home .slick-list {
+  height: 180px !important;
+}

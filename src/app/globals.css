@@ -32,7 +32,7 @@ body {
   margin-right: 15px; /* Tạo khoảng cách giữa các item */
 }
 
-.slick-center {
+.service-item-home .slick-center {
   background: linear-gradient(to bottom, #FF902E, #D94E0D);
   color: white !important;
   border-radius: 20px;
@@ -44,4 +44,12 @@ body {
 
 .service-item-home .slick-list {
   height: 180px !important;
+}
+
+.reason-slide .slick-slider {
+  height: 350px !important;
+}
+
+.search-photographer .slick-slider .slick-list {
+  height: 550px !important;
 }

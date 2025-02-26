@@ -25,7 +25,7 @@ export default function FeedBackMobile() {
             <div className="px-5">
                 {
                     users.map(e => (
-                        <div>
+                        <div key={e.id}>
                             <FeedbackCard
                                 content={e.content}
                                 fullname={e.fullname}

@@ -1,5 +1,5 @@
+'use client';
 import React from 'react'
-import Input from '../services/input'
 
 export default function SearchServiceMobile() {
     const getDate = () => {

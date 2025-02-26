@@ -37,7 +37,7 @@ export default function ReasonSlide() {
         slidesToScroll: 1
     };
     const getNumber = (index: number) => {
-        var text = "";
+        let text = "";
         if (index > 9) text = index + "";
         else {
             text = "0" + index;

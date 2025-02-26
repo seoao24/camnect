@@ -2,7 +2,7 @@
 import React from 'react'
 import Slider from 'react-slick';
 
-var slideData = [
+const slideData = [
     {
         id: "slide-1",
         backgroundUrl: "/assets/images/search1.png",
@@ -51,7 +51,7 @@ var slideData = [
 ]
 export default function PhotographerSlide() {
     const getNumber = (index: number) => {
-        var text = "";
+        let text = "";
         if (index > 9) text = index + "";
         else {
             text = "0" + index;
@@ -86,8 +86,8 @@ export default function PhotographerSlide() {
                                 <div className="text-[16px] font-bold mr-2">{e.fullname}</div>
                                 <div className="flex items-center">
                                     {
-                                        Array.from({ length: 5 }, (_, i) => (
-                                            <div className="mx-[2px]">
+                                        Array.from({ length: 5 }, () => (
+                                            <div className="mx-[2px]" key={e.id}>
                                                 <svg
                                                     width="18px"
                                                     height="18px"

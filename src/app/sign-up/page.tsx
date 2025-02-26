@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function SignIn() {
+export default function SignUp() {
   return (
-    <div className='flex justify-center mt-[5rem]'>
-      <div className="container flex items-center justify-center">
-        <div className='max-w-[450px]'>
+    <div className='flex justify-center mt-[5rem] px-5'>
+      <div className="container md:flex items-center justify-center">
+        <div className='max-w-[450px] hidden md:block'>
           <div className="text-[#777777] text-[30px]">Form Đăng ký Camect</div>
           <div className="text-[#F07202] font-bold text-[36px]">Đăng ký ngay để trải nghiệm dịch vụ Camnect!</div>
           <div className="text-[18px] text-[#777777] ">Chào mừng bạn đến với Camnect – nền tảng kết nối nhiếp ảnh chuyên nghiệp và đáng tin cậy. Hãy hoàn thành form đăng ký ngay nhé!</div>
@@ -22,7 +22,7 @@ export default function SignIn() {
           <input type="text" className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Tên người dùng*' />
           <input type="password" className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Mật khẩu*' />
           <input type="password" className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Xác nhận mật khẩu*' />
-          <button className='flex text-[#F07202] bg-white rounded-[20px] w-[274px] py-4 justify-center mt-5'>
+          <button className='flex text-[#F07202] bg-white rounded-[20px] md:w-[274px] py-4 justify-center mt-5 w-full'>
             <div className="flex items-center">
               <div className='mx-1'>Đăng ký</div>
               <svg

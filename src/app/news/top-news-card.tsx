@@ -9,7 +9,7 @@ interface TopNewsCardProps {
 export default function TopNewsCard(props: TopNewsCardProps) {
     return (
         <div className=''>
-            <div className="bg-cover bg-no-repeat h-[200px] w-full"
+            <div className="bg-cover bg-no-repeat md:h-[200px] md:w-full w-[120px] h-[92px]"
                 style={{
                     backgroundImage: `url('${props.imageUrl}')`
                 }}></div>

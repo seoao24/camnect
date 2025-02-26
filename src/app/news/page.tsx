@@ -19,71 +19,91 @@ const LastNews1 = () => (
 export default function News() {
   return (
     <div>
-      <CommonHero />
-      <div className="flex justify-center">
-        <div className="container grid grid-cols-2 gap-4">
-          <TopNews />
-          <LastNews />
-        </div>
-      </div>
-      <div className="flex justify-center my-10 bg-[#FEF5EC]">
-        <div className="grid grid-cols-4 gap-4 container py-12">
-          <NewsCard
-            title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
-            imageUrl='/assets/images/news11.png'
-            lastPost='8 giờ trước'
-          />
-          <NewsCard
-            title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
-            imageUrl='/assets/images/news11.png'
-            lastPost='8 giờ trước'
-          />
-          <NewsCard
-            title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
-            imageUrl='/assets/images/news11.png'
-            lastPost='8 giờ trước'
-          />
-          <NewsCard
-            title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
-            imageUrl='/assets/images/news11.png'
-            lastPost='8 giờ trước'
-          />
-        </div>
-      </div>
-      <div className="flex justify-center">
-        <div className='container'>
-          <div className='font-bold text-[36px]'>
-            Bài viết mới:
+      <div className="bg-[#F07202] px-5 py-1 my-1 text-white text-[12px] md:hidden">Nơi khoảnh khắc trở thành kỉ niệm!</div>
+      <div className='px-5'>
+        <CommonHero />
+        <div className="flex justify-center">
+          <div className="container grid md:grid-cols-2 gap-4">
+            <TopNews />
+            <LastNews />
           </div>
-          <LastNewsCard
-            imageUrl='/assets/images/last-news1.png'
-            title='Camnect: Dịch Vụ Cho Thuê Nhiếp Ảnh Gia Chụp Ảnh Chuyên Nghiệp'
-            content={<LastNews1 />} />
-          <LastNewsCard
-            imageUrl='/assets/images/last-news1.png'
-            title='Camnect: Dịch Vụ Cho Thuê Nhiếp Ảnh Gia Chụp Ảnh Chuyên Nghiệp'
-            content={<LastNews1 />} />
-          <LastNewsCard
-            imageUrl='/assets/images/last-news1.png'
-            title='Camnect: Dịch Vụ Cho Thuê Nhiếp Ảnh Gia Chụp Ảnh Chuyên Nghiệp'
-            content={<LastNews1 />} />
-          <LastNewsCard
-            imageUrl='/assets/images/last-news1.png'
-            title='Camnect: Dịch Vụ Cho Thuê Nhiếp Ảnh Gia Chụp Ảnh Chuyên Nghiệp'
-            content={<LastNews1 />} />
-          <LastNewsCard
-            imageUrl='/assets/images/last-news1.png'
-            title='Camnect: Dịch Vụ Cho Thuê Nhiếp Ảnh Gia Chụp Ảnh Chuyên Nghiệp'
-            content={<LastNews1 />} />
-          <LastNewsCard
-            imageUrl='/assets/images/last-news1.png'
-            title='Camnect: Dịch Vụ Cho Thuê Nhiếp Ảnh Gia Chụp Ảnh Chuyên Nghiệp'
-            content={<LastNews1 />} />
         </div>
-      </div>
-      <div className="flex justify-center">
-        <div className="container">
-          <RelativeNews />
+        <div className="flex justify-center my-10 bg-[#FEF5EC]">
+          <div className="grid grid-cols-4 gap-4 container py-12 hidden md:block">
+            <NewsCard
+              title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
+              imageUrl='/assets/images/news11.png'
+              lastPost='8 giờ trước'
+            />
+            <NewsCard
+              title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
+              imageUrl='/assets/images/news11.png'
+              lastPost='8 giờ trước'
+            />
+            <NewsCard
+              title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
+              imageUrl='/assets/images/news11.png'
+              lastPost='8 giờ trước'
+            />
+            <NewsCard
+              title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
+              imageUrl='/assets/images/news11.png'
+              lastPost='8 giờ trước'
+            />
+          </div>
+          <div className="grid grid-cols-3 gap-4 container py-12 md:hidden">
+            <NewsCard
+              title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
+              imageUrl='/assets/images/news11.png'
+              lastPost='8 giờ trước'
+            />
+            <NewsCard
+              title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
+              imageUrl='/assets/images/news11.png'
+              lastPost='8 giờ trước'
+            />
+            <NewsCard
+              title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
+              imageUrl='/assets/images/news11.png'
+              lastPost='8 giờ trước'
+            />
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <div className='container'>
+            <div className='font-bold text-[36px]'>
+              Bài viết mới:
+            </div>
+            <LastNewsCard
+              imageUrl='/assets/images/last-news1.png'
+              title='Camnect: Dịch Vụ Cho Thuê Nhiếp Ảnh Gia Chụp Ảnh Chuyên Nghiệp'
+              content={<LastNews1 />} />
+            <LastNewsCard
+              imageUrl='/assets/images/last-news1.png'
+              title='Camnect: Dịch Vụ Cho Thuê Nhiếp Ảnh Gia Chụp Ảnh Chuyên Nghiệp'
+              content={<LastNews1 />} />
+            <LastNewsCard
+              imageUrl='/assets/images/last-news1.png'
+              title='Camnect: Dịch Vụ Cho Thuê Nhiếp Ảnh Gia Chụp Ảnh Chuyên Nghiệp'
+              content={<LastNews1 />} />
+            <LastNewsCard
+              imageUrl='/assets/images/last-news1.png'
+              title='Camnect: Dịch Vụ Cho Thuê Nhiếp Ảnh Gia Chụp Ảnh Chuyên Nghiệp'
+              content={<LastNews1 />} />
+            <LastNewsCard
+              imageUrl='/assets/images/last-news1.png'
+              title='Camnect: Dịch Vụ Cho Thuê Nhiếp Ảnh Gia Chụp Ảnh Chuyên Nghiệp'
+              content={<LastNews1 />} />
+            <LastNewsCard
+              imageUrl='/assets/images/last-news1.png'
+              title='Camnect: Dịch Vụ Cho Thuê Nhiếp Ảnh Gia Chụp Ảnh Chuyên Nghiệp'
+              content={<LastNews1 />} />
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <div className="container">
+            <RelativeNews />
+          </div>
         </div>
       </div>
     </div>

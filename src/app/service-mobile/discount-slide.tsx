@@ -1,8 +1,9 @@
+'use client';
 import React from 'react'
-import ServiceItem, { ServiceItemProps } from './service-item';
 import Slider from 'react-slick';
+import ServiceItem, { ServiceItemProps } from '../services/service-item';
 
-const serviceItems: ServiceItemProps[] = Array.from({ length: 10 }, (_, i) => ({
+const serviceItems: ServiceItemProps[] = Array.from({ length: 20 }, (_, i) => ({
     id: `service-${i + 1}`,
     imageUrl: `/assets/images/default-image.png`,
     name: `Tên`,
@@ -13,44 +14,20 @@ const serviceItems: ServiceItemProps[] = Array.from({ length: 10 }, (_, i) => ({
     lastPrice: 500000, // Giá cũ ngẫu nhiên từ 100 - 200
     link: `https://example.com/service-${i + 1}`
 }));
-export default function TopPhotographers() {
+
+export default function DiscountSlideMobile() {
     const settings = {
-        className: "center h-[400px]",
+        // dots: true,
         infinite: true,
-        centerPadding: "60px",
-        slidesToShow: 4,
-        swipeToSlide: true,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    initialSlide: 2
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
+        speed: 500,
+        centerMode: true,
+        slidesToShow: 1,
+        slidesToScroll: 1
     };
     return (
-        <div>
-            <div className="text-center text-[40px] font-bold text-[#F07202] mt-5">CÁC NHIẾP ẢNH GIA NỔI BẬT</div>
-            <div className="slider-container">
+        <div className='px-5 my-5'>
+            <div className="text-[24px] text-[#F07202] font-bold">Đang được giảm giá:</div>
+            <div className="slider-container discount-service-mobile">
                 <Slider {...settings}>
                     {
                         serviceItems.map((e) => (

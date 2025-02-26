@@ -53,3 +53,11 @@ body {
 .search-photographer .slick-slider .slick-list {
   height: 550px !important;
 }
+
+.discount-service-mobile .slick-slider {
+  height: 500px !important;
+}
+
+.discount-service-mobile .slick-list {
+  height: 430px !important;
+}

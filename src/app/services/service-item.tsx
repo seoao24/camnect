@@ -14,7 +14,7 @@ export interface ServiceItemProps {
 }
 export default function ServiceItem(props: ServiceItemProps) {
     return (
-        <div className='rounded-[25px] bg-white m-4' key={props.id}>
+        <div className='rounded-[25px] bg-white p-4 md:w-full w-[300px]' key={props.id}>
             <Image
                 src={props.imageUrl}
                 alt={props.id}
@@ -24,7 +24,7 @@ export default function ServiceItem(props: ServiceItemProps) {
                     width: "100%",
                     height: "207px"
                 }}
-                className='rounded-[25px]'
+                className='rounded-[25px] md:w-full w-[300px]'
             />
             <div className='text-[20px] font-bold'>{props.name}</div>
             <div className="text-[18px]">{props.type}</div>

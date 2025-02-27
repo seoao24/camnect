@@ -4,7 +4,7 @@ import CardPhotographers from "./card-photographer";
 
 export default function SearchPhotographers() {
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-[100px]">
             <div className="container">
                 <div className="text-center text-[40px] text-[#F07202] font-bold">TÌM KIẾM NHIẾP ẢNH GIA</div>
                 <div className="flex justify-center">

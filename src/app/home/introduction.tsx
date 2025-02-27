@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Introduction() {
     return (
-        <div className="flex justify-center z-[50] relative mt-[100px] pb-[10rem]">
+        <div className="flex justify-center z-[50] relative mt-[100px]">
             <div className="container flex">
                 <div className="text-[#777777] pr-5 w-[80%]">
                     <div className="font-bold text-[40px] text-[#F07202]">GIỚI THIỆU VỀ CAMNECT</div>

@@ -36,10 +36,11 @@ const MainHeader = () => {
         <div>
             <div className="hidden md:flex justify-center w-[100vw] mt-3">
                 <div className="container justify-between flex items-center">
-                    <div className="flex">
+                    <Link
+                        href={'/'} className="flex">
                         <img src="/assets/images/logo.png" alt="" className="w-[100px] h-[120px]" />
                         <div className="font-bold text-[50px] text-[#F07202] ml-3 mt-[2rem]">Camnect</div>
-                    </div>
+                    </Link>
                     <div>
                         <HeaderMenu />
                     </div>

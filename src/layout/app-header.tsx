@@ -1,5 +1,4 @@
 'use client';
-import OrgangeButton from "@/components/buttons/OrganeButton";
 import YellowButton from "@/components/buttons/YellowButton";
 import BorderedInput from "@/components/inputs/BorderedInput";
 import React, { useState } from "react";
@@ -47,7 +46,13 @@ const MainHeader = () => {
                     <div className="flex items-center">
                         <Link className="bg-none border-[#F07202] border-[1px] px-[2rem] text-[#F07202] rounded-[20px] py-[10px] text-[16px] font-bold mx-2"
                             href='/sign-up'>Đăng ký</Link>
-                        <OrgangeButton title="Đăng nhập" onClick={() => { }} />
+                        {/* <OrgangeButton title="Đăng nhập" onClick={() => { }} /> */}
+                        <Link
+                            href={'/sign-in'}
+                            className="bg-[#F07202] px-[2rem] text-[#F07202] rounded-[20px] py-[10px] text-[16px] font-bold text-white mx-2"
+                        >
+                            Đăng nhập
+                        </Link>
                     </div>
                 </div>
             </div>

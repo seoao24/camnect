@@ -7,7 +7,7 @@ export default function RelativeNews() {
             <div className='font-bold text-[36px]'>
                 Các bài viết cùng chủ đề:
             </div>
-            <div className="grid grid-cols-3 gap-4 hidden md:block">
+            <div className="md:grid grid-cols-3 gap-4 hidden">
                 <RelativeCardNews
                     imageUrl='/assets/images/relative6.png'
                     title='Chụp ảnh Tết cùng concept vô cùng độc lạ ngay hôm nay!'

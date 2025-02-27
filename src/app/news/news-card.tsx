@@ -8,7 +8,7 @@ interface NewsCardProps {
 export default function NewsCard(props: NewsCardProps) {
     return (
         <div>
-            <div className="rouned-[20px] md:w-full md:h-[200px] bg-cover bg-no-repeat w-[128px] h-[79px]"
+            <div className="rouned-[20px] md:w-[295px] md:h-[184px] bg-cover bg-no-repeat bg-center w-[128px] h-[79px]"
                 style={{
                     backgroundImage: `url('${props.imageUrl}')`
                 }}></div>

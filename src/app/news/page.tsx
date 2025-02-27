@@ -28,8 +28,8 @@ export default function News() {
             <LastNews />
           </div>
         </div>
-        <div className="flex justify-center my-10 bg-[#FEF5EC]">
-          <div className="grid grid-cols-4 gap-4 container py-12 hidden md:block">
+        <div className="flex justify-center my-10 bg-[#FEF5EC] py-10">
+          <div className="md:grid grid-cols-4 gap-4 container hidden">
             <NewsCard
               title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
               imageUrl='/assets/images/news11.png'

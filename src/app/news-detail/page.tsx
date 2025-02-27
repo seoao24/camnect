@@ -2,7 +2,6 @@
 import CommonHero from "@/components/heros/CommonHero";
 import React from "react";
 import NewsDetail from "./news-detail";
-import Image from "next/image";
 import HintNews from "./hint-news";
 import LastNews from "./last-news";
 import RelativeNews from "./relative-news";
@@ -11,8 +10,10 @@ const Content = () => (
     <>
         <p className="my-4">Chụp ảnh không chỉ là một phương tiện ghi lại những khoảnh khắc đẹp trong cuộc sống, mà còn là một hình thức nghệ thuật giúp chúng ta trải nghiệm và kết nối sâu sắc hơn với thế giới xung quanh. Từ những bức ảnh ghi lại ký ức gia đình đến những tác phẩm nghệ thuật tinh tế, nhiếp ảnh mang lại những giá trị vững bên trong và ngòi ngoài của bức tranh cuộc sống.</p>
         <div className="flex justify-center">
-            <div className="w-[90%] relative h-[700px]">
-                <Image src="/assets/images/news-main.png" alt="news main" fill />
+            <div className="w-[90%] relative md:h-[700px] h-[146px] bg-contain bg-no-repeat bg-center" style={{
+                backgroundImage: `url('/assets/images/news-main.png')`
+            }}>
+                {/* <Image src="/assets/images/news-main.png" alt="news main" fill /> */}
             </div>
         </div>
         <p className="my-4">Những bức ảnh giúp chúng ta lưu giữ những ký ức đẹp nhất. Dù là nụ cười hồn nhiên của trẻ nhỏ, một buổi họp gia đình đầm ấm, hay chuyến du lịch đáng nhớ, mỗi bức ảnh đều gỏi nhớ lại những khoảnh khắc đã qua. Hình ảnh như một ngôn ngữ kỳ diệu, kể lại những câu chuyện của thời gian và cảm xúc. Qua đó, người xem có thể dễ dàng kết nối với những ký ức cá nhân hoặc tập thể mà không cần nhiều lời giải thích.</p>
@@ -27,16 +28,35 @@ export default function News() {
         <div className="">
             <CommonHero />
             <div className="flex justify-center">
-                <div className="container flex">
+                <div className="container md:flex">
                     <NewsDetail
                         author="Thu Hoài"
                         postedAt="06/01/2025"
                         title="Nghệ Thuật Lưu Giữ Thời Gian"
                         content={<Content />} />
                     <div className="px-5 shadow-lg">
-                        <div className="w-[325px] h-[234px] relative">
-                            <Image src="/assets/images/news1.png" alt="news 1" fill />
+                        <div className="md:w-[325px] md:h-[234px] w-[217px] h-[146px] relative bg-contain bg-center bg-no-repeat" style={{
+                            backgroundImage: `url('/assets/images//assets/images/news1.png')`
+                        }}>
                         </div>
+                        {/* <div className="md:w-[325px] md:h-[234px] w-[217px] h-[146px] relative">
+                            <Image src="/assets/images/news1.png" alt="news 1"
+                                width={0}
+                                height={0}
+                                style={{
+                                    width: "325px",
+                                    height: "234px"
+                                }} />
+                        </div>
+                        <div className=" w-[217px] h-[146px] relative md:hidden">
+                            <Image src="/assets/images/news1.png" alt="news 1"
+                                width={0}
+                                height={0}
+                                style={{
+                                    width: "217px",
+                                    height: "146px"
+                                }} />
+                        </div> */}
                         <div className="text-[#F07202] text-[30px] font-bold text-center my-2">Có thể bạn quan tâm?</div>
                         <HintNews
                             imageUrl="/assets/images/hint-news1.png"
@@ -98,7 +118,7 @@ export default function News() {
             <div className="mt-[5rem] flex justify-center">
                 <div className="container">
                     <LastNews />
-                    <RelativeNews/>
+                    <RelativeNews />
                 </div>
             </div>
         </div>

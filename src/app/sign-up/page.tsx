@@ -1,6 +1,48 @@
-import React from 'react';
+'use client';
+import axiosInstance from '@/api/apiBase';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
+interface SignUpForm {
+  fullname: string,
+  email: string,
+  password: string,
+  repassword: string,
+  numberPhone: string
+}
 export default function SignUp() {
+  const router = useRouter();
+  const [form, setForm] = useState<SignUpForm>({
+    fullname: "",
+    email: "",
+    password: "",
+    repassword: "",
+    numberPhone: ""
+  })
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  }
+  const register = async () => {
+    if (form.password != form.repassword) {
+      toast.error("Mật khẩu không khớp");
+    }
+    try {
+      await axiosInstance.post("/Authentication/SignUp", form);
+      toast.success("Đăng ký thành công");
+      router.push("/sign-in");
+    } catch (e: unknown) {
+      if (axios.isAxiosError(e) && e.response) {
+        toast.error(e.response.data);
+      } else {
+        toast.error("Có lỗi xảy ra, vui lòng thử lại.");
+      }
+    }
+  }
   return (
     <div className='flex justify-center mt-[5rem] px-5'>
       <div className="container md:flex items-center justify-center">
@@ -16,13 +58,14 @@ export default function SignUp() {
         </div>
         <div className="p-10 bg-[#F07202] rounded-tl-[20px] rounded-bl-[20px] rounded-br-[20px] max-w-[740px]">
           <div className="grid grid-cols-2 gap-4">
-            <input type="text" className='bg-white outline-none border-none p-4' placeholder='Số điện thoại*' />
-            <input type="text" className='bg-white outline-none border-none p-4' placeholder='Email*' />
+            <input type="text" name='numberPhone' value={form.numberPhone} className='bg-white outline-none border-none p-4' placeholder='Số điện thoại*' onChange={handleChange} />
+            <input type="text" name='email' value={form.email} className='bg-white outline-none border-none p-4' placeholder='Email*' onChange={handleChange} />
           </div>
-          <input type="text" className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Tên người dùng*' />
-          <input type="password" className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Mật khẩu*' />
-          <input type="password" className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Xác nhận mật khẩu*' />
-          <button className='flex text-[#F07202] bg-white rounded-[20px] md:w-[274px] py-4 justify-center mt-5 w-full'>
+          <input type="text" name='fullname' value={form.fullname} className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Tên người dùng*' onChange={handleChange} />
+          <input type="password" name='password' value={form.password} className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Mật khẩu*' onChange={handleChange} />
+          <input type="password" name='repassword' value={form.repassword} className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Xác nhận mật khẩu*' onChange={handleChange} />
+          <button className='flex text-[#F07202] bg-white rounded-[20px] md:w-[274px] py-4 justify-center mt-5 w-full'
+            onClick={register}>
             <div className="flex items-center">
               <div className='mx-1'>Đăng ký</div>
               <svg

@@ -1,7 +1,41 @@
 'use client';
-import React from 'react'
+import axiosInstance from '@/api/apiBase';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react'
+import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
+interface LoginForm {
+    email: string,
+    password: string
+}
 export default function SignIn() {
+    const router = useRouter();
+    const [form, setForm] = useState<LoginForm>({
+        email: "",
+        password: ""
+    });
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+    }
+    const login = async () => {
+        try {
+            const response = await axiosInstance.post("/Authentication/SignIn", form);
+            toast.success("Đăng nhập thành công");
+            router.push("/");
+            Cookies.set('access-key', response.data, { expires: 1 })
+        } catch (e: unknown) {
+            if (axios.isAxiosError(e) && e.response) {
+                toast.error(e.response.data);
+            } else {
+                toast.error("Có lỗi xảy ra, vui lòng thử lại.");
+            }
+        }
+    }
     return (
         <div className='flex justify-center mt-[5rem] px-5'>
             <div className="container md:flex items-center justify-center">
@@ -20,10 +54,11 @@ export default function SignIn() {
                         <input type="text" className='bg-white outline-none border-none p-4' placeholder='Số điện thoại*' />
                         <input type="text" className='bg-white outline-none border-none p-4' placeholder='Email*' />
                     </div> */}
-                    <input type="email" className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Email*' />
-                    <input type="password" className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Mật khẩu*' />
+                    <input type="email" name='email' className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Email*' value={form.email} onChange={handleChange} />
+                    <input type="password" name='password' className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Mật khẩu*' value={form.password} onChange={handleChange} />
                     {/* <input type="password" className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Xác nhận mật khẩu*' /> */}
-                    <button className='flex text-[#F07202] bg-white rounded-[20px] md:w-[274px] py-4 justify-center mt-5 w-full'>
+                    <button className='flex text-[#F07202] bg-white rounded-[20px] md:w-[274px] py-4 justify-center mt-5 w-full'
+                        onClick={login}>
                         <div className="flex items-center">
                             <div className='mx-1'>Đăng nhập</div>
                             <svg

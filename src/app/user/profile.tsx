@@ -46,7 +46,7 @@ export default function ProfileFeature() {
                     </div>
                 </div>
             </div>
-            <div className="flex mt-4">
+            <div className="md:flex mt-4">
                 <div className="w-[400px] shadow-lg">
                     {
                         profileMenus.map(e => (
@@ -61,17 +61,17 @@ export default function ProfileFeature() {
                         ))
                     }
                 </div>
-                <div className="w-full shadow-lg px-10 ml-4">
+                <div className="w-full shadow-lg md:px-10 md:ml-4 px-5 md:mt-0 mt-5">
                     <div className="flex justify-between my-2">
                         <div className='flex'>
-                            <div className="w-[52px] h-[56px] bg-cover bg-no-repeat"
+                            <div className="md:w-[52px] md:h-[56px] w-[24px] h-[26px] bg-cover bg-no-repeat"
                                 style={{
                                     backgroundImage: `url('/assets/images/common-icon1.png')`
                                 }}></div>
-                            <div className="text-[20px] mt-1 ml-5 text-[#6B716E]">Sống tại: <strong>Hà Nội</strong></div>
+                            <div className="md:text-[20px] text-[14px] mt-1 ml-5 text-[#6B716E]">Sống tại: <strong>Hà Nội</strong></div>
                         </div>
                         <div className="flex items-center">
-                            <div className="w-[17px] h-[22px] bg-cover bg-no-repeat mx-1 cursor-pointer"
+                            <div className="md:w-[17px] md:h-[22px] w-[13px] h-[17px] bg-cover bg-no-repeat mx-1 cursor-pointer"
                                 style={{
                                     backgroundImage: `url('/assets/images/lock-icon.png')`
                                 }}></div>
@@ -83,14 +83,14 @@ export default function ProfileFeature() {
                     </div>
                     <div className="flex justify-between my-2">
                         <div className='flex'>
-                            <div className="w-[52px] h-[56px] bg-cover bg-no-repeat"
+                            <div className="md:w-[52px] md:h-[56px] w-[24px] h-[26px] bg-cover bg-no-repeat"
                                 style={{
                                     backgroundImage: `url('/assets/images/common-icon2.png')`
                                 }}></div>
-                            <div className="text-[20px] mt-1 ml-5 text-[#6B716E]">Từng học tại: <strong>Trường Đại học Mỹ Thuật Công Nghiệp</strong></div>
+                            <div className="md:text-[20px] text-[14px]  mt-1 ml-5 text-[#6B716E]">Từng học tại: <strong>Trường Đại học Mỹ Thuật Công Nghiệp</strong></div>
                         </div>
                         <div className="flex items-center">
-                            <div className="w-[17px] h-[22px] bg-cover bg-no-repeat mx-1 cursor-pointer"
+                            <div className="md:w-[17px] md:h-[22px] w-[13px] h-[17px] bg-cover bg-no-repeat mx-1 cursor-pointer"
                                 style={{
                                     backgroundImage: `url('/assets/images/lock-icon.png')`
                                 }}></div>
@@ -102,14 +102,14 @@ export default function ProfileFeature() {
                     </div>
                     <div className="flex justify-between my-2">
                         <div className='flex'>
-                            <div className="w-[52px] h-[56px] bg-cover bg-no-repeat"
+                            <div className="md:w-[52px] md:h-[56px] w-[24px] h-[26px] bg-cover bg-no-repeat"
                                 style={{
                                     backgroundImage: `url('/assets/images/common-icon3.png')`
                                 }}></div>
-                            <div className="text-[20px] mt-1 ml-5 text-[#6B716E]">Email: <span className='italic'>đã ẩn</span></div>
+                            <div className="md:text-[20px] text-[14px]  mt-1 ml-5 text-[#6B716E]">Email: <span className='italic'>đã ẩn</span></div>
                         </div>
                         <div className="flex items-center">
-                            <div className="w-[17px] h-[22px] bg-cover bg-no-repeat mx-1 cursor-pointer"
+                            <div className="md:w-[17px] md:h-[22px] w-[13px] h-[17px] bg-cover bg-no-repeat mx-1 cursor-pointer"
                                 style={{
                                     backgroundImage: `url('/assets/images/lock-icon.png')`
                                 }}></div>
@@ -121,14 +121,14 @@ export default function ProfileFeature() {
                     </div>
                     <div className="flex justify-between my-2">
                         <div className='flex'>
-                            <div className="w-[52px] h-[56px] bg-cover bg-no-repeat"
+                            <div className="md:w-[52px] md:h-[56px] w-[24px] h-[26px] bg-cover bg-no-repeat"
                                 style={{
                                     backgroundImage: `url('/assets/images/common-icon4.png')`
                                 }}></div>
-                            <div className="text-[20px] mt-1 ml-5 text-[#6B716E]">Số điện thoại: <span className='italic'>đã ẩn</span></div>
+                            <div className="md:text-[20px] text-[14px]  mt-1 ml-5 text-[#6B716E]">Số điện thoại: <span className='italic'>đã ẩn</span></div>
                         </div>
                         <div className="flex items-center">
-                            <div className="w-[17px] h-[22px] bg-cover bg-no-repeat mx-1 cursor-pointer"
+                            <div className="md:w-[17px] md:h-[22px] w-[13px] h-[17px] bg-cover bg-no-repeat mx-1 cursor-pointer"
                                 style={{
                                     backgroundImage: `url('/assets/images/lock-icon.png')`
                                 }}></div>
@@ -140,14 +140,14 @@ export default function ProfileFeature() {
                     </div>
                     <div className="flex justify-between my-2">
                         <div className='flex'>
-                            <div className="w-[52px] h-[56px] bg-cover bg-no-repeat"
+                            <div className="md:w-[52px] md:h-[56px] w-[24px] h-[26px] bg-cover bg-no-repeat"
                                 style={{
                                     backgroundImage: `url('/assets/images/common-icon5.png')`
                                 }}></div>
-                            <div className="text-[20px] mt-1 ml-5 text-[#6B716E]">Tình trạng quan hệ: <strong>Độc thân</strong></div>
+                            <div className="md:text-[20px] text-[14px]  mt-1 ml-5 text-[#6B716E]">Tình trạng quan hệ: <strong>Độc thân</strong></div>
                         </div>
                         <div className="flex items-center">
-                            <div className="w-[17px] h-[22px] bg-cover bg-no-repeat mx-1 cursor-pointer"
+                            <div className="md:w-[17px] md:h-[22px] w-[13px] h-[17px] bg-cover bg-no-repeat mx-1 cursor-pointer"
                                 style={{
                                     backgroundImage: `url('/assets/images/lock-icon.png')`
                                 }}></div>

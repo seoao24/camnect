@@ -1,8 +1,10 @@
 "use client";
-
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import AppHeader from "@/layout/app-header";
+import { ToastContainer } from 'react-toastify';
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,6 +21,11 @@ export default function ClientLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
+  const accessKey = Cookies.get('access-key');
+  if(!accessKey){
+    router.push("/sign-in")
+  }
   return (
     <html lang="en">
       <body
@@ -28,6 +35,7 @@ export default function ClientLayout({
         <div className="p-0 m-0">
           {children}
         </div>
+        <ToastContainer />
       </body>
     </html>
   );

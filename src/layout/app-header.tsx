@@ -1,9 +1,11 @@
 'use client';
 import YellowButton from "@/components/buttons/YellowButton";
-import BorderedInput from "@/components/inputs/BorderedInput";
 import React, { useState } from "react";
 import HeaderMenu, { pages } from "./header-menu";
 import Link from "next/link";
+import { toast } from 'react-toastify';
+import axiosInstance from "@/api/apiBase";
+import Cookies from "js-cookie";
 
 export default function AppHeader() {
     return (
@@ -15,13 +17,33 @@ export default function AppHeader() {
 }
 
 const TopHeader = () => {
+    const [email, setEmail] = useState('');
+    const getVoucher = async () => {
+        const params = {
+            Email: email
+        }
+        try {
+            await axiosInstance.get('/OrderService/GetVoucherByEmail', {
+                params: params
+            });
+            toast.success("Hãy kiểm tra email của bạn để lấy voucher");
+        } catch (e) {
+            console.log(e);
+            toast.error("Đã có lỗi xảy ra khi gửi voucher");
+        }
+    }
     return (
         <div className="hidden md:flex w-[100vw] h-[72px] bg-[url('/assets/images/header-top.png')] bg-no-repeat bg-cover justify-center">
             <div className="container flex justify-between items-center">
                 <div className="font-bold text-[24px] uppercase">Giảm giá 25% cho lần đầu đăng ký</div>
                 <div className="flex items-center">
-                    <BorderedInput />
-                    <YellowButton title="Nhận mã giảm giá" onClick={() => { }} />
+                    <input
+                        className="pt-[10px] pb-[10px] px-[1rem] rounded-[20px] border-none outline-none mx-[1.5rem]"
+                        placeholder="Điền email tại đây"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        type="email" />
+                    <YellowButton title="Nhận mã giảm giá" onClick={getVoucher} />
                 </div>
             </div>
         </div>
@@ -30,31 +52,41 @@ const TopHeader = () => {
 
 const MainHeader = () => {
     const [isOpenMenu, setIsOpenMenu] = useState(false);
-    const [selectedLink, setSelectedLink] = useState(pages[0].link)
+    const [selectedLink, setSelectedLink] = useState(pages[0].link);
+    const accessKey = Cookies.get('access-key');
     return (
         <div>
             <div className="hidden md:flex justify-center w-[100vw] mt-3">
-                <div className="container justify-between flex items-center">
-                    <Link
-                        href={'/'} className="flex">
-                        <img src="/assets/images/logo.png" alt="" className="w-[100px] h-[120px]" />
-                        <div className="font-bold text-[50px] text-[#F07202] ml-3 mt-[2rem]">Camnect</div>
-                    </Link>
-                    <div>
-                        <HeaderMenu />
-                    </div>
-                    <div className="flex items-center">
+                {
+                    accessKey ? (
+                        <div className="container justify-between flex items-center">
+                            <Link
+                                href={'/'} className="flex">
+                                <img src="/assets/images/logo.png" alt="" className="w-[100px] h-[120px]" />
+                                <div className="font-bold text-[50px] text-[#F07202] ml-3 mt-[2rem]">Camnect</div>
+                            </Link>
+                            <div>
+                                <HeaderMenu />
+                            </div>
+                            <div className="flex items-center">
+                                <Link className="bg-none border-[#F07202] border-[1px] px-[2rem] text-[#F07202] rounded-[20px] py-[10px] text-[16px] font-bold mx-2"
+                                    href='/sign-up'>Đăng ký</Link>
+                                {/* <OrgangeButton title="Đăng nhập" onClick={() => { }} /> */}
+                                <Link
+                                    href={'/sign-in'}
+                                    className="bg-[#F07202] px-[2rem] text-[#F07202] rounded-[20px] py-[10px] text-[16px] font-bold text-white mx-2"
+                                >
+                                    Đăng nhập
+                                </Link>
+                            </div>
+                        </div>
+                    ) : (
                         <Link className="bg-none border-[#F07202] border-[1px] px-[2rem] text-[#F07202] rounded-[20px] py-[10px] text-[16px] font-bold mx-2"
-                            href='/sign-up'>Đăng ký</Link>
-                        {/* <OrgangeButton title="Đăng nhập" onClick={() => { }} /> */}
-                        <Link
-                            href={'/sign-in'}
-                            className="bg-[#F07202] px-[2rem] text-[#F07202] rounded-[20px] py-[10px] text-[16px] font-bold text-white mx-2"
-                        >
-                            Đăng nhập
+                            href='/sign-in'>
+                            Đăng ký
                         </Link>
-                    </div>
-                </div>
+                    )
+                }
             </div>
             <div className="md:hidden flex justify-between items-center px-5 relative">
                 <div className="flex items-center">

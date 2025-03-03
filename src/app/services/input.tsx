@@ -19,7 +19,7 @@ export default function Input(props: SearviceInputText) {
                     height: "25px"
                 }}
             /> */}
-            <div className='w-[25px] h-[25px] bg-contain bg-no-repeat bg-center' style={{
+            <div className='w-[25px] h-[25px] bg-contain bg-no-repeat bg-center bg-[#D9D9D9] rounded-[5px]' style={{
                 backgroundImage: `url('${props.icon}')`
             }}>
 

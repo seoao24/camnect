@@ -53,7 +53,7 @@ const TopHeader = () => {
 const MainHeader = () => {
     const [isOpenMenu, setIsOpenMenu] = useState(false);
     const [selectedLink, setSelectedLink] = useState(pages[0].link);
-    const accessKey = Cookies.get('access-key');
+    //const accessKey = Cookies.get('access-key');
     return (
         <div>
             <div className="hidden md:flex justify-center w-[100vw] mt-3">

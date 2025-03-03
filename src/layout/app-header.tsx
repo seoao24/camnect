@@ -57,36 +57,27 @@ const MainHeader = () => {
     return (
         <div>
             <div className="hidden md:flex justify-center w-[100vw] mt-3">
-                {
-                    accessKey ? (
-                        <div className="container justify-between flex items-center">
-                            <Link
-                                href={'/'} className="flex">
-                                <img src="/assets/images/logo.png" alt="" className="w-[100px] h-[120px]" />
-                                <div className="font-bold text-[50px] text-[#F07202] ml-3 mt-[2rem]">Camnect</div>
-                            </Link>
-                            <div>
-                                <HeaderMenu />
-                            </div>
-                            <div className="flex items-center">
-                                <Link className="bg-none border-[#F07202] border-[1px] px-[2rem] text-[#F07202] rounded-[20px] py-[10px] text-[16px] font-bold mx-2"
-                                    href='/sign-up'>Đăng ký</Link>
-                                {/* <OrgangeButton title="Đăng nhập" onClick={() => { }} /> */}
-                                <Link
-                                    href={'/sign-in'}
-                                    className="bg-[#F07202] px-[2rem] text-[#F07202] rounded-[20px] py-[10px] text-[16px] font-bold text-white mx-2"
-                                >
-                                    Đăng nhập
-                                </Link>
-                            </div>
-                        </div>
-                    ) : (
+                <div className="container justify-between flex items-center">
+                    <Link
+                        href={'/'} className="flex">
+                        <img src="/assets/images/logo.png" alt="" className="w-[100px] h-[120px]" />
+                        <div className="font-bold text-[50px] text-[#F07202] ml-3 mt-[2rem]">Camnect</div>
+                    </Link>
+                    <div>
+                        <HeaderMenu />
+                    </div>
+                    <div className="flex items-center">
                         <Link className="bg-none border-[#F07202] border-[1px] px-[2rem] text-[#F07202] rounded-[20px] py-[10px] text-[16px] font-bold mx-2"
-                            href='/sign-in'>
-                            Đăng ký
+                            href='/sign-up'>Đăng ký</Link>
+                        {/* <OrgangeButton title="Đăng nhập" onClick={() => { }} /> */}
+                        <Link
+                            href={'/sign-in'}
+                            className="bg-[#F07202] px-[2rem] text-[#F07202] rounded-[20px] py-[10px] text-[16px] font-bold text-white mx-2"
+                        >
+                            Đăng nhập
                         </Link>
-                    )
-                }
+                    </div>
+                </div>
             </div>
             <div className="md:hidden flex justify-between items-center px-5 relative">
                 <div className="flex items-center">

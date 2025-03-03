@@ -5,7 +5,7 @@ import HeaderMenu, { pages } from "./header-menu";
 import Link from "next/link";
 import { toast } from 'react-toastify';
 import axiosInstance from "@/api/apiBase";
-import Cookies from "js-cookie";
+//import Cookies from "js-cookie";
 
 export default function AppHeader() {
     return (

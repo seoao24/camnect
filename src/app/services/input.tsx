@@ -10,7 +10,7 @@ export interface SearviceInputText {
 export default function Input(props: SearviceInputText) {
     return (
         <div className={`flex border-[1px] border-[#F07202] rounded-[5px] items-center bg-white py-2 px-2 ${props.classes}`}>
-            <Image
+            {/* <Image
                 src={props.icon}
                 alt='name'
                 width={0}
@@ -19,8 +19,13 @@ export default function Input(props: SearviceInputText) {
                     width: "25px",
                     height: "25px"
                 }}
-            />
-            <input type="text" className='border-none outline-none w-full ml-3' placeholder={props.placeholder}/>
+            /> */}
+            <div className='w-[25px] h-[25px] bg-contain bg-no-repeat bg-center' style={{
+                backgroundImage: `url('${props.icon}')`
+            }}>
+
+            </div>
+            <input type="text" className='border-none outline-none w-full ml-3' placeholder={props.placeholder} />
             <svg
                 width="20px"
                 height="20px"

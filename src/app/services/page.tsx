@@ -20,7 +20,7 @@ export default function Service() {
                     <TopPhotographers />
                 </div>
             </div>
-            <div>
+            <div className='md:hidden'>
                 <SearchServiceMobile />
                 <DiscountSlideMobile />
                 <HotSearchSlideMobile />

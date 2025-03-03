@@ -1,7 +1,8 @@
-import React from 'react'
-import ServiceDetailSummary from './summary'
-import OptionalService from './optional-service'
-import ListService from './list-service'
+'use client';
+import React from 'react';
+import ServiceDetailSummary from './summary';
+import OptionalService from './optional-service';
+import ListService from './list-service';
 
 export default function ServiceDetail() {
     return (

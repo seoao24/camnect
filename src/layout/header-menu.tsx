@@ -27,6 +27,11 @@ export const pages = [
         id: "6",
         title: "Dịch vụ",
         link: "/services"
+    },
+    {
+        id: "6",
+        title: "Dịch vụ của tôi",
+        link: "/my-service"
     }
 ]
 export default function HeaderMenu() {

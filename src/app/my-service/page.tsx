@@ -124,20 +124,20 @@ export default function AddService() {
             const response = await axiosInstance.get("/Service/SearchConcept");
             setConcept(response.data);
             setSelectedConcept(response.data[0].id)
-        } catch (e: unknown) {
+        } catch {
             // toast.error("Không thể lấy danh sách concept");
         }
     }
     const getUserServices = async () => {
         try {
-            var params = {
+            const params = {
                 getByUser: true
             }
             const response = await axiosInstance.get("/Service/Search", {
                 params: params
             });
             setUserServices(response.data);
-        } catch (e: unknown) {
+        } catch {
             // toast.error("Không thể lấy danh sách concept");
         }
     }

@@ -8,11 +8,11 @@ export const pages = [
         title: "Trang chủ",
         link: "/"
     },
-    {
-        id: "3",
-        title: "Lịch",
-        link: "/calendar"
-    },
+    // {
+    //     id: "3",
+    //     title: "Lịch",
+    //     link: "/calendar"
+    // },
     {
         id: "4",
         title: "Tin tức",

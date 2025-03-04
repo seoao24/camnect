@@ -5,12 +5,13 @@ import HeaderMenu, { pages } from "./header-menu";
 import Link from "next/link";
 import { toast } from 'react-toastify';
 import axiosInstance from "@/api/apiBase";
-//import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 
 export default function AppHeader() {
     const [email, setEmail] = useState('');
     const [isOpenMenu, setIsOpenMenu] = useState(false);
     const [selectedLink, setSelectedLink] = useState(pages[0].link);
+    const accessKey = Cookies.get('access-key');
     const getVoucher = async () => {
         const params = {
             Email: email
@@ -43,7 +44,7 @@ export default function AppHeader() {
             </div>
             <div>
                 <div className="hidden md:flex justify-center w-[100vw] mt-3">
-                    <div className="container justify-between flex items-center">
+                    <div className={`container justify-between flex items-center ${accessKey ? 'hidden' : ''}`}>
                         <Link
                             href={'/'} className="flex">
                             <img src="/assets/images/logo.png" alt="" className="w-[100px] h-[120px]" />
@@ -64,6 +65,15 @@ export default function AppHeader() {
                             </Link>
                         </div>
                     </div>
+                    <Link
+                        href={'/user'}>
+                        <div className={`container justify-between flex items-center ${accessKey ? '' : 'hidden'}`}>
+                            <div className="bg-center bg-cover bg-no-repeat w-[60px] h-[60px] rounded-[50%] bg-[#BBBBBB]" style={{
+                                backgroundImage: `url('')`
+                            }}></div>
+                            <div className="">User name</div>
+                        </div>
+                    </Link>
                 </div>
                 <div className="md:hidden flex justify-between items-center px-5 relative">
                     <div className="flex items-center">

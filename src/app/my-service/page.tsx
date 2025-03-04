@@ -38,6 +38,7 @@ const additionServices = [
     },
 ]
 interface AddServiceForm {
+    id: string | null,
     type: string,
     name: string,
     price: number,
@@ -45,7 +46,8 @@ interface AddServiceForm {
     image: File | null,
     imageUrl: string
     conceptIds: string[]
-    imageDefault: ImageDefault | null
+    imageDefault: ImageDefault | null,
+    address: string
 }
 interface ConceptModel {
     id: string,
@@ -73,7 +75,9 @@ export default function AddService() {
     const [isEditTitle, setIsEditTitle] = useState(true);
     const [concept, setConcept] = useState<ConceptModel[]>([]);
     const [userServices, setUserServices] = useState<ServiceItemProps[]>([])
+    const [isAdd, setIsAdd] = useState(false);
     const [form, setForm] = useState<AddServiceForm>({
+        id: null,
         type: '',
         name: '',
         price: 0,
@@ -81,7 +85,8 @@ export default function AddService() {
         image: null,
         imageUrl: '/assets/images/default-image.png',
         conceptIds: [],
-        imageDefault: null
+        imageDefault: null,
+        address: ""
     })
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.name === "image" && e.target.files) {
@@ -111,6 +116,18 @@ export default function AddService() {
             if (selectedConcept) form.conceptIds.concat(selectedConcept);
             toast.success("Thêm dịch vụ thành công");
             getUserServices();
+            setForm({
+                id: null,
+                type: '',
+                name: '',
+                price: 0,
+                description: '',
+                image: null,
+                imageUrl: '/assets/images/default-image.png',
+                conceptIds: [],
+                imageDefault: null,
+                address: ""
+            });
         } catch (e: unknown) {
             if (axios.isAxiosError(e) && e.response) {
                 toast.error(e.response.data);
@@ -142,6 +159,65 @@ export default function AddService() {
             // toast.error("Không thể lấy danh sách concept");
         }
     }
+    const getServiceDetail = async (id: string) => {
+        try {
+            const params = {
+                id: id
+            }
+            const response = await axiosInstance.get("/Service/Detail", {
+                params: params
+            });
+            setForm({
+                id: response.data?.id,
+                type: '',
+                name: response.data?.name,
+                price: response.data?.price,
+                description: response.data?.description,
+                image: response.data?.imageDefaultUrl,
+                imageUrl: '/assets/images/default-image.png',
+                conceptIds: response.data?.concepts,
+                imageDefault: {
+                    imageUrl: response.data?.imageDefaultUrl ?? '/assets/images/default-image.png',
+                    size: 0
+                },
+                address: response.data?.address
+            })
+            setIsAdd(true);
+        } catch {
+            // toast.error("Không thể lấy danh sách concept");
+        }
+    }
+    const updateService = async () => {
+        try {
+            const updatedForm = {
+                ...form,
+                conceptIds: [...form.conceptIds, selectedConcept] // Đảm bảo concept được lưu
+            };
+            console.log(updatedForm)
+            await axiosInstance.post("/Service/Update", updatedForm);
+            toast.success("Cật nhật dịch vụ thành công");
+            getUserServices();
+            setForm({
+                id: null,
+                type: '',
+                name: '',
+                price: 0,
+                description: '',
+                image: null,
+                imageUrl: '/assets/images/default-image.png',
+                conceptIds: [],
+                imageDefault: null,
+                address: ""
+            });
+            setIsAdd(false);
+        } catch (e: unknown) {
+            if (axios.isAxiosError(e) && e.response) {
+                toast.error(e.response.data);
+            } else {
+                toast.error("Có lỗi xảy ra, vui lòng thử lại.");
+            }
+        }
+    }
     useEffect(() => {
         getConcepts();
         getUserServices();
@@ -149,93 +225,104 @@ export default function AddService() {
     return (
         <div className='flex justify-center'>
             <div className="container">
-                <div className='shadow text-[#606060] py-2 px-4 mt-5'>
-                    <div className="text-[28px] font-bold">Lọc các tùy chọn dịch vụ:</div>
-                    <table className='mt-2'>
-                        <tbody>
-                            <tr>
-                                <td className='text-[24px] font-bold'>Concept:</td>
-                                <td>
-                                    {
-                                        concept.map(e => (
-                                            <button key={`concept-${e.id}`} className={`rounded-[10px] mx-2 px-4 py-1 ${selectedConcept == e.id ? 'bg-[#F07202] text-white' : 'bg-[#DCDCDC]'}`}
-                                                onClick={() => setSelectedConcept(e.id)}>
-                                                {e.name}
-                                            </button>
-                                        ))
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className='text-[24px] font-bold'>Dịch vụ thêm:</td>
-                                <td>
-                                    {
-                                        additionServices.map(e => (
-                                            <button key={e.id} className={`rounded-[10px] mx-2 px-4 py-1 ${selectedAdditionervice == e.id ? 'bg-[#F07202] text-white' : 'bg-[#DCDCDC]'}`}
-                                                onClick={() => setSelectedAdditionService(e.id)}>
-                                                {e.title}
-                                            </button>
-                                        ))
-                                    }
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div className='shadow-md mt-5'>
-                    <div className="w-full border-[1px] border-[#8E8B8B] flex px-4 py-2">
-                        <div className="">
-                            <div className={`text-[30px] text-[#F07202] font-bold ${isEditTitle ? 'hidden' : ''}`}>{form.type}</div>
-                            <input type="text" name='type' className={`px-5 py-1 border-none outline-none ${isEditTitle ? '' : 'hidden'}`} value={form.type} placeholder='Nhập loại dịch vụ' onChange={handleChange} />
+                <div className={`${isAdd ? '' : 'hidden'}`}>
+                    <div className='shadow text-[#606060] py-2 px-4 mt-5'>
+                        <div className="text-[28px] font-bold">Lọc các tùy chọn dịch vụ:</div>
+                        <table className='mt-2'>
+                            <tbody>
+                                <tr>
+                                    <td className='text-[24px] font-bold'>Concept:</td>
+                                    <td>
+                                        {
+                                            concept.map(e => (
+                                                <button key={`concept-${e.id}`} className={`rounded-[10px] mx-2 px-4 py-1 ${selectedConcept == e.id ? 'bg-[#F07202] text-white' : 'bg-[#DCDCDC]'}`}
+                                                    onClick={() => setSelectedConcept(e.id)}>
+                                                    {e.name}
+                                                </button>
+                                            ))
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className='text-[24px] font-bold'>Dịch vụ thêm:</td>
+                                    <td>
+                                        {
+                                            additionServices.map(e => (
+                                                <button key={e.id} className={`rounded-[10px] mx-2 px-4 py-1 ${selectedAdditionervice == e.id ? 'bg-[#F07202] text-white' : 'bg-[#DCDCDC]'}`}
+                                                    onClick={() => setSelectedAdditionService(e.id)}>
+                                                    {e.title}
+                                                </button>
+                                            ))
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className='shadow-md mt-5'>
+                        <div className="w-full border-[1px] border-[#8E8B8B] flex px-4 py-2">
+                            <div className="">
+                                <div className={`text-[30px] text-[#F07202] font-bold ${isEditTitle ? 'hidden' : ''}`}>{form.type}</div>
+                                <input type="text" name='type' className={`px-5 py-1 border-none outline-none ${isEditTitle ? '' : 'hidden'}`} value={form.type} placeholder='Nhập loại dịch vụ' onChange={handleChange} />
+                            </div>
+                            <div className="flex items-center text-[#606060] text-[24px]">
+                                <div className='text-[#B7B7B7] text-[20px] border-l-[1px] border-l-[#B7B7B7] px-5 mx-5 cursor-pointer'
+                                    onClick={() => setIsEditTitle(!isEditTitle)}>
+                                    {isEditTitle ? 'Lưu' : 'Chỉnh sửa'}
+                                </div>
+                            </div>
                         </div>
-                        <div className="flex items-center text-[#606060] text-[24px]">
-                            <div className='text-[#B7B7B7] text-[20px] border-l-[1px] border-l-[#B7B7B7] px-5 mx-5 cursor-pointer'
-                                onClick={() => setIsEditTitle(!isEditTitle)}>
-                                {isEditTitle ? 'Lưu' : 'Chỉnh sửa'}
+                        <div className="flex py-5">
+                            <div className='shadow-md rounded-[20px] my-2 mx-2'>
+                                <input type="file" name="image" id="add-service-file" className='hidden' onChange={handleChange} />
+                                <label htmlFor="add-service-file">
+                                    <div className='w-[400px] h-[325px] bg-cover bg-center bg-no-repeat' style={{
+                                        backgroundImage: `url('${form.imageUrl}')`
+                                    }}>
+
+                                    </div>
+                                </label>
+                            </div>
+                            <div className='w-full px-5'>
+                                <input name='name' value={form.name} type="text" className='border-[#F07202] border-[1px] outline-none px-3 py-1 rounded-[5px] w-full h-[54px]' placeholder='Tên dịch vụ' onChange={handleChange} />
+                                <input name='price' value={form.price} type="number" className='border-[#F07202] border-[1px] outline-none px-3 py-1 rounded-[5px] w-full my-5 h-[54px]' placeholder='Giá' onChange={handleChange} />
+                                {/* <input name='address' value={form.address} type="text" className='border-[#F07202] border-[1px] outline-none px-3 py-1 rounded-[5px] w-full my-5 h-[54px]' placeholder='Địa chỉ' onChange={handleChange} /> */}
+                                <input name='description' value={form.description} className='border-[#F07202] border-[1px] outline-none px-3 py-1 rounded-[5px] w-full' placeholder='Miêu tả sản phẩm' onChange={handleChange} />
                             </div>
                         </div>
                     </div>
-                    <div className="flex py-5">
-                        <div className='shadow-md rounded-[20px] my-2 mx-2'>
-                            <input type="file" name="image" id="add-service-file" className='hidden' onChange={handleChange} />
-                            <label htmlFor="add-service-file">
-                                <div className='w-[400px] h-[325px] bg-cover bg-center bg-no-repeat' style={{
-                                    backgroundImage: `url('${form.imageUrl}')`
-                                }}>
+                    <div className="flex justify-center my-5">
+                        <button className='bg-[#EBEBEB] text-[#F07202] rounded-[10px] py-2 px-5 mx-2'
+                            onClick={() => setIsAdd(false)}>
+                            Hủy bỏ
+                        </button>
+                        {
+                            !form.id ? (
+                                <button className='bg-[#F07202] rounded-[10px] text-white py-2 px-5 mx-2'
+                                    onClick={addService}>
+                                    Đăng dịch vụ
+                                </button>
+                            ) : (
+                                <button className='bg-[#F07202] rounded-[10px] text-white py-2 px-5 mx-2'
+                                    onClick={updateService}>Cật nhật</button>
+                            )
+                        }
 
-                                </div>
-                            </label>
-                        </div>
-                        <div className='w-full px-5'>
-                            <input name='name' type="text" className='border-[#F07202] border-[1px] outline-none px-3 py-1 rounded-[5px] w-full h-[54px]' placeholder='Tên dịch vụ' onChange={handleChange} />
-                            <input name='price' type="number" className='border-[#F07202] border-[1px] outline-none px-3 py-1 rounded-[5px] w-full my-5 h-[54px]' placeholder='Giá' onChange={handleChange} />
-                            <input name='description' className='border-[#F07202] border-[1px] outline-none px-3 py-1 rounded-[5px] w-full' placeholder='Miêu tả sản phẩm' onChange={handleChange} />
-                        </div>
                     </div>
                 </div>
-                <div className="flex justify-center my-5">
-                    <button className='bg-[#F07202] rounded-[10px] text-white py-2 px-5'
-                        onClick={addService}>
-                        Đăng dịch vụ
-                    </button>
-                </div>
-                <div className="mt-10">
-                    <div className="text-[40px] text-[#F07202] uppercase font-bold">CÁC SẢN PHẨM KHÁC CỦA BẠN</div>
+                <div className="mt-10 px-5">
+                    <div className="flex justify-between items-center">
+                        <div className="text-[40px] text-[#F07202] uppercase font-bold">CÁC SẢN PHẨM CỦA BẠN</div>
+                        <button className={`bg-[#F07202] rounded-[5px] text-white px-3 py-2 ${isAdd ? 'hidden' : ''}`}
+                            onClick={() => setIsAdd(true)}>
+                            Thêm mới
+                        </button>
+                    </div>
                     <div className="grid md:grid-cols-4 grid-col-1 gap-4">
                         {
                             userServices.map(e => (
-                                <div className='rounded-[25px] bg-white p-4 md:w-full' key={e.id}>
-                                    {/* <Image
-                                src={props.imageUrl}
-                                alt={props.id}
-                                width={0}
-                                height={0}
-                                style={{
-                                    width: "100%",
-                                    height: "207px"
-                                }}
-                                className='rounded-[25px] md:w-full w-[300px]'
-                            /> */}
+                                <div className='rounded-[25px] bg-white p-4 md:w-full' key={e.id}
+                                    onClick={() => getServiceDetail(e.id)}>
                                     <div className="bg-cover bg-center bg-no-repeat h-[207px]" style={{
                                         backgroundImage: `url('')`
                                     }}></div>
@@ -263,7 +350,7 @@ export default function AddService() {
                                                 />{" "}
                                             </g>
                                         </svg>
-                                        <div className='text-[14px] text-[#606060]'>{e.address}</div>
+                                        <div className='text-[14px] text-[#606060]'>{e.address ?? "Tất cả"}</div>
                                     </div>
                                     <div className="flex items-center">
                                         <svg

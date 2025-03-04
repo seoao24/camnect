@@ -1,19 +1,29 @@
-import React from 'react'
-import ServiceItem, { ServiceItemProps } from './service-item';
+'use client';
+import React, { useEffect, useState } from 'react'
+import ServiceItem from './service-item';
 import Slider from 'react-slick';
+import axiosInstance from '@/api/apiBase';
 
-const serviceItems: ServiceItemProps[] = Array.from({ length: 10 }, (_, i) => ({
-    id: `service-${i + 1}`,
-    imageUrl: `/assets/images/default-image.png`,
-    name: `Tên`,
-    type: "Chụp chân dung",
-    location: `Hà Nội`,
-    rate: 4.9, // Random rating từ 0 - 5
-    currentPrice: 450000, // Giá ngẫu nhiên từ 50 - 150
-    lastPrice: 500000, // Giá cũ ngẫu nhiên từ 100 - 200
-    link: `https://example.com/service-${i + 1}`
-}));
+interface ServiceModel {
+    id: string,
+    type: string,
+    name: string,
+    price: number,
+    oldPrice: number,
+    description: string,
+    image: File | null,
+    imageUrl: string
+    conceptIds: string[]
+    imageDefault: ImageDefault | null,
+    address: string,
+    rate: number
+}
+interface ImageDefault {
+    imageUrl: string,
+    size: number
+}
 export default function TopPhotographers() {
+    const [services, setServices] = useState<ServiceModel[]>([]);
     const settings = {
         className: "center h-[400px]",
         infinite: true,
@@ -47,21 +57,37 @@ export default function TopPhotographers() {
             }
         ]
     };
+    const getServices = async () => {
+        try {
+            const params = {
+
+            }
+            const response = await axiosInstance.get("/Service/Search", {
+                params: params
+            });
+            setServices(response.data?.items);
+        } catch {
+            // toast.error("Không thể lấy danh sách concept");
+        }
+    }
+    useEffect(() => {
+        getServices();
+    }, [])
     return (
         <div>
             <div className="text-center text-[40px] font-bold text-[#F07202] mt-5">CÁC NHIẾP ẢNH GIA NỔI BẬT</div>
             <div className="slider-container">
                 <Slider {...settings}>
                     {
-                        serviceItems.map((e) => (
+                        services.map((e) => (
                             <div key={e.id}>
                                 <ServiceItem
-                                    currentPrice={e.currentPrice}
+                                    currentPrice={e.price}
                                     id={e.id}
                                     imageUrl={e.imageUrl}
-                                    lastPrice={e.lastPrice}
-                                    link={e.link}
-                                    location={e.location}
+                                    lastPrice={e.oldPrice}
+                                    link={""}
+                                    location={e.address}
                                     name={e.name}
                                     rate={e.rate}
                                     type={e.type}

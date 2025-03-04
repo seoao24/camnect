@@ -29,7 +29,7 @@ export const pages = [
         link: "/services"
     },
     {
-        id: "6",
+        id: "7",
         title: "Dịch vụ của tôi",
         link: "/my-service"
     }

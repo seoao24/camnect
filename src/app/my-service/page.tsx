@@ -136,7 +136,8 @@ export default function AddService() {
             const response = await axiosInstance.get("/Service/Search", {
                 params: params
             });
-            setUserServices(response.data);
+            setUserServices(response.data?.items);
+            console.log(response.data?.items)
         } catch {
             // toast.error("Không thể lấy danh sách concept");
         }

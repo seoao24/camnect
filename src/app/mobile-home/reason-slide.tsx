@@ -4,25 +4,25 @@ import Slider from 'react-slick';
 
 const itemSlides = [
     {
-        id: "slide-1",
+        id: "slide-reason-1",
         background: "/assets/images/mobile-reason1.png",
         title: "Kết nối nhanh chóng",
         content: "Khách hàng có thể tìm kiếm, đặt lịch và sử dụng dịch vụ chụp ảnh một cách dễ dàng. Không còn phải loay hoay tìm nhiếp ảnh gia phù hợp, Camnect giúp bạn tiết kiệm thời gian và công sức, mang lại sự thuận tiện tối đa."
     },
     {
-        id: "slide-2",
+        id: "slide-reason-2",
         background: "/assets/images/mobile-reason2.png",
         title: "Chất lượng đảm bảo",
         content: "Camnect không chỉ kết nối nhanh chóng mà còn cam kết mang lại dịch vụ chất lượng hàng đầu. Với hệ thống đánh giá minh bạch, khách hàng có thể yên tâm hoàn toàn về sự chuyên nghiệp và đáng tin cậy của dịch vụ."
     },
     {
-        id: "slide-3",
+        id: "slide--reason3",
         background: "/assets/images/mobile-reason1.png",
         title: "Kết nối nhanh chóng",
         content: "Khách hàng có thể tìm kiếm, đặt lịch và sử dụng dịch vụ chụp ảnh một cách dễ dàng. Không còn phải loay hoay tìm nhiếp ảnh gia phù hợp, Camnect giúp bạn tiết kiệm thời gian và công sức, mang lại sự thuận tiện tối đa."
     },
     {
-        id: "slide-4",
+        id: "slide-reason-4",
         background: "/assets/images/mobile-reason2.png",
         title: "Chất lượng đảm bảo",
         content: "Camnect không chỉ kết nối nhanh chóng mà còn cam kết mang lại dịch vụ chất lượng hàng đầu. Với hệ thống đánh giá minh bạch, khách hàng có thể yên tâm hoàn toàn về sự chuyên nghiệp và đáng tin cậy của dịch vụ."

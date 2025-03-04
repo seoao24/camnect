@@ -18,9 +18,9 @@ export default function Home() {
         <FQA />
         <Feedback />
       </div>
-      <div className="md:hidden">
+      {/* <div className="md:hidden">
         <MobilePage/>
-      </div>
+      </div> */}
     </div>
   );
 }

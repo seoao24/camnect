@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 
 const slideData = [
     {
-        id: "slide-1",
+        id: "slide-home-1",
         backgroundUrl: "/assets/images/search1.png",
         fullname: "Quỳnh Trang",
         rate: 5,
@@ -19,7 +19,7 @@ const slideData = [
         ]
     },
     {
-        id: "slide-2",
+        id: "slide-home-2",
         backgroundUrl: "/assets/images/search1.png",
         fullname: "Quỳnh Trang",
         rate: 5,
@@ -34,7 +34,7 @@ const slideData = [
         ]
     },
     {
-        id: "slide-3",
+        id: "slide-home-3",
         backgroundUrl: "/assets/images/search1.png",
         fullname: "Quỳnh Trang",
         rate: 5,

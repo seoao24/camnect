@@ -30,22 +30,22 @@ export default function ServiceSlide() {
 
 const itemContents = [
   {
-    id: "slide-1",
+    id: "slide-service-1",
     title: "Chụp Ảnh Chân Dung & Cá Nhân",
     content: "Hướng dẫn tạo dáng tự nhiên, phù hợp với cá tính riêng của mỗi người. Đặc biệt, quá trình xử lý hậu kỳ chuyên sâu sẽ làm nổi bật thần thái và vẻ đẹp độc đáo, mang đến những bức ảnh hoàn hảo nhất."
   },
   {
-    id: "slide-2",
+    id: "slide-service-2",
     title: "Chụp Ảnh Chân Dung & Cá Nhân",
     content: "Hướng dẫn tạo dáng tự nhiên, phù hợp với cá tính riêng của mỗi người. Đặc biệt, quá trình xử lý hậu kỳ chuyên sâu sẽ làm nổi bật thần thái và vẻ đẹp độc đáo, mang đến những bức ảnh hoàn hảo nhất."
   },
   {
-    id: "slide-3",
+    id: "slide-service-3",
     title: "Chụp Ảnh Chân Dung & Cá Nhân",
     content: "Hướng dẫn tạo dáng tự nhiên, phù hợp với cá tính riêng của mỗi người. Đặc biệt, quá trình xử lý hậu kỳ chuyên sâu sẽ làm nổi bật thần thái và vẻ đẹp độc đáo, mang đến những bức ảnh hoàn hảo nhất."
   },
   {
-    id: "slide-4",
+    id: "slide-service-4",
     title: "Chụp Ảnh Chân Dung & Cá Nhân",
     content: "Hướng dẫn tạo dáng tự nhiên, phù hợp với cá tính riêng của mỗi người. Đặc biệt, quá trình xử lý hậu kỳ chuyên sâu sẽ làm nổi bật thần thái và vẻ đẹp độc đáo, mang đến những bức ảnh hoàn hảo nhất."
   }

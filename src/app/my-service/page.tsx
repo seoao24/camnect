@@ -3,6 +3,15 @@ import axiosInstance from '@/api/apiBase';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import {
+    ref,
+    uploadBytes,
+    getDownloadURL,
+    listAll,
+    // list,
+} from "firebase/storage";
+import { storage } from '@/firebase/firebase-config';
+import { v4 } from "uuid";
 
 const concepts = [
     {
@@ -88,6 +97,24 @@ export default function AddService() {
         imageDefault: null,
         address: ""
     })
+
+    const [imageUpload, setImageUpload] = useState<File | null>(null);
+    // const [imageUrls, setImageUrls] = useState<string[]>([]);
+
+    const imagesListRef = ref(storage, "images/");
+    const uploadFile = () => {
+        if (imageUpload == null) return;
+        const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+        uploadBytes(imageRef, imageUpload).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+                // setImageUrls((prev) => [...prev, url]);
+                setForm(prevForm => ({
+                    ...prevForm,
+                    imageUrl: url
+                }));
+            });
+        });
+    };
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.name === "image" && e.target.files) {
             const file = e.target.files[0];
@@ -193,7 +220,6 @@ export default function AddService() {
                 ...form,
                 conceptIds: [...form.conceptIds, selectedConcept] // Đảm bảo concept được lưu
             };
-            console.log(updatedForm)
             await axiosInstance.post("/Service/Update", updatedForm);
             toast.success("Cật nhật dịch vụ thành công");
             getUserServices();
@@ -221,6 +247,17 @@ export default function AddService() {
     useEffect(() => {
         getConcepts();
         getUserServices();
+        listAll(imagesListRef).then((response) => {
+            response.items.forEach((item) => {
+                getDownloadURL(item).then((url) => {
+                    // setImageUrls((prev) => [...prev, url]);
+                    setForm(prevForm => ({
+                        ...prevForm,
+                        imageUrl: url
+                    }));
+                });
+            });
+        });
     }, [])
     return (
         <div className='flex justify-center'>
@@ -274,7 +311,12 @@ export default function AddService() {
                         </div>
                         <div className="flex py-5">
                             <div className='shadow-md rounded-[20px] my-2 mx-2'>
-                                <input type="file" name="image" id="add-service-file" className='hidden' onChange={handleChange} />
+                                <input type="file" name="image" id="add-service-file" className='hidden' onChange={(event) => {
+                                    if (event.target.files && event.target.files.length > 0) {
+                                        setImageUpload(event.target.files[0]);
+                                        uploadFile();
+                                    }
+                                }} />
                                 <label htmlFor="add-service-file">
                                     <div className='w-[400px] h-[325px] bg-cover bg-center bg-no-repeat' style={{
                                         backgroundImage: `url('${form.imageUrl}')`

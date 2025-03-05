@@ -65,3 +65,7 @@ body {
 .calendar-rows tr {
   padding: 1rem 1rem;
 }
+
+.slider-container .slick-slide {
+  overflow: hidden;
+}

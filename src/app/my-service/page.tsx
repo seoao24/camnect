@@ -52,20 +52,15 @@ interface AddServiceForm {
     name: string,
     price: number,
     description: string,
-    image: File | null,
     imageUrl: string
     conceptIds: string[]
-    imageDefault: ImageDefault | null,
+    imageDefault: File | null,
     address: string
 }
 interface ConceptModel {
     id: string,
     name: string,
     description: string
-}
-interface ImageDefault {
-    imageUrl: string,
-    size: number
 }
 interface ServiceItemProps {
     id: string;
@@ -110,10 +105,15 @@ export default function AddService() {
                 // setImageUrls((prev) => [...prev, url]);
                 setForm(prevForm => ({
                     ...prevForm,
-                    imageUrl: url
+                    imageUrl: url,
+                    imageDefault: {
+                        imageUrl: url,
+                        size: 0
+                    }
                 }));
             });
         });
+        console.log(form)
     };
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.name === "image" && e.target.files) {
@@ -253,7 +253,11 @@ export default function AddService() {
                     // setImageUrls((prev) => [...prev, url]);
                     setForm(prevForm => ({
                         ...prevForm,
-                        imageUrl: url
+                        imageUrl: url,
+                        imageDefault: {
+                            imageUrl: url,
+                            size: 0
+                        }
                     }));
                 });
             });
@@ -319,7 +323,7 @@ export default function AddService() {
                                 }} />
                                 <label htmlFor="add-service-file">
                                     <div className='w-[400px] h-[325px] bg-cover bg-center bg-no-repeat' style={{
-                                        backgroundImage: `url('${form.imageUrl}')`
+                                        backgroundImage: `url('${form.imageDefault?.imageUrl}')`
                                     }}>
 
                                     </div>

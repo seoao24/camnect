@@ -1,8 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Post from '../communications/post'
 import ContactForm from './contact'
+import axiosInstance from '@/api/apiBase';
 
+interface PostResponse {
+    id: string;
+    description: string;
+    createdDateAgo: string;
+    totalLike: number;
+    totalComment: number;
+    createdDate: string; // Hoặc Date nếu bạn muốn xử lý dạng Date trong JS
+    imageUrls: string[];
+    likedByUser: boolean;
+    userFullname: string;
+    userAvatar: string | null;
+    typeUser: string;
+    userId: string;
+}
 export default function PostFeature() {
+    const [posts, setPosts] = useState<PostResponse[]>([]);
+    const getPosts = async () => {
+        const response = await axiosInstance.get("/Post/Search");
+        setPosts(response.data);
+    }
+
+    useEffect(() => {
+        getPosts();
+    }, [])
     return (
         <div>
             <div className="md:flex my-5 hidden">
@@ -12,41 +36,31 @@ export default function PostFeature() {
                 </button>
             </div>
             <div className="flex">
-                <div>
+                <div className='w-full'>
                     <div className="font-bold text-[36px] hidden md:block">
                         Bài viết
                     </div>
-                    <Post
-                        avatarUrl="/assets/images/relative1.png"
-                        description="📸 Đây là khoảnh khắc mình chụp được trong một buổi chiều hoàng hôn ở ngoại ô. Ánh sáng tự nhiên hòa quyện với cảm xúc của người mẫu đã tạo nên một khung cảnh vừa chân thực vừa đầy cảm hứng."
-                        fullname="Đặng Trung Hiếu"
-                        imageUrls={[
-                            "/assets/images/post1.png",
-                            "/assets/images/post2.png",
-                            "/assets/images/post3.png"
-                        ]}
-                        lastPost="1 giờ trước"
-                        status="Thành viên mới"
-                    />
-                    <Post
-                        avatarUrl="/assets/images/relative1.png"
-                        description="📸 Đây là khoảnh khắc mình chụp được trong một buổi chiều hoàng hôn ở ngoại ô. Ánh sáng tự nhiên hòa quyện với cảm xúc của người mẫu đã tạo nên một khung cảnh vừa chân thực vừa đầy cảm hứng."
-                        fullname="Đặng Trung Hiếu"
-                        imageUrls={[
-                            "/assets/images/post1.png",
-                            "/assets/images/post2.png",
-                            "/assets/images/post3.png"
-                        ]}
-                        lastPost="1 giờ trước"
-                        status="Thành viên mới"
-                    />
+                    {
+                        posts.map(e => (
+                            <div key={e.id} className='w-full'>
+                                <Post
+                                    avatarUrl={`${e.userAvatar ? `${process.env.NEXT_PUBLIC_API_URL}/${e.userAvatar}` : '/assets/images/relative1.png'}`}
+                                    description={e.description}
+                                    fullname={e.userFullname}
+                                    imageUrls={e.imageUrls}
+                                    lastPost={e.createdDateAgo}
+                                    status={e.typeUser}
+                                />
+                            </div>
+                        ))
+                    }
                 </div>
                 <div className="w-[400px] ml-4 md:block hidden">
                     <ContactForm />
                     <div className='w-full h-[200px] rounded-[10px] bg-cover bg-no-repeat mt-4'
-                    style={{
-                        backgroundImage: "url('/assets/images/google-map.png')"
-                    }}>
+                        style={{
+                            backgroundImage: "url('/assets/images/google-map.png')"
+                        }}>
 
                     </div>
                 </div>

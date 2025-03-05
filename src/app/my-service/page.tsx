@@ -84,7 +84,6 @@ export default function AddService() {
     };
     const addService = async () => {
         try {
-            console.log(form)
             const formData = new FormData();
             formData.append("id", form.id ?? "");
             formData.append("type", form.type);

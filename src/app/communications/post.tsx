@@ -10,11 +10,11 @@ interface PostProps {
 }
 export default function Post(props: PostProps) {
     return (
-        <div className='card shadow-lg py-5 md:px-10 px-5 my-5 rounded-[20px]'>
+        <div className='card shadow-lg py-5 md:px-10 px-5 my-5 rounded-[20px] w-full'>
             <div className="flex items-center">
                 <div className="w-[67px] h-[67px] bg-no-repeat bg-cover rounded-[50%]"
                     style={{
-                        backgroundImage: `url('${props.avatarUrl}')`
+                        backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${props.avatarUrl}')`
                     }}></div>
                 <div className='px-3'>
                     <div className="font-bold text-[16px]">{props.fullname}</div>
@@ -37,7 +37,7 @@ export default function Post(props: PostProps) {
                         return (
                             <div key={"image" + index} className="rounded-[10px] bg-cover bg-no-repeat w-full md:h-[500px] h-[152px]"
                                 style={{
-                                    backgroundImage: `url('${url}')`
+                                    backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${url}')`
                                 }}></div>
                         )
                     })

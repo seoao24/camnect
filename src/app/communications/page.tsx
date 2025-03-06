@@ -189,7 +189,7 @@ export default function Communications() {
                     </div>
                 </div>
             </div>
-            <div className="">
+            <div className="md:hidden">
                 <MobileHeader />
                 <div className="px-3">
                     <div className="grid grid-cols-3 gap-4 mt-5">

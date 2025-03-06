@@ -68,11 +68,11 @@ export default function SignUp() {
           <input type="password" name='repassword' value={form.repassword} className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Xác nhận mật khẩu*' onChange={handleChange} />
           <div className="flex text-white py-4">
           <div className="flex">
-              <input type="radio" id='basic' name='role' checked value={0}/>
+              <input type="radio" id='basic' name='role' value={0} onChange={handleChange}/>
               <label htmlFor="basic" className='ml-2'>Tôi là khách hàng</label>
             </div>
             <div className="flex ml-5">
-              <input type="radio" id='photographer' name='role' value={1}/>
+              <input type="radio" id='photographer' name='role' value={1} onChange={handleChange}/>
               <label htmlFor="photographer" className='ml-2'>Tôi là nhiếp ảnh gia</label>
             </div>
           </div>

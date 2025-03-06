@@ -44,7 +44,11 @@ export const pages = [
         link: "/orders"
     }
 ]
-export default function HeaderMenu() {
+
+interface HeaderMenuProps {
+    role: number
+}
+export default function HeaderMenu(props: HeaderMenuProps) {
     // const router = useRouter();
     const [activePage, setActivePage] = useState<string>(pages[0].link);
     return (
@@ -56,7 +60,7 @@ export default function HeaderMenu() {
                             key={e.id}
                             href={e.link}
                             onClick={() => setActivePage(e.link)}
-                            className={`px-3 text-[16px] ${activePage == e.link ? 'font-bold' : ''}`}
+                            className={`px-3 text-[16px] ${activePage == e.link ? 'font-bold' : ''} ${props.role != 1 && e.id == "7" ? 'hidden' : ''}`}
                         >{e.title}</Link>
                     ))
                 }

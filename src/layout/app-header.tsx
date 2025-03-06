@@ -10,7 +10,8 @@ import axiosInstance from "@/api/apiBase";
 interface UserInfo {
     userId: string,
     fullname: string,
-    avatarUrl: string
+    avatarUrl: string,
+    role: number
 }
 export default function AppHeader() {
     const [email, setEmail] = useState('');
@@ -66,7 +67,7 @@ export default function AppHeader() {
                             <div className="font-bold text-[50px] text-[#F07202] ml-3 mt-[2rem]">Camnect</div>
                         </Link>
                         <div>
-                            <HeaderMenu />
+                            <HeaderMenu role={currentUser?.role ?? 0}/>
                         </div>
                         <div className={`flex items-center ${currentUser ? 'hidden' : ''}`}>
                             <Link className="bg-none border-[#F07202] border-[1px] px-[2rem] text-[#F07202] rounded-[20px] py-[10px] text-[16px] font-bold mx-2"

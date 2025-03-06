@@ -10,7 +10,8 @@ interface SignUpForm {
   email: string,
   password: string,
   repassword: string,
-  numberPhone: string
+  numberPhone: string,
+  role: number
 }
 export default function SignUp() {
   const router = useRouter();
@@ -19,7 +20,8 @@ export default function SignUp() {
     email: "",
     password: "",
     repassword: "",
-    numberPhone: ""
+    numberPhone: "",
+    role: 0
   })
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
@@ -66,11 +68,11 @@ export default function SignUp() {
           <input type="password" name='repassword' value={form.repassword} className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Xác nhận mật khẩu*' onChange={handleChange} />
           <div className="flex text-white py-4">
           <div className="flex">
-              <input type="radio" id='basic' name='type-user' checked/>
+              <input type="radio" id='basic' name='role' checked value={0}/>
               <label htmlFor="basic" className='ml-2'>Tôi là khách hàng</label>
             </div>
             <div className="flex ml-5">
-              <input type="radio" id='photographer' name='type-user'/>
+              <input type="radio" id='photographer' name='role' value={1}/>
               <label htmlFor="photographer" className='ml-2'>Tôi là nhiếp ảnh gia</label>
             </div>
           </div>

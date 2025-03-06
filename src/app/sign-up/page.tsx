@@ -64,6 +64,16 @@ export default function SignUp() {
           <input type="text" name='fullname' value={form.fullname} className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Tên người dùng*' onChange={handleChange} />
           <input type="password" name='password' value={form.password} className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Mật khẩu*' onChange={handleChange} />
           <input type="password" name='repassword' value={form.repassword} className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Xác nhận mật khẩu*' onChange={handleChange} />
+          <div className="flex text-white py-4">
+          <div className="flex">
+              <input type="radio" id='basic' name='type-user' checked/>
+              <label htmlFor="basic" className='ml-2'>Tôi là khách hàng</label>
+            </div>
+            <div className="flex ml-5">
+              <input type="radio" id='photographer' name='type-user'/>
+              <label htmlFor="photographer" className='ml-2'>Tôi là nhiếp ảnh gia</label>
+            </div>
+          </div>
           <button className='flex text-[#F07202] bg-white rounded-[20px] md:w-[274px] py-4 justify-center mt-5 w-full'
             onClick={register}>
             <div className="flex items-center">

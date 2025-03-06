@@ -1,17 +1,22 @@
 'use client';
 import YellowButton from "@/components/buttons/YellowButton";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderMenu, { pages } from "./header-menu";
 import Link from "next/link";
 import { toast } from 'react-toastify';
 import axiosInstance from "@/api/apiBase";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
+interface UserInfo {
+    userId: string,
+    fullname: string,
+    avatarUrl: string
+}
 export default function AppHeader() {
     const [email, setEmail] = useState('');
     const [isOpenMenu, setIsOpenMenu] = useState(false);
     const [selectedLink, setSelectedLink] = useState(pages[0].link);
-    const accessKey = Cookies.get('access-key');
+    const [currentUser, setCurrentUser] = useState<UserInfo>()
     const getVoucher = async () => {
         const params = {
             Email: email
@@ -26,6 +31,17 @@ export default function AppHeader() {
             toast.error("Đã có lỗi xảy ra khi gửi voucher");
         }
     }
+    const getUser = async () => {
+        try {
+            const response = await axiosInstance.get("/Authentication/CurrentUser");
+            setCurrentUser(response.data);
+        } catch {
+
+        }
+    }
+    useEffect(() => {
+        getUser();
+    }, [])
     return (
         <>
             <div className="hidden md:flex w-[100vw] h-[72px] bg-[url('/assets/images/header-top.png')] bg-no-repeat bg-cover justify-center">
@@ -44,7 +60,7 @@ export default function AppHeader() {
             </div>
             <div>
                 <div className="hidden md:flex justify-center w-[100vw] mt-3">
-                    <div className={`container justify-between flex items-center ${accessKey ? 'hidden' : ''}`}>
+                    <div className={`container justify-between flex items-center`}>
                         <Link
                             href={'/'} className="flex">
                             <img src="/assets/images/logo.png" alt="" className="w-[100px] h-[120px]" />
@@ -53,7 +69,7 @@ export default function AppHeader() {
                         <div>
                             <HeaderMenu />
                         </div>
-                        <div className="flex items-center">
+                        <div className={`flex items-center ${currentUser ? 'hidden' : ''}`}>
                             <Link className="bg-none border-[#F07202] border-[1px] px-[2rem] text-[#F07202] rounded-[20px] py-[10px] text-[16px] font-bold mx-2"
                                 href='/sign-up'>Đăng ký</Link>
                             {/* <OrgangeButton title="Đăng nhập" onClick={() => { }} /> */}
@@ -64,16 +80,17 @@ export default function AppHeader() {
                                 Đăng nhập
                             </Link>
                         </div>
+                        <Link
+                            href={'/user'}>
+                            <div className={`container justify-between flex items-center ${currentUser ? '' : 'hidden'}`}>
+                                <div className="bg-center bg-cover bg-no-repeat w-[40px] h-[40px] rounded-[50%] bg-[#BBBBBB]" style={{
+                                    backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${currentUser?.avatarUrl}')`
+                                }}></div>
+                                <div className="text-[20px] ml-2">{currentUser?.fullname}</div>
+                            </div>
+                        </Link>
                     </div>
-                    <Link
-                        href={'/user'}>
-                        <div className={`container justify-between flex items-center ${accessKey ? '' : 'hidden'}`}>
-                            <div className="bg-center bg-cover bg-no-repeat w-[60px] h-[60px] rounded-[50%] bg-[#BBBBBB]" style={{
-                                backgroundImage: `url('')`
-                            }}></div>
-                            <div className="">User name</div>
-                        </div>
-                    </Link>
+
                 </div>
                 <div className="md:hidden flex justify-between items-center px-5 relative">
                     <div className="flex items-center">

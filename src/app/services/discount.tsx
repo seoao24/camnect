@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Slider from "react-slick";
 import axiosInstance from '@/api/apiBase';
+import { toast } from 'react-toastify';
 
 interface ServiceModel {
     id: string,
@@ -67,6 +68,18 @@ export default function Discount() {
             setServices(response.data?.items);
         } catch {
             // toast.error("Không thể lấy danh sách concept");
+        }
+    }
+
+    const addToCart = async (id: string) => {
+        try {
+            const body = {
+                serviceId: id
+            }
+            await axiosInstance.post("/OrderService/CreateOrder", body)
+            toast.success("Đã thêm dịch vụ vào giỏ hàng");
+        } catch {
+
         }
     }
     useEffect(() => {
@@ -137,7 +150,8 @@ export default function Discount() {
                                     <div className="text-[18px] font-bold text-nowrap">Giá: {e.price}</div>
                                     <div className="text-[14px] font-bold text-nowrap text-[#828282] line-through">Giá: {e.oldPrice}</div>
                                     <div className="flex justify-between">
-                                        <button className="text-white bg-[#F07202] rounded-[30px] px-[14px] py-2 font-bold flex items-center">
+                                        <button className="text-white bg-[#F07202] rounded-[30px] px-[14px] py-2 font-bold flex items-center"
+                                        onClick={() => addToCart(e.id)}>
                                             <div>Thêm vào giỏ hàng</div>
                                             <svg
                                                 width="20px"

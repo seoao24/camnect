@@ -28,10 +28,20 @@ export const pages = [
         title: "Dịch vụ",
         link: "/services"
     },
+    // {
+    //     id: "9",
+    //     title: "Giỏ hàng",
+    //     link: "/orders"
+    // },
     {
         id: "7",
         title: "Dịch vụ của tôi",
         link: "/my-service"
+    },
+    {
+        id: "8",
+        title: "Giỏ hàng",
+        link: "/orders"
     }
 ]
 export default function HeaderMenu() {

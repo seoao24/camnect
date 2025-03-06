@@ -26,8 +26,7 @@ export default function AppHeader() {
                 params: params
             });
             toast.success("Hãy kiểm tra email của bạn để lấy voucher");
-        } catch (e) {
-            console.log(e);
+        } catch {
             toast.error("Đã có lỗi xảy ra khi gửi voucher");
         }
     }

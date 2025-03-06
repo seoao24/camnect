@@ -1,10 +1,11 @@
 'use client';
 import CommonHero from "@/components/heros/CommonHero";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Post from "./post";
 import TopUser from "./top-user";
 import MobileHeader from "@/layout/mobile-header";
 import PostFeature from "../user/post";
+import axiosInstance from "@/api/apiBase";
 
 const SortTime = [
     "Tuần",
@@ -26,55 +27,56 @@ const menuItems = [
         title: "BXH"
     }
 ]
+interface PostResponse {
+    id: string;
+    description: string;
+    createdDateAgo: string;
+    totalLike: number;
+    totalComment: number;
+    createdDate: string; // Hoặc Date nếu bạn muốn xử lý dạng Date trong JS
+    imageUrls: string[];
+    likedByUser: boolean;
+    userFullname: string;
+    userAvatar: string | null;
+    typeUser: string;
+    userId: string;
+}
 export default function Communications() {
     const [selectedSortTime, setSelectedSortTime] = useState(SortTime[0])
-    const [selectedMenu, setSelectedMenu] = useState(menuItems[0].id)
+    const [selectedMenu, setSelectedMenu] = useState(menuItems[0].id);
+    const [posts, setPosts] = useState<PostResponse[]>([]);
+    const getPosts = async () => {
+        const response = await axiosInstance.get("/Post/Search");
+        setPosts(response.data);
+    }
+
+    useEffect(() => {
+        getPosts();
+    }, [])
     return (
         <div>
             <div className="md:block hidden">
                 <CommonHero />
                 <div className="flex justify-center">
                     <div className="container flex">
-                        <div>
+                        <div className="w-full">
                             <div className="text-[40px] text-[#F07202] font-bold">
                                 DÒNG THỜI GIAN
                             </div>
-                            <Post
-                                avatarUrl="/assets/images/relative1.png"
-                                description="📸 Đây là khoảnh khắc mình chụp được trong một buổi chiều hoàng hôn ở ngoại ô. Ánh sáng tự nhiên hòa quyện với cảm xúc của người mẫu đã tạo nên một khung cảnh vừa chân thực vừa đầy cảm hứng."
-                                fullname="Đặng Trung Hiếu"
-                                imageUrls={[
-                                    "/assets/images/post1.png",
-                                    "/assets/images/post2.png",
-                                    "/assets/images/post3.png"
-                                ]}
-                                lastPost="1 giờ trước"
-                                status="Thành viên mới"
-                            />
-                            <Post
-                                avatarUrl="/assets/images/relative1.png"
-                                description="📸 Đây là khoảnh khắc mình chụp được trong một buổi chiều hoàng hôn ở ngoại ô. Ánh sáng tự nhiên hòa quyện với cảm xúc của người mẫu đã tạo nên một khung cảnh vừa chân thực vừa đầy cảm hứng."
-                                fullname="Đặng Trung Hiếu"
-                                imageUrls={[
-                                    "/assets/images/post1.png",
-                                    "/assets/images/post2.png",
-                                    "/assets/images/post3.png"
-                                ]}
-                                lastPost="1 giờ trước"
-                                status="Thành viên mới"
-                            />
-                            <Post
-                                avatarUrl="/assets/images/relative1.png"
-                                description="📸 Đây là khoảnh khắc mình chụp được trong một buổi chiều hoàng hôn ở ngoại ô. Ánh sáng tự nhiên hòa quyện với cảm xúc của người mẫu đã tạo nên một khung cảnh vừa chân thực vừa đầy cảm hứng."
-                                fullname="Đặng Trung Hiếu"
-                                imageUrls={[
-                                    "/assets/images/post1.png",
-                                    "/assets/images/post2.png",
-                                    "/assets/images/post3.png"
-                                ]}
-                                lastPost="1 giờ trước"
-                                status="Thành viên mới"
-                            />
+                            {
+                                posts.map((e, index) => (
+                                    <div key={e.id + "-" + index} className="w-full">
+                                        <Post
+                                            avatarUrl={e.userAvatar}
+                                            description={e.description}
+                                            fullname={e.userFullname}
+                                            imageUrls={e.imageUrls}
+                                            lastPost={e.createdDateAgo}
+                                            status={e.typeUser}
+                                        />
+                                    </div>
+                                ))
+                            }
                         </div>
                         <div className="ml-3">
                             <div className="w-[315px] rounded-[20px] shadow-lg px-5 py-5">

@@ -2,7 +2,7 @@
 import React from 'react'
 
 interface PostProps {
-    avatarUrl: string,
+    avatarUrl: string | null,
     fullname: string,
     status: string,
     lastPost: string,
@@ -32,7 +32,7 @@ export default function Post(props: PostProps) {
             <div className="py-3 text-[14px]">
                 {props.description}
             </div>
-            <div className="grid grid-cols-3 gap-4">
+            <div className={`grid ${props.imageUrls.length == 1 ? 'grid-cols-1' : props.imageUrls.length == 2 ? 'grid-cols-2' : 'grid-cols-3'} gap-4`}>
                 {
                     props.imageUrls.map((url, index) => {
                         return (

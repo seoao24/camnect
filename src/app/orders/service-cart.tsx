@@ -2,34 +2,46 @@
 import Link from 'next/link';
 import React, { useState } from 'react'
 
-export default function ServiceCart() {
+interface OrderDetailProps {
+    orderDetailId: string;
+    serviceId: string;
+    imageDefault?: string | null;
+    name?: string | null;
+    description?: string | null;
+    price?: number | null;
+    oldPrice?: number | null;
+    quantity?: number | null;
+    totalQuantity?: number | null;
+}
+export default function ServiceCart(props: OrderDetailProps) {
     const [quantity, setQuantity] = useState(1);
+    console.log(props)
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 min-[550px]:gap-6 border-t border-[#8E8B8B] py-6">
             <div className="flex items-center flex-col min-[550px]:flex-row gap-3 min-[550px]:gap-6 w-full max-xl:justify-center max-xl:max-w-xl max-xl:mx-auto">
                 <div className="img-box">
                     <img
-                        src="https://pagedone.io/asset/uploads/1701162850.png"
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/${props.imageDefault}`}
                         alt="perfume bottle image"
                         className="xl:w-[140px] rounded-xl object-cover"
                     />
                 </div>
                 <div className="pro-data w-full max-w-sm ">
                     <h5 className="font-bold text-[16px] text-black max-[550px]:text-center uppercase">
-                        GÓI CHỤP CÁ NHÂN
+                        {props.name}
                     </h5>
                     <p className="font-normal text-[12px] text-[#141416] my-2 min-[550px]:my-3 max-[550px]:text-center">
-                        Khám phá vẻ đẹp cá nhân, lưu giữ dấu ấn riêng biệt.
+                        {props.description}
                     </p>
                     <h6 className="font-medium text-lg leading-8 text-indigo-600  max-[550px]:text-center">
-                        $120.00
+                        {props.price}
                     </h6>
                 </div>
             </div>
             <div className="flex items-center flex-col min-[450px]:flex-row w-full max-xl:max-w-xl max-xl:mx-auto gap-2">
                 <div className="font-manrope font-bold text-[13px] leading-2 text-[#F07202] w-full max-w-[150px] text-center">
-                    <div className='text-[#6B716E] line-through'>3.500.000đ</div>
-                    <div>2.500.000đ</div>
+                    <div className='text-[#6B716E] line-through'>{props.oldPrice}đ</div>
+                    <div>{props.price}đ</div>
                 </div>
                 <div className="flex items-center w-full mx-auto justify-center">
                     <button className="group rounded-l-full px-3 py-[3px] border border-[#8E8B8B] flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50">
@@ -101,7 +113,7 @@ export default function ServiceCart() {
                         </svg>
                     </button>
                 </div>
-                <div className="font-manrope font-bold text-[13px] leading-2 text-[#F07202] w-full max-w-[150px] text-center">2.500.000đ</div>
+                <div className="font-manrope font-bold text-[13px] leading-2 text-[#F07202] w-full max-w-[150px] text-center">{(props.price  ?? 0)* (props.quantity ?? 1)}đ</div>
                 <div className=''>
                     <div className="text-[#6B716E] text-[13px] text-center">Xóa</div>
                     <Link

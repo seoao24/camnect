@@ -86,7 +86,7 @@ export default function AppHeader() {
                                 <div className="bg-center bg-cover bg-no-repeat w-[40px] h-[40px] rounded-[50%] bg-[#BBBBBB]" style={{
                                     backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${currentUser?.avatarUrl}')`
                                 }}></div>
-                                <div className="text-[20px] ml-2">{currentUser?.fullname}</div>
+                                <div className="text-[20px] ml-2 text-[#F07202] font-semibold">{currentUser?.fullname}</div>
                             </div>
                         </Link>
                     </div>

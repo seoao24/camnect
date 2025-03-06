@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useState } from 'react'
 import Post from '../communications/post'
 import ContactForm from './contact'

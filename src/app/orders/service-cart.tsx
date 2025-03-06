@@ -1,6 +1,8 @@
 'use client';
+import axiosInstance from '@/api/apiBase';
 import Link from 'next/link';
 import React, { useState } from 'react'
+import { toast } from 'react-toastify';
 
 interface OrderDetailProps {
     orderDetailId: string;
@@ -15,7 +17,14 @@ interface OrderDetailProps {
 }
 export default function ServiceCart(props: OrderDetailProps) {
     const [quantity, setQuantity] = useState(1);
-    console.log(props)
+    const deleteOrder = async (id: string) => {
+        try {
+            await axiosInstance.post(`/OrderService/Delete?orderDetailIds=${id}`);
+            toast.success("Đã xóa dịch vụ khỏi đơn hàng");
+        } catch {
+
+        }
+    }
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 min-[550px]:gap-6 border-t border-[#8E8B8B] py-6">
             <div className="flex items-center flex-col min-[550px]:flex-row gap-3 min-[550px]:gap-6 w-full max-xl:justify-center max-xl:max-w-xl max-xl:mx-auto">
@@ -44,7 +53,9 @@ export default function ServiceCart(props: OrderDetailProps) {
                     <div>{props.price}đ</div>
                 </div>
                 <div className="flex items-center w-full mx-auto justify-center">
-                    <button className="group rounded-l-full px-3 py-[3px] border border-[#8E8B8B] flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50">
+                    <button
+                        onClick={() => setQuantity(quantity + 1)}
+                        className="group rounded-l-full px-3 py-[3px] border border-[#8E8B8B] flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50">
                         <svg
                             className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                             xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +92,9 @@ export default function ServiceCart(props: OrderDetailProps) {
                         value={quantity}
                         onChange={(e) => setQuantity(Number.parseInt(e.target.value))}
                     />
-                    <button className="group rounded-r-full px-3 py-[3px] border border-[#8E8B8B] flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50">
+                    <button
+                        onClick={() => setQuantity(quantity - 1 > 0 ? quantity - 1 : 1)}
+                        className="group rounded-r-full px-3 py-[3px] border border-[#8E8B8B] flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50">
                         <svg
                             className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                             xmlns="http://www.w3.org/2000/svg"
@@ -113,9 +126,10 @@ export default function ServiceCart(props: OrderDetailProps) {
                         </svg>
                     </button>
                 </div>
-                <div className="font-manrope font-bold text-[13px] leading-2 text-[#F07202] w-full max-w-[150px] text-center">{(props.price  ?? 0)* (props.quantity ?? 1)}đ</div>
+                <div className="font-manrope font-bold text-[13px] leading-2 text-[#F07202] w-full max-w-[150px] text-center">{(props.price ?? 0) * (props.quantity ?? 1)}đ</div>
                 <div className=''>
-                    <div className="text-[#6B716E] text-[13px] text-center">Xóa</div>
+                    <div className="text-[#6B716E] text-[13px] text-center cursor-pointer"
+                        onClick={() => deleteOrder(props.orderDetailId)}>Xóa</div>
                     <Link
                         className=''
                         href={''}>

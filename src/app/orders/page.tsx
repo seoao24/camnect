@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import ServiceCart from "./service-cart";
 import axiosInstance from "@/api/apiBase";
+import Link from "next/link";
 
 interface OrderDetail {
     orderDetailId: string;
@@ -21,6 +22,7 @@ export default function Orders() {
         try {
             const response = await axiosInstance.get("/OrderService/SearchOrder");
             setOrders(response.data.items);
+            getOrderDetails();
         } catch {
 
         }
@@ -32,13 +34,20 @@ export default function Orders() {
         <div className="flex justify-center">
             <div className="container my-5">
                 <div className="text-[36px] font-bold text-[#F07202]">Camnect - Nơi khoảnh khắc trở thành kỷ niệm</div>
-                <div className="text-[30px] font-bold text-black">Giỏ hàng</div>
+                <div className="flex justify-between">
+                    <div className="text-[30px] font-bold text-black">Giỏ hàng</div>
+                    <Link
+                        className={`text-[30px] font-bold text-[#F07202] ${orders.length ? '' : 'hidden'}`}
+                        href={'/payment-infomation'}>
+                            Thanh toán
+                    </Link>
+                </div>
 
                 <div className="mt-5">
                     {
                         orders.map((e, index) => (
                             <div key={e.orderDetailId + "-" + index}>
-                                <ServiceCart orderDetailId={e.orderDetailId} serviceId={e.serviceId} description={e.description} imageDefault={e.imageDefault} name={e.name} price={e.price} oldPrice={e.oldPrice}/>
+                                <ServiceCart orderDetailId={e.orderDetailId} serviceId={e.serviceId} description={e.description} imageDefault={e.imageDefault} name={e.name} price={e.price} oldPrice={e.oldPrice} />
                             </div>
                         ))
                     }

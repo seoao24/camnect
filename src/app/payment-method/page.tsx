@@ -1,8 +1,34 @@
+'use client';
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import QRPay from './qr-pay'
+import axiosInstance from '@/api/apiBase';
 
+interface OrderDetail {
+    orderDetailId: string;
+    serviceId: string;
+    imageDefault?: string | null;
+    name?: string | null;
+    description?: string | null;
+    price?: number | null;
+    oldPrice?: number | null;
+    quantity?: number | null;
+    totalQuantity?: number | null;
+}
 export default function PaymentMethod() {
+    const [orders, setOrders] = useState<OrderDetail[]>([]);
+    const getOrderDetails = async () => {
+        try {
+            const response = await axiosInstance.get("/OrderService/SearchOrder");
+            setOrders(response.data.items);
+            getOrderDetails();
+        } catch {
+
+        }
+    }
+    useEffect(() => {
+        getOrderDetails();
+    }, [])
     return (
         <div className='flex justify-center'>
             <div className="container flex border-[#8E8B8B] border-t-[1px] mt-10 px-10">
@@ -65,7 +91,7 @@ export default function PaymentMethod() {
                     </div>
                 </div>
                 <div className="max-w-[700px] w-full">
-                    <div className="text-[#777777] text-[30px] text-center py-10 border-[#8E8B8B] border-b-[1px] w-full">Đơn hàng ( 1 sản phẩm )</div>
+                    <div className="text-[#777777] text-[30px] text-center py-10 border-[#8E8B8B] border-b-[1px] w-full">Đơn hàng ( ${orders.length} sản phẩm )</div>
                     <div className="px-5">
                         <div className="flex items-center py-5 border-[#8E8B8B] border-b-[1px]">
                             <div className="text-[20px] text-[#F07202] border-[#8E8B8B] border-r-[1px] pr-2">Lyn Nguyen</div>
@@ -87,7 +113,7 @@ export default function PaymentMethod() {
                         </div>
                     </div>
                     <div className="flex justify-between px-5">
-                        <input type="text" className='border-[1px] border-[#6B716E] px-2 py-2 text-[13px] rounded-[5px] w-full mr-5' placeholder='Nhập mã giảm giá'/>
+                        <input type="text" className='border-[1px] border-[#6B716E] px-2 py-2 text-[13px] rounded-[5px] w-full mr-5' placeholder='Nhập mã giảm giá' />
                         <button className="w-[126px] h-[52px] rounded-[5px] bg-[#FF9900] text-[13px]">Áp dụng</button>
                     </div>
                 </div>

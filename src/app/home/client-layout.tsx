@@ -4,7 +4,7 @@ import "../globals.css";
 import AppHeader from "@/layout/app-header";
 import { ToastContainer } from 'react-toastify';
 import Cookies from "js-cookie";
-// import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,9 +21,9 @@ export default function ClientLayout({
 }: {
   children: React.ReactNode;
 }) {
-  //const router = useRouter();
+  const pathname = usePathname();
   const accessKey = Cookies.get('access-key');
-  if(!accessKey){
+  if (!accessKey) {
     // router.push("/sign-in")
   }
   return (
@@ -31,11 +31,16 @@ export default function ClientLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#F9F8F8] text-black`}
       >
-        <AppHeader />
-        <div className="p-0 m-0">
+        <div className={`w-full ${pathname.includes("/admin") ? 'hidden' : ''}`}>
+          <AppHeader />
+          <div className="p-0 m-0">
+            {children}
+          </div>
+          <ToastContainer />
+        </div>
+        <div className={`w-full ${pathname.includes("/admin") ? '' : 'hidden'}`}>
           {children}
         </div>
-        <ToastContainer />
       </body>
     </html>
   );

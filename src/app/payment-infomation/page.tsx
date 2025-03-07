@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
-import QRPay from '../payment-method/qr-pay';
+// import QRPay from '../payment-method/qr-pay';
 import axiosInstance from '@/api/apiBase';
 
 interface OrderDetail {
@@ -44,54 +44,22 @@ export default function PaymentInformation() {
                         <div className=""> Thanh toán/Đặt cọc</div>
                     </div>
                     <div className='text-[30px] font-[600] mt-5 mb-3'>
-                        Thanh toán
+                        Thông tin mua hàng
                     </div>
-                    <div className="flex justify-between">
-                        <div>
-                            <div className="bg-[#FF9900] rounded-[5px] shadow-md py-3 px-4 text-white font-[400] cursor-pointer">Thanh toán toàn bộ</div>
-                            <div className='text-[13px] text-[#6B716E] py-2'>{paymentAmount.toLocaleString()} VND</div>
-                        </div>
-                        <div>
-                            <div className="bg-[#FF9900] rounded-[5px] shadow-md py-3 px-4 text-white font-[400] cursor-pointer">Thanh toán số tiền đặt cọc</div>
-                            <div className='text-[13px] text-[#6B716E] py-2'>0</div>
-                        </div>
-                    </div>
-                    <div className="rounded-[5px] border-[#8E8B8B] border-[1px] w-full mt-10">
-                        <div className="flex py-3 px-3 border-[#8E8B8B] border-b-[1px]">
-                            <input type="radio" className='w-[24px] h-[24px] rounded-[50%]' id='vnpay' name='payment-method' />
-                            <label htmlFor="vnpay" className='text-[16px] text-[#6B716E] ml-5'>Thanh toán qua VNPAY</label>
-                        </div>
-                        <div className="flex py-3 px-3 border-[#8E8B8B] border-b-[1px]">
-                            <input type="radio" className='w-[24px] h-[24px] rounded-[50%]' id='zalopay' name='payment-method' />
-                            <label htmlFor="zalopay" className='text-[16px] text-[#6B716E] ml-5'>Thanh toán qua ZaloPay</label>
-                        </div>
-                        <div className="flex py-3 px-3 border-[#8E8B8B] border-b-[1px]">
-                            <input type="radio" className='w-[24px] h-[24px] rounded-[50%]' id='momo' name='payment-method' />
-                            <label htmlFor="momo" className='text-[16px] text-[#6B716E] ml-5'>Thanh toán qua MoMo</label>
-                        </div>
-                        <div className="flex py-3 px-3 border-[#8E8B8B] border-b-[1px]">
-                            <input type="radio" className='w-[24px] h-[24px] rounded-[50%]' id='nganluong' name='payment-method' />
-                            <label htmlFor="nganluong" className='text-[16px] text-[#6B716E] ml-5'>Thanh toán qua Ngân lượng</label>
-                        </div>
-                        <div className="flex py-3 px-3 border-[#8E8B8B] border-b-[1px]">
-                            <input type="radio" className='w-[24px] h-[24px] rounded-[50%]' id='webmoney' name='payment-method' />
-                            <label htmlFor="webmoney" className='text-[16px] text-[#6B716E] ml-5'>Thanh toán qua WebMoney</label>
-                        </div>
-                        <div className="flex py-3 px-3 border-[#8E8B8B] border-b-[1px]">
-                            <input type="radio" className='w-[24px] h-[24px] rounded-[50%]' id='mocha' name='payment-method' />
-                            <label htmlFor="mocha" className='text-[16px] text-[#6B716E] ml-5'>Thanh toán qua Mocha</label>
-                        </div>
-                        <div className="flex py-3 px-3 border-[#8E8B8B] border-b-[1px]">
-                            <input type="radio" className='w-[24px] h-[24px] rounded-[50%] bg-[#FF9900]' id='vtcpay' name='payment-method' />
-                            <label htmlFor="vtcpay" className='text-[16px] text-[#6B716E] ml-5'>Thanh toán qua VTC Pay</label>
-                        </div>
+                    <div className="">
+                        <input type="email" name='email' className='border-[1px] border-[#8E8B8B] rounded-[5px] w-full px-2 py-3 outline-none my-2' placeholder='Email(Tùy chọn)'/>
+                        <input type="text" name='fullname' className='border-[1px] border-[#8E8B8B] rounded-[5px] w-full px-2 py-3 outline-none my-2' placeholder='Họ và tên*'/>
+                        <input type="text" name='phoneNumber' className='border-[1px] border-[#8E8B8B] rounded-[5px] w-full px-2 py-3 outline-none my-2' placeholder='Số điện thoại*'/>
+                        <input type="text" name='address' className='border-[1px] border-[#8E8B8B] rounded-[5px] w-full px-2 py-3 outline-none my-2' placeholder='Địa chỉ(Tùy chọn)'/>
+                        <textarea name="note" id="" rows={3} placeholder='Ghi chú (Tùy chọn)' className='border-[1px] border-[#8E8B8B] rounded-[5px] w-full px-2 py-3 outline-none my-2'></textarea>
                     </div>
 
                     <div className="flex justify-between items-center mt-5">
-                        <Link href={'/'} className='text-[#F07202] text-[15px]'>
-                            {`< Thông tin`}
+                        <Link href={'/orders'} className='text-[#F07202] text-[15px]'>
+                            {`< Giỏ hàng`}
                         </Link>
-                        <QRPay />
+                        {/* <QRPay /> */}
+                        <Link href={'/payment-method'} className="px-4 py-1 text-white bg-[#FF9900] rounded-[20px] text-white">Tiếp tục chọn thanh toán</Link>
                     </div>
                 </div>
                 <div className="max-w-[700px] w-full">

@@ -31,7 +31,7 @@ export default function Chat() {
 
     const getUsers = async () => {
         try {
-            var response = await axiosInstance.get(`/Authentication/ChatUsers?keyword=${searchKeyword}`);
+            const response = await axiosInstance.get(`/Authentication/ChatUsers?keyword=${searchKeyword}`);
             setUsers(response.data);
         } catch {
 

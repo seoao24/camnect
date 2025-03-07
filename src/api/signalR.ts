@@ -8,7 +8,7 @@ let connection: signalR.HubConnection | null = null;
 export const connectSignalR = async (
     onMessageReceived: (user: string, message: string) => void
 ) => {
-    const token = Cookies.get('access-key');
+    // const token = Cookies.get('access-key');
     connection = new signalR.HubConnectionBuilder()
         // .withUrl(hubUrl, {
         //     withCredentials: true, // Cho phép gửi cookie hoặc authentication token

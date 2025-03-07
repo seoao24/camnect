@@ -1,32 +1,24 @@
 'use client';
 import axiosInstance from '@/api/apiBase';
-import { useRouter } from 'next/navigation';
+import { useRouter  } from 'next/navigation';
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import Link from 'next/link';
 
-interface LoginForm {
-    email: string,
-    password: string
-}
-export default function SignIn() {
+export default function ForgotPassword() {
     const router = useRouter();
-    const [form, setForm] = useState<LoginForm>({
-        email: "",
-        password: ""
-    });
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        });
-    }
+    const [email, setEmail] = useState<string>("");
     const login = async () => {
+        const baseUrl = window.location.origin;
         try {
-            const response = await axiosInstance.post("/Authentication/SignIn", form);
-            toast.success("Đăng nhập thành công");
+            const body = {
+                email: email,
+                clientSide: baseUrl
+            }
+            const response = await axiosInstance.post("/Authentication/ForgotPassword", body);
+            toast.success("Hãy kiểm tra hòm thư của bạn");
             router.push("/");
             Cookies.set('access-key', response.data, { expires: 1 })
         } catch (e: unknown) {
@@ -50,19 +42,13 @@ export default function SignIn() {
                         }}>
                     </div>
                 </div>
-                <div className="p-10 bg-[#F07202] rounded-tl-[20px] rounded-bl-[20px] rounded-br-[20px] max-w-[740px]">
-                    {/* <div className="grid grid-cols-2 gap-4">
-                        <input type="text" className='bg-white outline-none border-none p-4' placeholder='Số điện thoại*' />
-                        <input type="text" className='bg-white outline-none border-none p-4' placeholder='Email*' />
-                    </div> */}
-                    <input type="email" name='email' className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Email*' value={form.email} onChange={handleChange} />
-                    <input type="password" name='password' className='bg-white outline-none border-none p-4 w-full my-4' placeholder='Mật khẩu*' value={form.password} onChange={handleChange} />
+                <div className="p-10 bg-[#F07202] rounded-tl-[20px] rounded-bl-[20px] rounded-br-[20px] max-w-[740px] py-[60px]">
+                    <input type="email" name='email' className='bg-white outline-none border-none p-4 md:w-[400px] mt-4' placeholder='Email*' value={email} onChange={(e) => setEmail(e.target.value)} />
                     {/* <input type="password" className='bg-white outline-none border-none p-4 w-full mt-4' placeholder='Xác nhận mật khẩu*' /> */}
-                    <Link href={'/forgot-password'} className='mt-5 text-white'>Quên mật khẩu</Link>
-                    <button className='flex text-[#F07202] bg-white rounded-[20px] md:w-[274px] py-4 justify-center mt-5 w-full'
+                    <button className='flex text-[#F07202] bg-white rounded-[20px] md:w-[274px] py-4 justify-center my-5 w-full'
                         onClick={login}>
                         <div className="flex items-center">
-                            <div className='mx-1'>Đăng nhập</div>
+                            <div className='mx-1'>Yêu cầu đặt lại mật khẩu</div>
                             <svg
                                 width="20px"
                                 height="20px"
@@ -85,6 +71,7 @@ export default function SignIn() {
                             </svg>
                         </div>
                     </button>
+                    <Link href={'/sign-in'} className='text-white ml-2'>Trở về đăng nhập</Link>
                 </div>
             </div>
         </div>

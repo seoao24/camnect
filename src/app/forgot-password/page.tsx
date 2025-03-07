@@ -3,7 +3,6 @@ import axiosInstance from '@/api/apiBase';
 import { useRouter  } from 'next/navigation';
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
-import Cookies from 'js-cookie';
 import axios from 'axios';
 import Link from 'next/link';
 
@@ -17,10 +16,9 @@ export default function ForgotPassword() {
                 email: email,
                 clientSide: baseUrl
             }
-            const response = await axiosInstance.post("/Authentication/ForgotPassword", body);
+            await axiosInstance.post("/Authentication/ForgotPassword", body);
             toast.success("Hãy kiểm tra hòm thư của bạn");
             router.push("/");
-            Cookies.set('access-key', response.data, { expires: 1 })
         } catch (e: unknown) {
             if (axios.isAxiosError(e) && e.response) {
                 toast.error(e.response.data);

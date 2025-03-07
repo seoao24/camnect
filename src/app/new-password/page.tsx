@@ -20,13 +20,11 @@ export default function NewPassword() {
                 password: password
             }
             const urlParams = new URLSearchParams(window.location.search);
-            const token = urlParams.get('token');
-            console.log(token);
-            axiosInstance.defaults.headers['Authorization'] = `Bearer ${token}`;
-            const response = await axiosInstance.post("/Authentication/ResetPassword", body);
-            toast.success("Đăng nhập thành công");
+            const token = urlParams.get('token') ?? "";
+            Cookies.set('access-key', token, { expires: 1 })
+            await axiosInstance.post("/Authentication/ResetPassword", body);
+            toast.success("Đổi mật khẩu thành công");
             router.push("/");
-            Cookies.set('access-key', response.data, { expires: 1 })
         } catch (e: unknown) {
             if (axios.isAxiosError(e) && e.response) {
                 toast.error(e.response.data);

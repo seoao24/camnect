@@ -1,119 +1,168 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import AddBlock from './add-block';
 import axiosInstance from '@/api/apiBase';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+
+interface BlogModel {
+    id: string;
+    title: string;
+    imageUrl?: string | null;
+    content: string;
+    postedAt: string;
+}
 
 export default function Blog() {
-    const [content, setContent] = useState<string>("");
-    const [title, setTitle] = useState<string>("");
-    const [image, setImage] = useState<File | null>(null);
-    const [imageUrl, setImageUrl] = useState<string>("");
-
-    // Khôi phục imageUrl từ localStorage khi component mount
-    useEffect(() => {
-        const savedImageUrl = localStorage.getItem('imageUrl');
-        if (savedImageUrl) {
-            setImageUrl(savedImageUrl);
-        }
-    }, []);
-
-    // Lưu imageUrl vào localStorage khi nó thay đổi
-    useEffect(() => {
-        if (imageUrl) {
-            localStorage.setItem('imageUrl', imageUrl);
-        } else {
-            localStorage.removeItem('imageUrl');
-        }
-    }, [imageUrl]);
-
-    const addBlog = async () => {
-        console.log("Link ảnh khi bấm button: " + imageUrl);
-        const body = {
-            image: image
-        };
+    const [blogs, setBlogs] = useState<BlogModel[]>([]);
+    const getBlog = async () => {
         try {
-            await axiosInstance.post("", body);
-        } catch (error) {
-            console.error("Error adding blog:", error);
+            const response = await axiosInstance.get("/Blog/Search");
+            setBlogs(response.data);
+        } catch {
+
         }
-    };
-
-    console.log("Link ảnh khi render lại: " + imageUrl);
-
+    }
+    useEffect(() => {
+        getBlog();
+    }, [])
     return (
         <div>
-            <div className='flex justify-between items-center mb-5'>
-                <div className='text-[24px] font-semibold uppercase text-[#F07202]'>Thêm Blog mới</div>
-                <button
-                    onClick={addBlog}
-                    className="rounded-[5px] text-white bg-[#FF9900] px-4 py-2">Thêm blog</button>
+            <div className="flex justify-between items-center">
+                <div className="text-[24px] font-bold text-[#F07202]">Danh sách các blogs đã đăng</div>
+                <Link
+                    href={'/admin/blog/create'}
+                    className="rounded-[5px] px-3 py-1 text-white bg-[#F07202]">Thêm blog mới</Link>
             </div>
-            <div>
-                <textarea
-                    rows={2}
-                    className='w-full outline-none p-4 border-[#FF9900] border-[1px] rounded-[5px] text-[#F07202]'
-                    placeholder='Nhập tiêu đề'
-                    onChange={(e) => setTitle(e.target.value)}
-                    value={title}
-                />
+            <div className="overflow-x-auto mt-5">
+                <table className="min-w-full border border-gray-300 bg-white shadow-md rounded-lg">
+                    <thead className="bg-gray-100 border-b">
+                        <tr>
+                            <th className="px-4 py-2 text-left font-semibold text-gray-600">STT</th>
+                            <th className="px-4 py-2 text-left font-semibold text-gray-600">Hình ảnh</th>
+                            <th className="px-4 py-2 text-left font-semibold text-gray-600">Tiêu đề</th>
+                            <th className="px-4 py-2 text-left font-semibold text-gray-600">Ngày đăng</th>
+                            <th className="px-4 py-2 text-left font-semibold text-gray-600">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            blogs.map((e, index) => (
+                                <tr className="border-b hover:bg-gray-50" key={e.id + "-" + index}>
+                                    <td className="px-4 py-2">{index + 1}</td>
+                                    <td className="px-4 py-2">
+                                        <div className="w-[60px] h-[60px] bg-cover bg-center bg-no-repeat rounded-[5px]" style={{
+                                            backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${e.imageUrl}')`
+                                        }}></div>
+                                    </td>
+                                    <td className="px-4 py-2">
+                                        {e.title}
+                                    </td>
+                                    <td className="px-4 py-2">
+                                        {e.postedAt}
+                                    </td>
+                                    <td className="px-4 py-2">
+                                        <div className="flex">
+                                            <Link
+                                                className='mx-2'
+                                                href={'/admin/blog/update?id=' + e.id}
+                                            >
+                                                <svg
+                                                    width="24px"
+                                                    height="24px"
+                                                    viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="#000000"
+                                                >
+                                                    <g id="SVGRepo_bgCarrier" strokeWidth={0} />
+                                                    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
+                                                    <g id="SVGRepo_iconCarrier">
+                                                        {" "}
+                                                        <title />{" "}
+                                                        <g id="Complete">
+                                                            {" "}
+                                                            <g id="edit">
+                                                                {" "}
+                                                                <g>
+                                                                    {" "}
+                                                                    <path
+                                                                        d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8"
+                                                                        fill="none"
+                                                                        stroke="#F07202"
+                                                                        strokeLinecap="round"
+                                                                        strokeLinejoin="round"
+                                                                        strokeWidth={2}
+                                                                    />{" "}
+                                                                    <polygon
+                                                                        fill="none"
+                                                                        points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8"
+                                                                        stroke="#F07202"
+                                                                        strokeLinecap="round"
+                                                                        strokeLinejoin="round"
+                                                                        strokeWidth={2}
+                                                                    />{" "}
+                                                                </g>{" "}
+                                                            </g>{" "}
+                                                        </g>{" "}
+                                                    </g>
+                                                </svg>
+                                            </Link>
+                                            <button className="mx-2">
+                                                <svg
+                                                    width="24px"
+                                                    height="24px"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <g id="SVGRepo_bgCarrier" strokeWidth={0} />
+                                                    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
+                                                    <g id="SVGRepo_iconCarrier">
+                                                        {" "}
+                                                        <path
+                                                            d="M10 11V17"
+                                                            stroke="#BBBBBB"
+                                                            strokeWidth={2}
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        />{" "}
+                                                        <path
+                                                            d="M14 11V17"
+                                                            stroke="#BBBBBB"
+                                                            strokeWidth={2}
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        />{" "}
+                                                        <path
+                                                            d="M4 7H20"
+                                                            stroke="#BBBBBB"
+                                                            strokeWidth={2}
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        />{" "}
+                                                        <path
+                                                            d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z"
+                                                            stroke="#BBBBBB"
+                                                            strokeWidth={2}
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        />{" "}
+                                                        <path
+                                                            d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
+                                                            stroke="#BBBBBB"
+                                                            strokeWidth={2}
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        />{" "}
+                                                    </g>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
             </div>
-            <div className='my-4'>
-                {!imageUrl && (
-                    <div>
-                        <input
-                            type="file"
-                            id='title-image'
-                            className='hidden'
-                            onChange={(e) => {
-                                if (e.target.files && e.target.files.length > 0) {
-                                    const file = e.target.files[0];
-                                    const newImageUrl = URL.createObjectURL(file);
-                                    setImage(file);
-                                    setImageUrl(newImageUrl);
-                                }
-                            }}
-                        />
-                        <label
-                            htmlFor="title-image"
-                            className='px-4 py-2 bg-[#F07202] rounded-[5px] cursor-pointer text-white text-[20px] font-bold'>
-                            Thêm ảnh tiêu đề
-                        </label>
-                    </div>
-                )}
-                {imageUrl && (
-                    <div className="w-[300px] h-[300px] bg-cover bg-center bg-no-repeat rounded-[5px] mt-4 relative" style={{
-                        backgroundImage: `url('${imageUrl}')`
-                    }}>
-                        <button
-                            onClick={() => {
-                                setImage(null);
-                                setImageUrl(null);
-                            }}
-                            className="p-1 rounded-full bg-[#F07202] absolute top-4 right-4">
-                            <svg
-                                width="30px"
-                                height="30px"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <g id="SVGRepo_bgCarrier" strokeWidth={0} />
-                                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
-                                <g id="SVGRepo_iconCarrier">
-                                    {" "}
-                                    <path
-                                        fillRule="evenodd"
-                                        clipRule="evenodd"
-                                        d="M10.9393 12L6.9696 15.9697L8.03026 17.0304L12 13.0607L15.9697 17.0304L17.0304 15.9697L13.0607 12L17.0303 8.03039L15.9696 6.96973L12 10.9393L8.03038 6.96973L6.96972 8.03039L10.9393 12Z"
-                                        fill="#fff"
-                                    />{" "}
-                                </g>
-                            </svg>
-                        </button>
-                    </div>
-                )}
-            </div>
-            <AddBlock value={content} onChange={(e) => setContent(e)} />
         </div>
     );
 }

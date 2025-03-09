@@ -1,12 +1,31 @@
 'use client';
-import React from 'react'
+import axiosInstance from '@/api/apiBase';
+import React, { useEffect, useState } from 'react'
 
+interface Summary {
+    totalUser: number,
+    totalPhotographer: number,
+    totalService: number,
+    totalOrder: number
+}
 export default function AdminSummary() {
+    const [summary, setSummary] = useState<Summary>();
+    const getSummary = async () => {
+        try {
+            const response = await axiosInstance.get("/Admin/DashboardSummary");
+            setSummary(response.data);
+        } catch {
+
+        }
+    }
+    useEffect(() => {
+        getSummary();
+    }, [])
     return (
         <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div className="grid grid-cols-4 gap-4">
                 <div
-                    className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                    className="cursor-pointer block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                 >
                     <div className="flex items-center">
                         <div className="w-[40px] h-[40px] rounded-[50%] bg-[#F07202] flex items-center justify-center">
@@ -56,12 +75,12 @@ export default function AdminSummary() {
                         </div>
                         <div className='ml-2'>
                             <div className="font-semibold text-[#F07202] text-[16px]">Khách hàng</div>
-                            <div className='text-[12px] text-[#6B716E]'>200</div>
+                            <div className='text-[12px] text-[#6B716E]'>{summary?.totalUser ?? 0}</div>
                         </div>
                     </div>
                 </div>
                 <div
-                    className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                    className="cursor-pointer block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                 >
                     <div className="flex items-center">
                         <div className="w-[40px] h-[40px] rounded-[50%] bg-[#F07202] flex items-center justify-center">
@@ -90,12 +109,12 @@ export default function AdminSummary() {
                         </div>
                         <div className='ml-2'>
                             <div className="font-semibold text-[#F07202] text-[16px]">Nhiếp ảnh gia</div>
-                            <div className='text-[12px] text-[#6B716E]'>200</div>
+                            <div className='text-[12px] text-[#6B716E]'>{summary?.totalPhotographer}</div>
                         </div>
                     </div>
                 </div>
                 <div
-                    className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                    className="cursor-pointer block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                 >
                     <div className="flex items-center">
                         <div className="w-[40px] h-[40px] rounded-[50%] bg-[#F07202] flex items-center justify-center">
@@ -148,12 +167,12 @@ export default function AdminSummary() {
                         </div>
                         <div className='ml-2'>
                             <div className="font-semibold text-[#F07202] text-[16px]">Dịch vụ</div>
-                            <div className='text-[12px] text-[#6B716E]'>200</div>
+                            <div className='text-[12px] text-[#6B716E]'>{summary?.totalService}</div>
                         </div>
                     </div>
                 </div>
                 <div
-                    className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                    className="cursor-pointer block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                 >
                     <div className="flex items-center">
                         <div className="w-[40px] h-[40px] rounded-[50%] bg-[#F07202] flex items-center justify-center">
@@ -181,7 +200,7 @@ export default function AdminSummary() {
                         </div>
                         <div className='ml-2'>
                             <div className="font-semibold text-[#F07202] text-[16px]">Lượt đặt hàng</div>
-                            <div className='text-[12px] text-[#6B716E]'>200</div>
+                            <div className='text-[12px] text-[#6B716E]'>{summary?.totalOrder}</div>
                         </div>
                     </div>
                 </div>

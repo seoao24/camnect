@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import React, { ReactNode } from 'react'
 
 interface AdminLayoutProps {
@@ -37,8 +38,8 @@ export default function AdminLayout(props: AdminLayoutProps) {
                 <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
                     <ul className="space-y-2 font-medium">
                         <li>
-                            <a
-                                href="#"
+                            <Link
+                                href="/admin/dashboard"
                                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                             >
                                 <svg
@@ -52,11 +53,11 @@ export default function AdminLayout(props: AdminLayoutProps) {
                                     <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                                 </svg>
                                 <span className="ms-3">Dashboard</span>
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href="#"
+                            <Link
+                                href="/admin/blog"
                                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                             >
                                 <svg
@@ -132,11 +133,11 @@ export default function AdminLayout(props: AdminLayoutProps) {
                                 </svg>
 
                                 <span className="flex-1 ms-3 whitespace-nowrap">Blog</span>
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href="#"
+                            <Link
+                                href="/admin/chat"
                                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                             >
                                 <svg
@@ -152,7 +153,7 @@ export default function AdminLayout(props: AdminLayoutProps) {
                                 {/* <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
                                     3
                                 </span> */}
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <a

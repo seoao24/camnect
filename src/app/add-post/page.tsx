@@ -16,6 +16,7 @@ export default function AddPost() {
             formData.append("id", description ?? "");
             images.forEach((image) => {
                 formData.append(`images`, image);
+                formData.append(`description`, description);
             });
             await axiosInstance.post("/Post/Create", formData);
             toast.success("Bài đăng được tạo thành công");

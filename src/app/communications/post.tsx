@@ -22,7 +22,7 @@ export default function Post(props: PostProps) {
                     style={{
                         backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${props.avatarUrl}')`
                     }}>
-                        {props.avatarUrl ? '' : props.fullname.charAt[0].toUpperCase()}
+                        {props.avatarUrl ? '' : props.fullname.charAt[0]}
                     </div>
                 <div className='px-3'>
                     <div className="font-bold text-[16px]">{props.fullname}</div>

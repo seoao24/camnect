@@ -5,9 +5,10 @@ import HeaderMenu, { pages } from "./header-menu";
 import Link from "next/link";
 import { toast } from 'react-toastify';
 import axiosInstance from "@/api/apiBase";
+import UserDropdown from "./user-dropdown";
 // import Cookies from "js-cookie";
 
-interface UserInfo {
+export interface UserInfo {
     userId: string,
     fullname: string,
     avatarUrl: string,
@@ -80,7 +81,7 @@ export default function AppHeader() {
                                 Đăng nhập
                             </Link>
                         </div>
-                        <Link
+                        {/* <Link
                             href={'/user'}>
                             <div className={`container justify-between flex items-center ${currentUser ? '' : 'hidden'}`}>
                                 <div className="bg-center bg-cover bg-no-repeat w-[40px] h-[40px] rounded-[50%] bg-[#BBBBBB]" style={{
@@ -88,7 +89,10 @@ export default function AppHeader() {
                                 }}></div>
                                 <div className="text-[20px] ml-2 text-[#F07202] font-semibold">{currentUser?.fullname}</div>
                             </div>
-                        </Link>
+                        </Link> */}
+                        <div className={`${currentUser ? '' : 'hidden'}`}>
+                            <UserDropdown currentUser={currentUser}/>
+                        </div>
                     </div>
 
                 </div>

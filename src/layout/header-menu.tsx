@@ -42,11 +42,6 @@ export const pages = [
         id: "8",
         title: "Giỏ hàng",
         link: "/orders"
-    },
-    {
-        id: "10",
-        title: "Quản lý",
-        link: "/admin/dashboard"
     }
 ]
 

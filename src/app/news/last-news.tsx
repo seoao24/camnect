@@ -1,7 +1,35 @@
-import React from 'react'
+'use client';
+import React, { useEffect, useState } from 'react'
 import HintNews from '../news-detail/hint-news'
+import axiosInstance from '@/api/apiBase';
 
+export interface News {
+    id: string;
+    title: string;
+    imageUrl?: string;
+    content: string;
+    postedAt?: string;
+    author?: string;
+}
 export default function LastNews() {
+    const [news, setNews] = useState<News[]>([]);
+    const getNews = async () => {
+        try {
+            const params = {
+                total: 4
+            }
+            const response = await axiosInstance.get("/Blog/Search", {
+                params: params
+            });
+            setNews(response.data);
+        } catch {
+
+        }
+    }
+
+    useEffect(() => {
+        getNews();
+    }, []);
     return (
         <div className='shadow-lg rounded-[10px] px-4 py-4'>
             <div className="w-full my-3">
@@ -17,30 +45,19 @@ export default function LastNews() {
                 }}></div>
             </div>
             <div>
-                <HintNews
-                    title='Concept  chụp ảnh với áo dài luôn là một trong những concept rất đẹp và thanh lịch!'
-                    postedAt='11/01/2025'
-                    author='Tam Nguyen'
-                    imageUrl='/assets/images/last-news11.png'
-                />
-                <HintNews
-                    title='Chụp hình Tết 2025 siêu đáng yêu, bạn đã từng trải nghiệm chưa?'
-                    postedAt='11/01/2025'
-                    author='Tuan Anh Tran'
-                    imageUrl='/assets/images/last-news21.png'
-                />
-                <HintNews
-                    title='Trải nghiệm concept chụp ảnh đơn giản nhưng vô cùng hút mắt ngay bây giờ!'
-                    postedAt='11/01/2025'
-                    author='Lili Nguyen'
-                    imageUrl='/assets/images/last-news31.png'
-                />
-                <HintNews
-                    title='Cùng tạo nên concept độc đáo có 102 trong dịp sinh nhật sắp tới nào!'
-                    postedAt='11/01/2025'
-                    author='Nhat Anh'
-                    imageUrl='/assets/images/last-news41.png'
-                />
+                {
+                    news.map((e) => (
+                        <div key={e.id}>
+                            <HintNews
+                                id={e.id}
+                                title={e.title}
+                                postedAt={e.postedAt}
+                                author={e.author}
+                                imageUrl={`${process.env.NEXT_PUBLIC_API_URL}/${e.imageUrl}`}
+                            />
+                        </div>
+                    ))
+                }
             </div>
         </div>
     )

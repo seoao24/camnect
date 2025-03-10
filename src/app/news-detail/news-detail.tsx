@@ -9,7 +9,7 @@ interface NewsDetailProps {
 }
 export default function NewsDetail(props: NewsDetailProps) {
     return (
-        <div className="flex shadow-lg px-10">
+        <div className="flex shadow-lg px-10 w-full">
             <div className='py-10'>
                 <div className="text-[#F07202] md:text-[36px] font-bold text-[20px]">{props.title}</div>
                 <div className='flex items-center text-[#BBB9B9]'>

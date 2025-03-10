@@ -1,7 +1,28 @@
-import React from 'react'
+'use client';
+import React, { useEffect, useState } from 'react'
 import TopNewsCard from './top-news-card'
+import { News } from './last-news';
+import axiosInstance from '@/api/apiBase';
 
 export default function TopNews() {
+    const [topNews, setTopNews] = useState<News[]>([]);
+    const getTopNews = async () => {
+        try {
+            const params = {
+                total: 3
+            }
+            const response = await axiosInstance.get("/Blog/Search", {
+                params: params
+            });
+            setTopNews(response.data);
+        } catch {
+
+        }
+    }
+
+    useEffect(() => {
+        getTopNews();
+    }, []);
     return (
         <div className='rounded-[10px] shadow-lg px-4 py-4'>
             <div className="w-full my-5">
@@ -19,24 +40,19 @@ export default function TopNews() {
                 </div>
             </div>
             <div className="grid grid-cols-3 gap-4 pt-4">
-                <TopNewsCard
-                    content='- Bạn đã bao giờ chìm đắm trong những khoảng khắc lắng đọng...'
-                    postAt='06/01/2025'
-                    title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
-                    imageUrl='/assets/images/top-news-1.png'
-                />
-                <TopNewsCard
-                    content='- Bạn đã bao giờ chìm đắm trong những khoảng khắc lắng đọng...'
-                    postAt='06/01/2025'
-                    title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
-                    imageUrl='/assets/images/top-news-2.png'
-                />
-                <TopNewsCard
-                    content='- Bạn đã bao giờ chìm đắm trong những khoảng khắc lắng đọng...'
-                    postAt='06/01/2025'
-                    title='Chụp ảnh trên tuyến tàu siêu đẹp với concept vintage.'
-                    imageUrl='/assets/images/top-news-3.png'
-                />
+                {
+                    topNews.map(e => (
+                        <div key={e.id}>
+                            <TopNewsCard
+                                id={e.id}
+                                content={e.content}
+                                postAt={e.postedAt}
+                                title={e.title}
+                                imageUrl={e.imageUrl}
+                            />
+                        </div>
+                    ))
+                }
             </div>
         </div>
     )

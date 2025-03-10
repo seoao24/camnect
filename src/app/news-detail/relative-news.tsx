@@ -1,87 +1,59 @@
-import React from 'react'
+'use client';
+import React, { useEffect, useState } from 'react'
 import RelativeCardNews from './relative-card-news'
+import { News } from '../news/last-news';
+import axiosInstance from '@/api/apiBase';
 
 export default function RelativeNews() {
+    const [relativeNews, setRelativeNews] = useState<News[]>([]);
+    const getRelativeNews = async () => {
+        try {
+            const params = {
+                top: 6
+            }
+            const response = await axiosInstance.get("/Blog/Search", {
+                params: params
+            });
+            setRelativeNews(response.data);
+        } catch {
+
+        }
+    }
+    useEffect(() => {
+        getRelativeNews();
+    }, [])
     return (
         <div>
             <div className='font-bold text-[36px]'>
                 Các bài viết cùng chủ đề:
             </div>
             <div className="md:grid grid-cols-3 gap-4 hidden">
-                <RelativeCardNews
-                    imageUrl='/assets/images/relative6.png'
-                    title='Chụp ảnh Tết cùng concept vô cùng độc lạ ngay hôm nay!'
-                    views={12}
-                    link=''
-                />
-                <RelativeCardNews
-                    imageUrl='/assets/images/relative5.png'
-                    title='Chụp ảnh Tết cùng concept vô cùng độc lạ ngay hôm nay!'
-                    views={12}
-                    link=''
-                />
-                <RelativeCardNews
-                    imageUrl='/assets/images/relative4.png'
-                    title='Chụp ảnh Tết cùng concept vô cùng độc lạ ngay hôm nay!'
-                    views={12}
-                    link=''
-                />
-                <RelativeCardNews
-                    imageUrl='/assets/images/relative3.png'
-                    title='Chụp ảnh Tết cùng concept vô cùng độc lạ ngay hôm nay!'
-                    views={12}
-                    link=''
-                />
-                <RelativeCardNews
-                    imageUrl='/assets/images/relative2.png'
-                    title='Chụp ảnh Tết cùng concept vô cùng độc lạ ngay hôm nay!'
-                    views={12}
-                    link=''
-                />
-                <RelativeCardNews
-                    imageUrl='/assets/images/relative1.png'
-                    title='Chụp ảnh Tết cùng concept vô cùng độc lạ ngay hôm nay!'
-                    views={12}
-                    link=''
-                />
+                {
+                    relativeNews.map(e => (
+                        <div key={e.id}>
+                            <RelativeCardNews
+                                id={e.id}
+                                imageUrl={e.imageUrl}
+                                title={e.title}
+                                views={12}
+                            />
+                        </div>
+                    ))
+                }
             </div>
             <div className="grid grid-cols-1 gap-4 md:hidden">
-                <RelativeCardNews
-                    imageUrl='/assets/images/relative6.png'
-                    title='Chụp ảnh Tết cùng concept vô cùng độc lạ ngay hôm nay!'
-                    views={12}
-                    link=''
-                />
-                <RelativeCardNews
-                    imageUrl='/assets/images/relative5.png'
-                    title='Chụp ảnh Tết cùng concept vô cùng độc lạ ngay hôm nay!'
-                    views={12}
-                    link=''
-                />
-                <RelativeCardNews
-                    imageUrl='/assets/images/relative4.png'
-                    title='Chụp ảnh Tết cùng concept vô cùng độc lạ ngay hôm nay!'
-                    views={12}
-                    link=''
-                />
-                <RelativeCardNews
-                    imageUrl='/assets/images/relative3.png'
-                    title='Chụp ảnh Tết cùng concept vô cùng độc lạ ngay hôm nay!'
-                    views={12}
-                    link=''
-                />
-                <RelativeCardNews
-                    imageUrl='/assets/images/relative2.png'
-                    title='Chụp ảnh Tết cùng concept vô cùng độc lạ ngay hôm nay!'
-                    views={12}
-                    link=''
-                />
-                <RelativeCardNews
-                    imageUrl='/assets/images/relative1.png'
-                    title='Chụp ảnh Tết cùng concept vô cùng độc lạ ngay hôm nay!'
-                    views={12}
-                    link=''
-                />
+                {
+                    relativeNews.map(e => (
+                        <div key={e.id}>
+                            <RelativeCardNews
+                                id={e.id}
+                                imageUrl={e.imageUrl}
+                                title={e.title}
+                                views={12}
+                            />
+                        </div>
+                    ))
+                }
             </div>
         </div>
     )

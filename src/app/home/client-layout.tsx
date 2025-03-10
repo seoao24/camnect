@@ -5,6 +5,7 @@ import AppHeader from "@/layout/app-header";
 import { ToastContainer } from 'react-toastify';
 import Cookies from "js-cookie";
 import { usePathname } from "next/navigation";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,12 +35,16 @@ export default function ClientLayout({
         <div className={`w-full ${pathname.includes("/admin") ? 'hidden' : ''}`}>
           <AppHeader />
           <div className="p-0 m-0">
-            {children}
+            <Suspense>
+              {children}
+            </Suspense>
           </div>
           <ToastContainer />
         </div>
         <div className={`w-full ${pathname.includes("/admin") ? '' : 'hidden'}`}>
-          {children}
+          <Suspense>
+            {children}
+          </Suspense>
         </div>
       </body>
     </html>

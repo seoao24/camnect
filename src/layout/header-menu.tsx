@@ -42,6 +42,11 @@ export const pages = [
         id: "8",
         title: "Giỏ hàng",
         link: "/orders"
+    },
+    {
+        id: "10",
+        title: "Quản lý",
+        link: "/admin/dashboard"
     }
 ]
 
@@ -60,7 +65,7 @@ export default function HeaderMenu(props: HeaderMenuProps) {
                             key={e.id}
                             href={e.link}
                             onClick={() => setActivePage(e.link)}
-                            className={`px-3 text-[16px] ${activePage == e.link ? 'font-bold' : ''} ${props.role != 1 && e.id == "7" ? 'hidden' : ''}`}
+                            className={`px-3 text-[16px] ${activePage == e.link ? 'font-bold' : ''} ${props.role != 1 && e.id == "7" ? 'hidden' : `${props.role == 2 && (e.id == '7' || e.id == '8')}`}`}
                         >{e.title}</Link>
                     ))
                 }

@@ -65,7 +65,7 @@ export default function HeaderMenu(props: HeaderMenuProps) {
                             key={e.id}
                             href={e.link}
                             onClick={() => setActivePage(e.link)}
-                            className={`px-3 text-[16px] ${activePage == e.link ? 'font-bold' : ''} ${props.role != 1 && e.id == "7" ? 'hidden' : `${props.role == 2 && (e.id == '7' || e.id == '8')}`}`}
+                            className={`px-3 text-[16px] ${props.role != 2 && e.id == '10' ? 'hidden' : ''} ${activePage == e.link ? 'font-bold' : ''} ${props.role != 1 && e.id == "7" ? 'hidden' : `${props.role == 2 && (e.id == '7' || e.id == '8') ? 'hidden' : ''}`}`}
                         >{e.title}</Link>
                     ))
                 }

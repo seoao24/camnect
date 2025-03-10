@@ -12,9 +12,10 @@ export default function AddBlock({ value = "", onChange }: TinymceEditorProps) {
 
     return (
         <Editor
-            apiKey="f2bzt9l4x8lr8fwf81nruooh5xio9abs178o5x6lds0wituv"
+            key={value}
+            apiKey="v2d8117tlmkeujy1jt82fk0ilxtctlhcbu96gp4rqocopaxs"
             onInit={(evt, editor) => (editorRef.current = editor)}
-            value={value} // Sử dụng `value` thay vì `initialValue`
+            initialValue={value} // Sử dụng `value` thay vì `initialValue`
             onEditorChange={(content) => onChange?.(content)}
             init={{
                 height: 500,

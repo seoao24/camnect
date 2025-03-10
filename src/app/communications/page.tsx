@@ -67,12 +67,15 @@ export default function Communications() {
                                 posts.map((e, index) => (
                                     <div key={e.id + "-" + index} className="w-full">
                                         <Post
+                                        id={e.id}
                                             avatarUrl={e.userAvatar}
                                             description={e.description}
                                             fullname={e.userFullname}
                                             imageUrls={e.imageUrls}
                                             lastPost={e.createdDateAgo}
                                             status={e.typeUser}
+                                            totalComment={e.totalComment}
+                                            totalLike={e.totalLike}
                                         />
                                     </div>
                                 ))

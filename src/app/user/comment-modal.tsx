@@ -19,9 +19,12 @@ interface Comment {
     userAvatarUrl?: string;
 }
 export default function CommentModal(props: CommentModalProps) {
-    if (!props.isOpen) return null;
-    const [comment, setComment] = useState<string>("");
+    const [comment, setComment] = useState<string>();
     const [comments, setComments] = useState<Comment[]>([]);
+    useEffect(() => {
+        loadComment();
+    }, [props.isOpen, props.id]);
+    
     const addComment = async () => {
         try {
             if (!comment) {
@@ -39,7 +42,7 @@ export default function CommentModal(props: CommentModalProps) {
     }
     const loadComment = async () => {
         try {
-            var params = {
+            const params = {
                 postId: props.id
             }
             const response = await axiosInstance.get("/Post/SearchComment", {
@@ -50,12 +53,9 @@ export default function CommentModal(props: CommentModalProps) {
 
         }
     }
-    useEffect(() => {
-        if (props.isOpen) {
-            loadComment();
-        }
-    }, [props.isOpen, props.id]);
-
+    if (!props.isOpen) {
+        return null;
+    }
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-6 rounded-lg shadow-lg w-96 md:min-w-[800px]">

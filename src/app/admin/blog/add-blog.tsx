@@ -8,7 +8,7 @@ interface TinymceEditorProps {
 }
 
 export default function AddBlock({ value = "", onChange }: TinymceEditorProps) {
-    const editorRef = useRef<any>(null);
+    const editorRef = useRef(null);
 
     return (
         <Editor

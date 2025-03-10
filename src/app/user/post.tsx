@@ -45,12 +45,15 @@ export default function PostFeature() {
                         posts.map(e => (
                             <div key={e.id} className='w-full'>
                                 <Post
+                                    id={e.id}
                                     avatarUrl={`${e.userAvatar ? `${process.env.NEXT_PUBLIC_API_URL}/${e.userAvatar}` : '/assets/images/relative1.png'}`}
                                     description={e.description}
                                     fullname={e.userFullname}
                                     imageUrls={e.imageUrls}
                                     lastPost={e.createdDateAgo}
                                     status={e.typeUser}
+                                    totalLike={e.totalLike}
+                                    totalComment={e.totalComment}
                                 />
                             </div>
                         ))

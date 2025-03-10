@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const axiosInstance = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api` || "https://api.example.com",
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}api` || "https://api.example.com",
 });
 
 // Interceptor để tự động thêm Authorization header vào mọi request

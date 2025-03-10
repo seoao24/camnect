@@ -27,8 +27,8 @@ export default function ServiceItem(props: ServiceItemProps) {
                 }}
                 className='rounded-[25px] md:w-full w-[300px]'
             />
-            <div className='text-[20px] font-bold'>{props.name}</div>
-            <div className="text-[18px]">{props.type}</div>
+            <div className='text-[20px] font-bold truncate'>{props.name}</div>
+            <div className="text-[18px] truncate ">{props.type}</div>
             <div className="flex items-center">
                 <svg
                     id="Layer_1"

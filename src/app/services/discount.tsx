@@ -97,8 +97,8 @@ export default function Discount() {
                                     backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${e.imageDefaultUrl}')`
                                 }}></div>
                                 <div className="px-1 mt-2">
-                                    <div className='text-[20px] font-bold'>{e.name}</div>
-                                    <div className="text-[18px]">{e.type}</div>
+                                    <div className='text-[20px] font-bold truncate'>{e.name}</div>
+                                    <div className="text-[18px] truncate">{e.type}</div>
                                     <div className="flex items-center py-1">
                                         <svg
                                             id="Layer_1"

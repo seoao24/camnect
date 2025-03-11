@@ -1,11 +1,12 @@
 'use client';
 import YellowButton from "@/components/buttons/YellowButton";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import HeaderMenu, { pages } from "./header-menu";
 import Link from "next/link";
 import { toast } from 'react-toastify';
 import axiosInstance from "@/api/apiBase";
 import UserDropdown from "./user-dropdown";
+import { usePathname, useRouter } from "next/navigation";
 // import Cookies from "js-cookie";
 
 export interface UserInfo {
@@ -18,7 +19,9 @@ export default function AppHeader() {
     const [email, setEmail] = useState('');
     const [isOpenMenu, setIsOpenMenu] = useState(false);
     const [selectedLink, setSelectedLink] = useState(pages[0].link);
-    const [currentUser, setCurrentUser] = useState<UserInfo>()
+    const [currentUser, setCurrentUser] = useState<UserInfo>();
+    const pathname = usePathname();
+    const router = useRouter();
     const getVoucher = async () => {
         const params = {
             Email: email
@@ -43,6 +46,12 @@ export default function AppHeader() {
     useEffect(() => {
         getUser();
     }, [])
+
+    useEffect(() => {
+        if(currentUser?.role != 2 && pathname.includes("/admin")){
+            router.push("/");
+        }
+    }, [pathname])
     return (
         <>
             <div className="hidden md:flex w-[100vw] h-[72px] bg-[url('/assets/images/header-top.png')] bg-no-repeat bg-cover justify-center">

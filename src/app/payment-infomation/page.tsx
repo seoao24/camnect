@@ -3,6 +3,8 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 // import QRPay from '../payment-method/qr-pay';
 import axiosInstance from '@/api/apiBase';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
 interface OrderDetail {
     orderDetailId: string;
@@ -18,19 +20,43 @@ interface OrderDetail {
 export default function PaymentInformation() {
     const [orders, setOrders] = useState<OrderDetail[]>([]);
     const [paymentAmount, setPaymentAmount] = useState(0);
+    const [formData, setFormData] = useState({
+        email: "",
+        fullName: "",
+        phone: "",
+        address: "",
+        note: "",
+    });
+    const router = useRouter();
     const getOrderDetails = async () => {
         try {
             const response = await axiosInstance.get("/OrderService/SearchOrder");
             setOrders(response.data.items);
             console.log(response.data.items)
-            response.data.items.forEach((item : OrderDetail )=> {
+            response.data.items.forEach((item: OrderDetail) => {
                 setPaymentAmount(paymentAmount + ((item.quantity ?? 0) * (item.price ?? 0)));
             });
         } catch {
 
         }
     }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        Cookies.set("paymentInfo", JSON.stringify(formData), { expires: 7 });
+        router.push("/payment-method");
+    };
     useEffect(() => {
+        const savedForm = Cookies.get("paymentInfo");
+        if (savedForm) {
+            setFormData(JSON.parse(savedForm));
+        }
         getOrderDetails();
     }, [])
     return (
@@ -47,11 +73,11 @@ export default function PaymentInformation() {
                         Thông tin mua hàng
                     </div>
                     <div className="">
-                        <input type="email" name='email' className='border-[1px] border-[#8E8B8B] rounded-[5px] w-full px-2 py-3 outline-none my-2' placeholder='Email(Tùy chọn)'/>
-                        <input type="text" name='fullname' className='border-[1px] border-[#8E8B8B] rounded-[5px] w-full px-2 py-3 outline-none my-2' placeholder='Họ và tên*'/>
-                        <input type="text" name='phoneNumber' className='border-[1px] border-[#8E8B8B] rounded-[5px] w-full px-2 py-3 outline-none my-2' placeholder='Số điện thoại*'/>
-                        <input type="text" name='address' className='border-[1px] border-[#8E8B8B] rounded-[5px] w-full px-2 py-3 outline-none my-2' placeholder='Địa chỉ(Tùy chọn)'/>
-                        <textarea name="note" id="" rows={3} placeholder='Ghi chú (Tùy chọn)' className='border-[1px] border-[#8E8B8B] rounded-[5px] w-full px-2 py-3 outline-none my-2'></textarea>
+                        <input type="email" name='email' value={formData.email} className='border-[1px] border-[#8E8B8B] rounded-[5px] w-full px-2 py-3 outline-none my-2' placeholder='Email(Tùy chọn)' onChange={handleChange}/>
+                        <input type="text" name='fullName' value={formData.fullName} className='border-[1px] border-[#8E8B8B] rounded-[5px] w-full px-2 py-3 outline-none my-2' placeholder='Họ và tên*' onChange={handleChange}/>
+                        <input type="text" name='phone' value={formData.phone} className='border-[1px] border-[#8E8B8B] rounded-[5px] w-full px-2 py-3 outline-none my-2' placeholder='Số điện thoại*' onChange={handleChange}/>
+                        <input type="text" name='address' value={formData.address} className='border-[1px] border-[#8E8B8B] rounded-[5px] w-full px-2 py-3 outline-none my-2' placeholder='Địa chỉ(Tùy chọn)' onChange={handleChange}/>
+                        <textarea name="note" id="" value={formData.note} rows={3} placeholder='Ghi chú (Tùy chọn)' className='border-[1px] border-[#8E8B8B] rounded-[5px] w-full px-2 py-3 outline-none my-2' onChange={handleChange}></textarea>
                     </div>
 
                     <div className="flex justify-between items-center mt-5">
@@ -59,7 +85,11 @@ export default function PaymentInformation() {
                             {`< Giỏ hàng`}
                         </Link>
                         {/* <QRPay /> */}
-                        <Link href={'/payment-method'} className="px-4 py-1 text-white bg-[#FF9900] rounded-[20px] text-white">Tiếp tục chọn thanh toán</Link>
+                        {
+                            orders.length ? (
+                                <Link href={'/payment-method'} className="px-4 py-1 text-white bg-[#FF9900] rounded-[20px] text-white" onClick={handleSubmit}>Tiếp tục chọn thanh toán</Link>
+                            ) : null
+                        }
                     </div>
                 </div>
                 <div className="max-w-[700px] w-full">
@@ -88,10 +118,10 @@ export default function PaymentInformation() {
                             </div>
                         ))
                     }
-                    <div className="flex justify-between px-5">
+                    {/* <div className="flex justify-between px-5">
                         <input type="text" className='border-[1px] border-[#6B716E] px-2 py-2 text-[13px] rounded-[5px] w-full mr-5' placeholder='Nhập mã giảm giá' />
                         <button className="w-[126px] h-[52px] rounded-[5px] bg-[#FF9900] text-[13px]">Áp dụng</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 

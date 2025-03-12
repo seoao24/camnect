@@ -125,7 +125,7 @@ export default function PaymentMethod() {
                         orders.length ? (
                             <div className="flex justify-between px-5">
                                 <input type="text" className='border-[1px] border-[#6B716E] px-2 py-2 text-[13px] rounded-[5px] w-full mr-5' placeholder='Nhập mã giảm giá' value={voucherCode} onChange={(e) => setVoucherCode(e.target.value)} />
-                                <button className="w-[126px] h-[52px] rounded-[5px] bg-[#FF9900] text-[13px]">Áp dụng</button>
+                                <button className="w-[126px] h-[52px] rounded-[5px] bg-[#FF9900] text-[13px]" onClick={handleVoucher}>Áp dụng</button>
                             </div>
                         ) : null
                     }

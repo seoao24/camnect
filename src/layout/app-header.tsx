@@ -1,6 +1,6 @@
 'use client';
 import YellowButton from "@/components/buttons/YellowButton";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderMenu, { pages } from "./header-menu";
 import Link from "next/link";
 import { toast } from 'react-toastify';

@@ -1,9 +1,10 @@
 import axios from "axios";
+import { Agent } from "https";
 import Cookies from "js-cookie";
 
 const axiosInstance = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api` || "https://api.example.com",
-  httpsAgent: new (require("https").Agent)({
+  httpsAgent: new Agent({
     rejectUnauthorized: false, // Bỏ qua SSL
   }),
 });

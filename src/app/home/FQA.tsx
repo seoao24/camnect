@@ -1,3 +1,4 @@
+'use client';
 import Description from "@/components/text/description";
 import TextCollapse from "@/components/text/TextCollapse";
 import Title from "@/components/text/title";

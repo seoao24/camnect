@@ -22,7 +22,6 @@ export default function Orders() {
         try {
             const response = await axiosInstance.get("/OrderService/SearchOrder");
             setOrders(response.data.items);
-            getOrderDetails();
         } catch {
 
         }

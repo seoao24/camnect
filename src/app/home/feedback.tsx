@@ -1,3 +1,4 @@
+'use client';
 import Description from '@/components/text/description'
 import Title from '@/components/text/title'
 import React from 'react'

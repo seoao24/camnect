@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Agent } from "https";
 import Cookies from "js-cookie";
 
 const axiosInstance = axios.create({

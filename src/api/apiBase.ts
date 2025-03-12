@@ -3,10 +3,7 @@ import { Agent } from "https";
 import Cookies from "js-cookie";
 
 const axiosInstance = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api` || "https://api.example.com",
-  httpsAgent: new Agent({
-    rejectUnauthorized: false, // Bỏ qua SSL
-  }),
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api` || "https://api.example.com"
 });
 
 // Interceptor để tự động thêm Authorization header vào mọi request

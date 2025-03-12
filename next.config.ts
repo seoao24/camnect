@@ -23,6 +23,14 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "http://183.81.33.169:5000/:path*", // Thay URL của API thật vào đây
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -160,7 +160,7 @@ export default function UserInformation() {
                                 rows={3}></textarea>
                         </div>
                         {
-                            form?.role == 1 || true ? (
+                            form?.role == 1 ? (
                                 <div className='flex justify-center mt-4'>
                                     <input
                                         type="file"

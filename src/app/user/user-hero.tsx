@@ -15,7 +15,7 @@ export default function UserHero() {
     return (
         <div className='w-full md:h-[500px] bg-cover bg-center bg-no-repeat md:py-10 py-5'
             style={{
-                backgroundImage: `url('/assets/images/background.png')`
+                backgroundImage: `url('/assets/images/user-background.png'')`
             }}>
             <div className='flex justify-center'>
                 <label htmlFor="avatar">
@@ -25,8 +25,8 @@ export default function UserHero() {
                         }}></div>
                 </label>
             </div>
-            <div className="md:text-[36px] text-[14px] text-white font-bold text-center">{currentUser?.fullname}</div>
-            <div className="text-center text-white md:text-[24px] text-[12px]">978 người theo dõi</div>
+            <div className="md:text-[36px] text-[14px] text-[#F07202] font-bold text-center">{currentUser?.fullname}</div>
+            <div className="text-center text-[#F07202] md:text-[24px] text-[12px]">978 người theo dõi</div>
             <div className="flex justify-center">
                 <div className="md:w-[150px] md:h-[50px] w-[50px] h-[20px] bg-contain bg-no-repeat"
                     style={{

@@ -27,7 +27,7 @@ export default function NewsPage() {
   const getTopNews = async () => {
     try {
       const params = {
-        total: 7
+        total: 4
       }
       const response = await axiosInstance.get("/Blog/Search", {
         params: params

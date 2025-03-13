@@ -12,7 +12,7 @@ interface HintNewsProps {
 export default function HintNews(props: HintNewsProps) {
     return (
         <div className='flex my-2'>
-            <div className={`w-[104px] h-[62px] bg-cover bg-no-repeat bg-center`}
+            <div className={`w-[104px] h-[62px] bg-cover bg-no-repeat bg-center bg-[#D9D9D9]`}
                 style={{
                     backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${props.imageUrl}')`
                 }}>

@@ -72,7 +72,7 @@ export default function PhotographerSlide() {
             <Slider {...settings}>
                 {
                     slideData.map((e, index) => (
-                        <div className='' key={e.id}>
+                        <div className='' key={e.id + "-" + index}>
                             <div className="flex justify-between items-end">
                                 <div className="text-[90px] text-[#FFD9B7] uppercase">
                                     {getNumber(index + 1)}

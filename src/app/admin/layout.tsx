@@ -1,11 +1,35 @@
 'use client';
+import { UserInfo } from '@/layout/app-header';
+import Cookies from 'js-cookie';
 import Link from 'next/link';
-import React, { ReactNode, Suspense } from 'react'
+import { useRouter } from 'next/navigation';
+import React, { ReactNode, Suspense, useEffect, useState } from 'react'
 
 interface AdminLayoutProps {
     children: ReactNode;
 }
 export default function AdminLayout(props: AdminLayoutProps) {
+    const [currentUser, setCurrentUser] = useState<UserInfo | null>(null);
+    const router = useRouter();
+
+    useEffect(() => {
+        const currentUserString = Cookies.get("currentUser");
+        if (currentUserString) {
+            setCurrentUser(JSON.parse(currentUserString));
+        }
+    }, []); // Chạy 1 lần khi component mount
+
+    // Kiểm tra quyền truy cập sau khi currentUser được cập nhật
+    useEffect(() => {
+        if (currentUser === null) return;
+        if (currentUser?.role !== 2) {
+            router.push("/"); // Điều hướng về trang chính nếu không có quyền admin
+        }
+    }, [currentUser, router]); // Kiểm tra khi currentUser thay đổi
+
+    if (currentUser === null) {
+        return <div>Loading...</div>; // Trả về giao diện loading trong khi đang lấy dữ liệu
+    }
     return (
         <>
             <Suspense>

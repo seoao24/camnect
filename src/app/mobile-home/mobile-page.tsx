@@ -6,7 +6,6 @@ import HomeService from './home-service';
 import MobileIntroduction from './introduction';
 import MobileReason from './mobile-reason';
 import SearchPhotographer from './search-photographer';
-import FeedBackMobile from './feed-back-mobile';
 
 export default function MobilePage() {
     return (
@@ -26,7 +25,7 @@ export default function MobilePage() {
             <MobileIntroduction />
             <MobileReason />
             <SearchPhotographer />
-            <FeedBackMobile />
+            {/* <FeedBackMobile /> */}
         </div>
     )
 }

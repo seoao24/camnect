@@ -6,7 +6,7 @@ import Link from "next/link";
 import { toast } from 'react-toastify';
 import axiosInstance from "@/api/apiBase";
 import UserDropdown from "./user-dropdown";
-import { usePathname, useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 // import Cookies from "js-cookie";
 
 export interface UserInfo {
@@ -20,8 +20,7 @@ export default function AppHeader() {
     const [isOpenMenu, setIsOpenMenu] = useState(false);
     const [selectedLink, setSelectedLink] = useState(pages[0].link);
     const [currentUser, setCurrentUser] = useState<UserInfo>();
-    const pathname = usePathname();
-    const router = useRouter();
+    
     const getVoucher = async () => {
         const params = {
             Email: email
@@ -39,19 +38,20 @@ export default function AppHeader() {
         try {
             const response = await axiosInstance.get("/Authentication/CurrentUser");
             setCurrentUser(response.data);
+            Cookies.set("currentUser", JSON.stringify(response.data));
         } catch {
 
         }
     }
     useEffect(() => {
-        getUser();
-    }, [])
-
-    useEffect(() => {
-        if(currentUser?.role != 2 && pathname.includes("/admin")){
-            router.push("/");
+        const currentUserString = Cookies.get("currentUser");
+        if(currentUserString){
+            setCurrentUser(JSON.parse(currentUserString));
         }
-    }, [pathname])
+        else {
+            getUser();
+        }
+    }, [])
     return (
         <>
             <div className="hidden md:flex w-[100vw] h-[72px] bg-[url('/assets/images/header-top.png')] bg-no-repeat bg-cover justify-center">

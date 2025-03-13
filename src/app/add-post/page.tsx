@@ -27,7 +27,7 @@ export default function AddPost() {
     }
     return (
         <div>
-            <UserHero />
+            <UserHero/>
             <div className='md:flex justify-center hidden mb-5'>
                 <div className="container">
                     <div className="flex justify-between items-center py-5">

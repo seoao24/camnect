@@ -15,7 +15,7 @@ export default function UserHero() {
     return (
         <div className='w-full md:h-[500px] bg-cover bg-center bg-no-repeat md:py-10 py-5'
             style={{
-                backgroundImage: `url('/assets/images/user-background.png'')`
+                backgroundImage: `url('/assets/images/user-background.png')`
             }}>
             <div className='flex justify-center'>
                 <label htmlFor="avatar">

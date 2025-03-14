@@ -49,6 +49,15 @@ export default function UserInformation() {
 
         }
     }
+    const getUser = async () => {
+        try {
+            const response = await axiosInstance.get("/Authentication/CurrentUser");
+            setCurrentUser(response.data);
+            Cookies.set("currentUser", JSON.stringify(response.data));
+        } catch {
+
+        }
+    }
     const updateUserInformation = async () => {
         try {
             const formData = new FormData();
@@ -59,6 +68,7 @@ export default function UserInformation() {
             formData.append(`fullname`, form?.fullname);
             await axiosInstance.post("/Authentication/UpdateInformation", formData);
             toast.success("Cật nhật thông tin thành công");
+            getUser();
             router.push("/user");
         } catch {
             toast.error("Lỗi thông tin, vui lòng kiểm tra lại");

@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { Send, PhoneCall, Video, Info } from "lucide-react";
 import axiosInstance from '@/api/apiBase';
-// import useChat from '@/api/signalR';
-// import Cookies from 'js-cookie';
+import useChat from '@/api/signalR';
+import Cookies from 'js-cookie';
 
 export interface User {
     userId: string;
@@ -23,13 +23,12 @@ export default function Chat() {
     const [users, setUsers] = useState<User[]>([]);
     const [selectedUser, setSelectedUser] = useState<User>(users[0]);
     const [searchKeyword, setSearchKeyword] = useState<string>("");
-    // const token = Cookies.get("access-key");
-    // const sendMessage = () => {
-    //     if (newMessage.trim() === "") return;
-    //     setMessages([...messages, { id: Date.now(), text: newMessage, sender: "You", time: "Now", avatar: "https://via.placeholder.com/40" }]);
-    //     setNewMessage("");
-    // };
-
+    const token = Cookies.get("access-key");
+    const { messages, sendMessage } = useChat(token);
+    const handleSendMessage = () => {
+        sendMessage(newMessage);
+        setNewMessage('');
+    };
     const getUsers = async () => {
         try {
             const response = await axiosInstance.get(`/Authentication/ChatUsers?keyword=${searchKeyword}`);
@@ -38,26 +37,8 @@ export default function Chat() {
 
         }
     }
-
-    const getConnectedSignalR = () => {
-        // connectSignalR((user: string, message: string) => {
-        //     const newMessage: MessageModel = {
-        //         Message: message,
-        //         ReceiverId: user,
-        //     }
-        //     setMessages((prevMessages) => [...prevMessages, newMessage]);
-        // });
-    }
-    const handleSendMessage = async () => {
-        if (selectedUser?.userId.trim() && newMessage.trim()) {
-            // await sendMessage(selectedUser?.userId.trim(), newMessage.trim());
-            setNewMessage("");
-            console.log("sent message")
-        }
-    };
     useEffect(() => {
         getUsers();
-        getConnectedSignalR();
     }, [])
     return (
         <div className="flex h-screen bg-gray-100">
@@ -110,7 +91,7 @@ export default function Chat() {
                 </div>
                 {/* Messages */}
                 <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
-                    {/* {messages.map((msg, index) => (
+                    {messages.map((msg, index) => (
                         <div key={msg.Id + "-message-" + index} className="mb-4 flex items-end space-x-3">
                             <div className="w-[30px] h-[30px] rounded-full bg-cover bg-center bg-no-repeat bg-[#D9D9D9] text-center leading-[40px] font-semibold text-[#F07202]" style={{
                                 backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${selectedUser?.avatarUrl}')`
@@ -122,7 +103,7 @@ export default function Chat() {
                                 <p className="bg-white p-2 rounded-lg shadow text-gray-800">{msg.Message}</p>
                             </div>
                         </div>
-                    ))} */}
+                    ))}
                 </div>
                 {/* Input Field */}
                 <div className="flex items-center p-4 bg-white border-t">

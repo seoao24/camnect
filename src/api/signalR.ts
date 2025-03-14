@@ -7,8 +7,10 @@ const useChat = (token) => {
 
     useEffect(() => {
         const newConnection = new signalR.HubConnectionBuilder()
-            .withUrl('/chatHub', {
-                accessTokenFactory: () => token, // Gửi JWT token
+            .withUrl(`${process.env.NEXT_PUBLIC_API_URL}/chatHub`, {
+                headers: {
+                    Authorization: `Bearer ${token}`, // Thêm header Authorization
+                },
             })
             .withAutomaticReconnect()
             .build();

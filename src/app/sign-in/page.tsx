@@ -6,6 +6,9 @@ import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/redux/store';
+import { setIsLogin } from '@/redux/slices/loginSlice';
 
 interface LoginForm {
     email: string,
@@ -13,6 +16,7 @@ interface LoginForm {
 }
 export default function SignIn() {
     const router = useRouter();
+    const dispatch = useDispatch<AppDispatch>();
     const [form, setForm] = useState<LoginForm>({
         email: "",
         password: ""
@@ -28,7 +32,9 @@ export default function SignIn() {
             const response = await axiosInstance.post("/Authentication/SignIn", form);
             toast.success("Đăng nhập thành công");
             router.push("/");
-            Cookies.set('access-key', response.data, { expires: 1 })
+            Cookies.set('access-key', response.data, { expires: 1 });
+            getUser();
+            dispatch(setIsLogin());
         } catch (e: unknown) {
             if (axios.isAxiosError(e) && e.response) {
                 toast.error(e.response.data);
@@ -37,6 +43,14 @@ export default function SignIn() {
             }
         }
     }
+    const getUser = async () => {
+            try {
+                const response = await axiosInstance.get("/Authentication/CurrentUser");
+                Cookies.set("currentUser", JSON.stringify(response.data));
+            } catch {
+    
+            }
+        }
     return (
         <div className='flex justify-center mt-[5rem] px-5'>
             <div className="container md:flex items-center justify-center">

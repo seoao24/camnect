@@ -6,6 +6,8 @@ import { ToastContainer } from 'react-toastify';
 import Cookies from "js-cookie";
 import { usePathname } from "next/navigation";
 import { Suspense } from "react";
+import { Provider } from 'react-redux';
+import { store } from "@/redux/store";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,20 +34,22 @@ export default function ClientLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#F9F8F8] text-black`}
       >
-        <div className={`w-full ${pathname.includes("/admin") ? 'hidden' : ''}`}>
-          <AppHeader />
-          <div className="p-0 m-0">
+        <Provider store={store}>
+          <div className={`w-full ${pathname.includes("/admin") ? 'hidden' : ''}`}>
+            <AppHeader />
+            <div className="p-0 m-0">
+              <Suspense>
+                {children}
+              </Suspense>
+            </div>
+            <ToastContainer />
+          </div>
+          <div className={`w-full ${pathname.includes("/admin") ? '' : 'hidden'}`}>
             <Suspense>
               {children}
             </Suspense>
           </div>
-          <ToastContainer />
-        </div>
-        <div className={`w-full ${pathname.includes("/admin") ? '' : 'hidden'}`}>
-          <Suspense>
-            {children}
-          </Suspense>
-        </div>
+        </Provider>
       </body>
     </html>
   );

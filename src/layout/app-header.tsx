@@ -7,7 +7,9 @@ import { toast } from 'react-toastify';
 import axiosInstance from "@/api/apiBase";
 import UserDropdown from "./user-dropdown";
 import Cookies from "js-cookie";
-// import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+
 
 export interface UserInfo {
     userId: string,
@@ -19,7 +21,9 @@ export default function AppHeader() {
     const [email, setEmail] = useState('');
     const [isOpenMenu, setIsOpenMenu] = useState(false);
     const [selectedLink, setSelectedLink] = useState(pages[0].link);
-    const [currentUser, setCurrentUser] = useState<UserInfo>();
+    const [currentUser, setCurrentUser] = useState<UserInfo | null>(null);
+    const isLogin = useSelector((state: RootState) => state.login.isLogin);
+    const [key, setKey] = useState(0);
     
     const getVoucher = async () => {
         const params = {
@@ -34,26 +38,14 @@ export default function AppHeader() {
             toast.error("Đã có lỗi xảy ra khi gửi voucher");
         }
     }
-    const getUser = async () => {
-        try {
-            const response = await axiosInstance.get("/Authentication/CurrentUser");
-            setCurrentUser(response.data);
-            Cookies.set("currentUser", JSON.stringify(response.data));
-        } catch {
-
-        }
-    }
+    
     useEffect(() => {
         const currentUserString = Cookies.get("currentUser");
-        if(currentUserString){
-            setCurrentUser(JSON.parse(currentUserString));
-        }
-        else {
-            getUser();
-        }
-    }, [])
+        setCurrentUser(currentUserString ? JSON.parse(currentUserString) : null);
+        setKey(prevKey => prevKey + 1);
+    }, [isLogin])
     return (
-        <>
+        <div key={key}>
             <div className="hidden md:flex w-[100vw] h-[72px] bg-[url('/assets/images/header-top.png')] bg-no-repeat bg-cover justify-center">
                 <div className="container flex justify-between items-center">
                     <div className="font-bold text-[24px] uppercase">Giảm giá 25% cho lần đầu đăng ký</div>
@@ -146,6 +138,6 @@ export default function AppHeader() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }

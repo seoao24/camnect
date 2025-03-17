@@ -74,6 +74,7 @@ const pages = [
 	{ title: 'Tin Tức', link: '/news' },
 	{ title: 'Cộng đồng', link: '/communications' },
 	{ title: 'Dịch vụ', link: '/services' },
+	{ title: 'Giỏ hàng', link: '/orders' },
 ];
 
 const HeaderMenu = ({ role }: { role: number }) => {
@@ -1165,7 +1166,7 @@ export default function AppHeader() {
 							</div>
 						) : (
 							<div className='flex items-center space-x-4'>
-								<CartTrigger />
+								{/* <CartTrigger /> */}
 								<UserDropdown currentUser={currentUser} />
 							</div>
 						)}

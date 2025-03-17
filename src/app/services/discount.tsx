@@ -59,16 +59,13 @@ export default function Discount() {
 	};
 	const getServices = async () => {
 		try {
-			const params = {
-				// You might want to add a filter here for discounted items
-			};
+			const params = {};
 			const response = await axiosInstance.get('/Service/Search', {
 				params: params,
 			});
 			setServices(response.data?.items);
-		} catch (error) {
-			console.error('Error fetching services:', error);
-			// toast.error("Không thể lấy danh sách dịch vụ");
+		} catch {
+			// toast.error("Không thể lấy danh sách concept");
 		}
 	};
 
@@ -79,20 +76,11 @@ export default function Discount() {
 			};
 			await axiosInstance.post('/OrderService/CreateOrder', body);
 			toast.success('Đã thêm dịch vụ vào giỏ hàng');
-
-			// Dispatch custom event to notify cart count update
-			const cartUpdatedEvent = new Event('cart-updated');
-			window.dispatchEvent(cartUpdatedEvent);
-		} catch (error) {
-			console.error('Error adding to cart:', error);
-			toast.error('Không thể thêm vào giỏ hàng');
-		}
+		} catch {}
 	};
-
 	useEffect(() => {
 		getServices();
 	}, []);
-
 	return (
 		<div className={`${services.length ? '' : 'hidden'} mb-[5rem] mb-5`}>
 			<div className='text-center text-[40px] font-bold text-[#F07202] mt-5'>ĐANG ĐƯỢC GIẢM GIÁ</div>

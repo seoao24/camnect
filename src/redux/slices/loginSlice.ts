@@ -1,33 +1,26 @@
-import { UserInfo } from '@/layout/app-header';
+// src/store/counterSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface LoginState {
-  isLogin: boolean;
-  currentUser: UserInfo | null;
+    isLogin: boolean;
 }
 
 const initialState: LoginState = {
   isLogin: false,
-  currentUser: null,
 };
 
-export const loginSlice = createSlice({
-  name: 'login',
+const loginSlice = createSlice({
+  name: 'counter',
   initialState,
   reducers: {
     setIsLogin: (state) => {
-      state.isLogin = true;
+      state.isLogin = !state.isLogin;
     },
-    setCurrentUser: (state, action: PayloadAction<UserInfo>) => {
-      state.currentUser = action.payload;
-    },
-    logout: (state) => {
-      state.isLogin = false;
-      state.currentUser = null;
+    set: (state, action: PayloadAction<boolean>) => {
+      state.isLogin = action.payload;
     },
   },
 });
 
-export const { setIsLogin, setCurrentUser, logout } = loginSlice.actions;
-
+export const { setIsLogin, set } = loginSlice.actions;
 export default loginSlice.reducer;

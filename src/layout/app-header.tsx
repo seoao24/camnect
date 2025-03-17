@@ -1,391 +1,143 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
+import YellowButton from "@/components/buttons/YellowButton";
+import React, { useEffect, useState } from "react";
+import HeaderMenu, { pages } from "./header-menu";
+import Link from "next/link";
 import { toast } from 'react-toastify';
-import Cookies from 'js-cookie';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/redux/store';
-import { setCurrentUser } from '@/redux/slices/loginSlice';
-import axiosInstance from '@/api/apiBase';
-import Image from 'next/image';
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Separator } from '@radix-ui/react-dropdown-menu';
+import axiosInstance from "@/api/apiBase";
+import UserDropdown from "./user-dropdown";
+import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+
 
 export interface UserInfo {
-	userId: string;
-	fullname: string;
-	avatarUrl: string;
-	role: number;
+    userId: string,
+    fullname: string,
+    avatarUrl: string,
+    role: number
 }
-
-const pages = [
-	{ title: 'Trang Chủ', link: '/' },
-	{ title: 'Lịch', link: '/lich' },
-	{ title: 'Tin Tức', link: '/tin-tuc' },
-	{ title: 'Cộng đồng', link: '/cong-dong' },
-	{ title: 'Dịch vụ', link: '/dich-vu' },
-];
-
-const HeaderMenu = ({ role }: { role: number }) => {
-	const [selectedLink, setSelectedLink] = useState(pages[0].link);
-
-	return (
-		<div className='flex items-center space-x-8'>
-			{pages.map((page) => (
-				<Link
-					key={page.link}
-					href={page.link}
-					onClick={() => setSelectedLink(page.link)}
-					className={`${
-						selectedLink === page.link ? 'font-bold text-[#F07202]' : 'text-gray-800'
-					} hover:text-[#F07202] transition-colors`}
-				>
-					{page.title}
-				</Link>
-			))}
-		</div>
-	);
-};
-
-const UserDropdown = ({ currentUser }: { currentUser: UserInfo | null }) => {
-	if (!currentUser) return null;
-
-	const handleLogout = () => {
-		Cookies.remove('currentUser');
-		Cookies.remove('token');
-		Cookies.remove('access-key');
-		// Refresh the page or redirect to home
-		window.location.href = '/';
-	};
-
-	return (
-		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<div className='flex items-center space-x-2 cursor-pointer'>
-					<div
-						className='bg-center bg-cover bg-no-repeat w-[40px] h-[40px] rounded-full bg-[#BBBBBB]'
-						style={{
-							backgroundImage: currentUser?.avatarUrl
-								? `url('${process.env.NEXT_PUBLIC_API_URL}/${currentUser.avatarUrl}')`
-								: 'none',
-						}}
-					/>
-					<div className='text-[16px] text-[#F07202] font-semibold'>{currentUser?.fullname}</div>
-				</div>
-			</DropdownMenuTrigger>
-			<DropdownMenuContent align='end' className='w-48'>
-				{currentUser.role === 2 && (
-					<DropdownMenuItem>
-						<Link href='/admin/dashboard' className='w-full'>
-							Quản trị
-						</Link>
-					</DropdownMenuItem>
-				)}
-				<DropdownMenuItem>
-					<Link href='/user' className='w-full'>
-						Trang cá nhân
-					</Link>
-				</DropdownMenuItem>
-				<DropdownMenuSeparator />
-				<DropdownMenuItem onClick={handleLogout}>Đăng xuất</DropdownMenuItem>
-			</DropdownMenuContent>
-		</DropdownMenu>
-	);
-};
-
 export default function AppHeader() {
-	const [email, setEmail] = useState('');
-	const [emailError, setEmailError] = useState('');
-	const [selectedLink, setSelectedLink] = useState(pages[0].link);
-	const dispatch = useDispatch();
+    const [email, setEmail] = useState('');
+    const [isOpenMenu, setIsOpenMenu] = useState(false);
+    const [selectedLink, setSelectedLink] = useState(pages[0].link);
+    const [currentUser, setCurrentUser] = useState<UserInfo | null>(null);
+    const isLogin = useSelector((state: RootState) => state.login.isLogin);
+    const [key, setKey] = useState(0);
+    
+    const getVoucher = async () => {
+        const params = {
+            Email: email
+        }
+        try {
+            await axiosInstance.get('/OrderService/GetVoucherByEmail', {
+                params: params
+            });
+            toast.success("Hãy kiểm tra email của bạn để lấy voucher");
+        } catch {
+            toast.error("Đã có lỗi xảy ra khi gửi voucher");
+        }
+    }
+    
+    useEffect(() => {
+        const currentUserString = Cookies.get("currentUser");
+        setCurrentUser(currentUserString ? JSON.parse(currentUserString) : null);
+        setKey(prevKey => prevKey + 1);
+    }, [isLogin])
+    return (
+        <div key={key}>
+            <div className="hidden md:flex w-[100vw] h-[72px] bg-[url('/assets/images/header-top.png')] bg-no-repeat bg-cover justify-center">
+                <div className="container flex justify-between items-center">
+                    <div className="font-bold text-[24px] uppercase">Giảm giá 25% cho lần đầu đăng ký</div>
+                    <div className="flex items-center">
+                        <input
+                            className="pt-[10px] pb-[10px] px-[1rem] rounded-[20px] border-none outline-none mx-[1.5rem]"
+                            placeholder="Điền email tại đây"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            type="email" />
+                        <YellowButton title="Nhận mã giảm giá" onClick={getVoucher} />
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div className="hidden md:flex justify-center w-[100vw] mt-3">
+                    <div className={`container justify-between flex items-center`}>
+                        <Link
+                            href={'/'} className="flex">
+                            <img src="/assets/images/logo.png" alt="" className="w-[100px] h-[120px]" />
+                            <div className="font-bold text-[50px] text-[#F07202] ml-3 mt-[2rem]">Camnect</div>
+                        </Link>
+                        <div>
+                            <HeaderMenu role={currentUser?.role ?? 0}/>
+                        </div>
+                        <div className={`flex items-center ${currentUser ? 'hidden' : ''}`}>
+                            <Link className="bg-none border-[#F07202] border-[1px] px-[2rem] text-[#F07202] rounded-[20px] py-[10px] text-[16px] font-bold mx-2"
+                                href='/sign-up'>Đăng ký</Link>
+                            {/* <OrgangeButton title="Đăng nhập" onClick={() => { }} /> */}
+                            <Link
+                                href={'/sign-in'}
+                                className="bg-[#F07202] px-[2rem] text-[#F07202] rounded-[20px] py-[10px] text-[16px] font-bold text-white mx-2"
+                            >
+                                Đăng nhập
+                            </Link>
+                        </div>
+                        {/* <Link
+                            href={'/user'}>
+                            <div className={`container justify-between flex items-center ${currentUser ? '' : 'hidden'}`}>
+                                <div className="bg-center bg-cover bg-no-repeat w-[40px] h-[40px] rounded-[50%] bg-[#BBBBBB]" style={{
+                                    backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${currentUser?.avatarUrl}')`
+                                }}></div>
+                                <div className="text-[20px] ml-2 text-[#F07202] font-semibold">{currentUser?.fullname}</div>
+                            </div>
+                        </Link> */}
+                        <div className={`${currentUser ? '' : 'hidden'}`}>
+                            <UserDropdown currentUser={currentUser}/>
+                        </div>
+                    </div>
 
-	// Get currentUser from Redux store
-	const isLogin = useSelector((state: RootState) => state.login.isLogin);
-	const currentUser = useSelector((state: RootState) => state.login.currentUser);
-
-	const validateEmail = (email: string): boolean => {
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		return emailRegex.test(email);
-	};
-
-	const getVoucher = async () => {
-		// Reset error state
-		setEmailError('');
-
-		// Validate empty email
-		if (!email.trim()) {
-			setEmailError('Vui lòng nhập email của bạn');
-			return;
-		}
-
-		// Validate email format
-		if (!validateEmail(email)) {
-			setEmailError('Email không hợp lệ');
-			return;
-		}
-
-		const params = {
-			Email: email,
-		};
-		try {
-			await axiosInstance.get('/OrderService/GetVoucherByEmail', {
-				params: params,
-			});
-			toast.success('Hãy kiểm tra email của bạn để lấy voucher');
-			// Clear email field after successful submission
-			setEmail('');
-		} catch (error) {
-			toast.error('Đã có lỗi xảy ra khi gửi voucher');
-		}
-	};
-
-	useEffect(() => {
-		// Check for currentUser in cookies at component mount and update Redux if found
-		const currentUserString = Cookies.get('currentUser');
-		if (currentUserString) {
-			dispatch(setCurrentUser(JSON.parse(currentUserString)));
-		}
-	}, [dispatch]);
-
-	// Mobile menu items
-	const MobileMenuItems = () => {
-		const handleLogout = () => {
-			Cookies.remove('currentUser');
-			Cookies.remove('token');
-			Cookies.remove('access-key');
-			// Refresh the page or redirect to home
-			window.location.href = '/';
-		};
-
-		return (
-			<div className='py-4 space-y-4'>
-				{pages.map((page) => (
-					<Link
-						key={page.link}
-						href={page.link}
-						onClick={() => setSelectedLink(page.link)}
-						className={`block px-4 py-2 text-base ${
-							selectedLink === page.link ? 'font-bold text-[#F07202]' : 'text-gray-800'
-						}`}
-					>
-						{page.title}
-					</Link>
-				))}
-
-				{!currentUser ? (
-					<div className='mt-6 px-4 flex flex-col space-y-2'>
-						<Link
-							href='/sign-up'
-							className='inline-block w-full text-center border border-[#F07202] text-[#F07202] rounded-full py-2 px-4 font-medium'
-						>
-							Đăng ký
-						</Link>
-						<Link
-							href='/sign-in'
-							className='inline-block w-full text-center bg-[#F07202] text-white rounded-full py-2 px-4 font-medium'
-						>
-							Đăng nhập
-						</Link>
-					</div>
-				) : (
-					<div className='mt-6 px-4'>
-						<div className='flex items-center space-x-3 p-2 mb-4'>
-							<div
-								className='bg-center bg-cover bg-no-repeat w-[40px] h-[40px] rounded-full bg-[#BBBBBB]'
-								style={{
-									backgroundImage: currentUser?.avatarUrl
-										? `url('${process.env.NEXT_PUBLIC_API_URL}/${currentUser.avatarUrl}')`
-										: 'none',
-								}}
-							/>
-							<div className='text-base text-[#F07202] font-semibold'>{currentUser?.fullname}</div>
-						</div>
-
-						<Separator className='my-2' />
-
-						<nav className='flex flex-col space-y-1'>
-							{currentUser.role === 2 && (
-								<Link
-									href='/admin/dashboard'
-									className='px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md'
-								>
-									Quản trị
-								</Link>
-							)}
-							<Link href='/user' className='px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md'>
-								Trang cá nhân
-							</Link>
-							<button
-								onClick={handleLogout}
-								className='text-left px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md'
-							>
-								Đăng xuất
-							</button>
-						</nav>
-					</div>
-				)}
-			</div>
-		);
-	};
-
-	return (
-		<div className='sticky -top-1 left-0 w-full z-[51] bg-white'>
-			{/* Top promotion banner - desktop only */}
-			<div className='hidden lg:block bg-gradient-to-r from-[#FFD951] to-[#F07202] py-3'>
-				<div className='container-lg flex justify-between items-center'>
-					<div className='font-bold text-lg md:text-xl lg:text-2xl uppercase'>
-						GIẢM 25% CHO LẦN ĐẦU ĐĂNG KÝ
-					</div>
-					<div className='flex flex-col'>
-						<div className='flex items-center'>
-							<input
-								className={`h-10 px-4 rounded-full ${
-									emailError ? 'border border-red-500' : 'border-none'
-								} outline-none mr-2 w-48 md:w-64`}
-								placeholder='Điền email tại đây...'
-								value={email}
-								onChange={(e) => {
-									setEmail(e.target.value);
-									setEmailError('');
-								}}
-								type='email'
-							/>
-							<button
-								onClick={getVoucher}
-								className='bg-[#F07202] text-white font-medium rounded-full py-2 px-4 hover:bg-[#d86600] transition-colors'
-							>
-								Nhận mã giảm giá
-							</button>
-						</div>
-						{emailError && <div className='text-white text-xs mt-1 ml-2'>{emailError}</div>}
-					</div>
-				</div>
-			</div>
-
-			{/* Main header */}
-			<div className='bg-white shadow-sm'>
-				{/* Desktop Navigation */}
-				<div className='hidden lg:block container-lg'>
-					<div className='flex items-center justify-between py-3'>
-						<Link href='/' className='flex items-center'>
-							<div className='relative w-12 h-12'>
-								<Image
-									src='/assets/images/logo.png'
-									alt='Camnect Logo'
-									fill
-									className='object-contain'
-								/>
-							</div>
-							<span className='ml-2 text-[#F07202] text-2xl font-bold'>Camnect</span>
-						</Link>
-
-						<div className='flex items-center'>
-							<HeaderMenu role={currentUser?.role ?? 0} />
-
-							<div className='ml-8 relative'>
-								<div className='flex items-center px-3 py-2 bg-gray-100 rounded-full'>
-									<svg
-										className='w-4 h-4 text-gray-500'
-										fill='none'
-										stroke='currentColor'
-										viewBox='0 0 24 24'
-										xmlns='http://www.w3.org/2000/svg'
-									>
-										<path
-											strokeLinecap='round'
-											strokeLinejoin='round'
-											strokeWidth={2}
-											d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
-										/>
-									</svg>
-									<input
-										type='text'
-										placeholder='Tìm kiếm...'
-										className='ml-2 bg-transparent border-none outline-none w-32'
-									/>
-								</div>
-							</div>
-						</div>
-
-						{!currentUser ? (
-							<div className='flex items-center space-x-2'>
-								<Link
-									href='/sign-up'
-									className='border border-[#F07202] text-[#F07202] rounded-full py-2 px-6 font-medium hover:bg-[#FFF8E7] transition-colors'
-								>
-									Đăng ký
-								</Link>
-								<Link
-									href='/sign-in'
-									className='bg-[#F07202] text-white rounded-full py-2 px-6 font-medium hover:bg-[#d86600] transition-colors'
-								>
-									Đăng nhập
-								</Link>
-							</div>
-						) : (
-							<div>
-								<UserDropdown currentUser={currentUser} />
-							</div>
-						)}
-					</div>
-				</div>
-
-				{/* Mobile Navigation */}
-				<div className='lg:hidden'>
-					<div className='flex items-center justify-between px-4 py-3'>
-						<Link href='/' className='flex items-center'>
-							<div className='relative w-10 h-10'>
-								<Image
-									src='/assets/images/logo.png'
-									alt='Camnect Logo'
-									fill
-									className='object-contain'
-								/>
-							</div>
-							<span className='ml-2 text-[#F07202] text-xl font-bold'>Camnect</span>
-						</Link>
-
-						<Sheet>
-							<SheetTrigger asChild>
-								<button className='p-2'>
-									<svg
-										width='24px'
-										height='24px'
-										viewBox='0 0 24 24'
-										fill='none'
-										xmlns='http://www.w3.org/2000/svg'
-									>
-										<path
-											d='M4 6H20M4 12H20M4 18H20'
-											stroke='#888888'
-											strokeWidth='2'
-											strokeLinecap='round'
-											strokeLinejoin='round'
-										/>
-									</svg>
-								</button>
-							</SheetTrigger>
-							<SheetContent side='right'>
-								<SheetTitle className='sr-only'>Menu Navigation</SheetTitle>
-								<MobileMenuItems />
-							</SheetContent>
-						</Sheet>
-					</div>
-				</div>
-			</div>
-
-			{/* Orange banner for mobile view */}
-			<div className='lg:hidden bg-[#F07202] py-3 px-4'>
-				<p className='text-white text-center font-medium'>Nơi khoảnh khắc trở thành kỉ niệm!</p>
-			</div>
-		</div>
-	);
+                </div>
+                <div className="md:hidden flex justify-between items-center px-5 relative">
+                    <div className="flex items-center">
+                        <div className="bg-contain bg-no-repeat w-[50px] h-[50px]" style={{
+                            backgroundImage: `url('/assets/images/logo.png')`
+                        }}></div>
+                        <div className="font-bold text-[24px] text-[#F07202]">Camnect</div>
+                    </div>
+                    <div onClick={() => setIsOpenMenu(!isOpenMenu)}>
+                        <svg
+                            fill="#D9D9D9"
+                            width="21px"
+                            height="21px"
+                            viewBox="0 0 32 32"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <g id="SVGRepo_bgCarrier" strokeWidth={0} />
+                            <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
+                            <g id="SVGRepo_iconCarrier">
+                                {" "}
+                                <title>menu</title>{" "}
+                                <path d="M8 24h16v-4h-16v4zM8 18.016h16v-4h-16v4zM8 12h16v-4h-16v4z" />{" "}
+                            </g>
+                        </svg>
+                    </div>
+                    <div className={`absolute top-[50px] w-full bg-white z-[999] left-0 ${isOpenMenu ? 'block' : 'hidden'}`}>
+                        {
+                            pages.map(e => (
+                                <div key={e.link}>
+                                    <Link
+                                        href={e.link}
+                                        onClick={() => setSelectedLink(e.link)}
+                                        className={`${selectedLink == e.link ? 'font-bold' : ''}`}>
+                                        {e.title}
+                                    </Link>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
 }

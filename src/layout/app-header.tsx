@@ -28,10 +28,9 @@ export interface UserInfo {
 
 const pages = [
 	{ title: 'Trang Chủ', link: '/' },
-	{ title: 'Lịch', link: '/lich' },
-	{ title: 'Tin Tức', link: '/tin-tuc' },
-	{ title: 'Cộng đồng', link: '/cong-dong' },
-	{ title: 'Dịch vụ', link: '/dich-vu' },
+	{ title: 'Tin Tức', link: '/news' },
+	{ title: 'Cộng đồng', link: '/communications' },
+	{ title: 'Dịch vụ', link: '/services' },
 ];
 
 const HeaderMenu = ({ role }: { role: number }) => {

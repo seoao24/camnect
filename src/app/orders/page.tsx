@@ -14,6 +14,7 @@ interface OrderDetail {
 	oldPrice?: number | null;
 	quantity?: number | null;
 	totalQuantity?: number | null;
+	orderID: string | null;
 }
 
 export default function Orders() {
@@ -27,6 +28,9 @@ export default function Orders() {
 	useEffect(() => {
 		getOrderDetails();
 	}, []);
+
+	console.log('orders', orders);
+
 	return (
 		<div className='flex justify-center'>
 			<div className='container my-5'>
@@ -45,6 +49,7 @@ export default function Orders() {
 					{orders.map((e, index) => (
 						<div key={e.orderDetailId + '-' + index}>
 							<ServiceCart
+								orderID={e.orderID}
 								orderDetailId={e.orderDetailId}
 								serviceId={e.serviceId}
 								description={e.description}

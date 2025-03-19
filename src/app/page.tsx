@@ -1,4 +1,5 @@
 'use client';
+import ChatwootScript from '@/components/chatwoot-script';
 import Feedback from './home/feedback';
 import FQA from './home/FQA';
 import HomeHere from './home/hero';
@@ -17,6 +18,7 @@ export default function Home() {
 				<SearchPhotographers />
 				<FQA />
 				<Feedback />
+				<ChatwootScript />
 			</div>
 			{/* <div className='md:hidden'>
 				<MobilePage />

@@ -13,6 +13,14 @@ export default function AdminLayout(props: AdminLayoutProps) {
 	const [currentUser, setCurrentUser] = useState<UserInfo | null>(null);
 	const router = useRouter();
 
+	const handleLogout = () => {
+		Cookies.remove('currentUser');
+		Cookies.remove('token');
+		Cookies.remove('access-key');
+		// Refresh the page or redirect to home
+		window.location.href = '/';
+	};
+
 	useEffect(() => {
 		const currentUserString = Cookies.get('currentUser');
 		if (currentUserString) {
@@ -218,7 +226,9 @@ export default function AdminLayout(props: AdminLayoutProps) {
 											d='M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3'
 										/>
 									</svg>
-									<span className='flex-1 ms-3 whitespace-nowrap'>Đăng xuất</span>
+									<span className='flex-1 ms-3 whitespace-nowrap' onClick={handleLogout}>
+										Đăng xuất
+									</span>
 								</a>
 							</li>
 						</ul>

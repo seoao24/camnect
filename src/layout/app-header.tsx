@@ -132,6 +132,13 @@ const UserDropdown = ({ currentUser }: { currentUser: UserInfo | null }) => {
 						</Link>
 					</DropdownMenuItem>
 				)}
+				{currentUser.role === 1 && (
+					<DropdownMenuItem>
+						<Link href='/my-service' className='w-full'>
+							Dịch vụ của tôi
+						</Link>
+					</DropdownMenuItem>
+				)}
 				<DropdownMenuItem>
 					<Link href='/user' className='w-full'>
 						Trang cá nhân

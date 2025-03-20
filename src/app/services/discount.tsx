@@ -59,7 +59,7 @@ export default function Discount() {
 	};
 	const getServices = async () => {
 		try {
-			const params = {};
+			const params = { page_index: 1, page_size: 500 };
 			const response = await axiosInstance.get('/Service/Search', {
 				params: params,
 			});

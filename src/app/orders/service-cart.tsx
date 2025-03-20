@@ -135,7 +135,7 @@ export default function ServiceCart(props: OrderDetailProps) {
 				<div className='flex items-center flex-col min-[550px]:flex-row gap-3 min-[550px]:gap-6 w-full max-xl:justify-center max-xl:max-w-xl max-xl:mx-auto'>
 					<div className='img-box'>
 						<img
-							src={`${process.env.NEXT_PUBLIC_API_URL}/${props.imageDefault}`}
+							src={`https://api.tapta.online/${props.imageDefault}`}
 							alt='perfume bottle image'
 							className='xl:w-[140px] rounded-xl object-cover'
 						/>

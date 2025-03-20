@@ -58,7 +58,7 @@ export default function PostFeature() {
 								id={e.id}
 								avatarUrl={`${
 									e.userAvatar
-										? `${process.env.NEXT_PUBLIC_API_URL}/${e.userAvatar}`
+										? `https://api.tapta.online/${e.userAvatar}`
 										: '/assets/images/relative1.png'
 								}`}
 								description={e.description}

@@ -47,8 +47,8 @@ export default function UserInformation() {
 		try {
 			const response = await axiosInstance.get('/Authentication/UserInformation');
 			setForm(response.data);
-			setAvatarUrl(`${process.env.NEXT_PUBLIC_API_URL}/${response.data?.avatarUrl}`);
-			setQrUrl(`${process.env.NEXT_PUBLIC_API_URL}/${response.data?.qrPaymentUrl}`);
+			setAvatarUrl(`https://api.tapta.online/${response.data?.avatarUrl}`);
+			setQrUrl(`https://api.tapta.online/${response.data?.qrPaymentUrl}`);
 		} catch {}
 	};
 
@@ -90,7 +90,7 @@ export default function UserInformation() {
 		if (userString) {
 			const user = JSON.parse(userString);
 			// setCurrentUserState(user);
-			setAvatarUrl(`${process.env.NEXT_PUBLIC_API_URL}/${user?.avatarUrl}`);
+			setAvatarUrl(`https://api.tapta.online/${user?.avatarUrl}`);
 		}
 	}, []);
 

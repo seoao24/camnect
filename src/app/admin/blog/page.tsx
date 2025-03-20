@@ -340,7 +340,7 @@ export default function Blog() {
 											<div
 												className='w-[80px] h-[60px] bg-cover bg-center bg-no-repeat rounded-md shadow-sm border border-gray-200'
 												style={{
-													backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${blog.imageUrl}')`,
+													backgroundImage: `url('https://api.tapta.online/${blog.imageUrl}')`,
 												}}
 											></div>
 										) : (

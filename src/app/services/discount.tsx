@@ -91,7 +91,7 @@ export default function Discount() {
 							<div
 								className='bg-cover bg-center bg-no-repeat h-[207px] rounded-[25px]'
 								style={{
-									backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${e.imageDefaultUrl}')`,
+									backgroundImage: `url('https://api.tapta.online/${e.imageDefaultUrl}')`,
 								}}
 							></div>
 							<div className='px-1 mt-2'>

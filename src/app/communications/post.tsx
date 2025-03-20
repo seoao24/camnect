@@ -87,7 +87,7 @@ export default function Post(props: PostProps) {
 				<div
 					className='w-[67px] h-[67px] bg-no-repeat bg-cover rounded-[50%] bg-[#D9D9D9]'
 					style={{
-						backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${props.avatarUrl}')`,
+						backgroundImage: `url('https://api.tapta.online/${props.avatarUrl}')`,
 					}}
 				>
 					{props.avatarUrl ? '' : props.fullname.charAt[0]}

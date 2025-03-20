@@ -117,7 +117,7 @@ const UserDropdown = ({ currentUser }: { currentUser: UserInfo | null }) => {
 						className='bg-center bg-cover bg-no-repeat w-[40px] h-[40px] rounded-full bg-[#BBBBBB]'
 						style={{
 							backgroundImage: currentUser?.avatarUrl
-								? `url('${process.env.NEXT_PUBLIC_API_URL}/${currentUser.avatarUrl}')`
+								? `url('https://api.tapta.online/${currentUser.avatarUrl}')`
 								: 'none',
 						}}
 					/>
@@ -539,7 +539,7 @@ const CheckoutForm = ({
 										<div
 											className='w-16 h-16 bg-cover bg-center rounded-md flex-shrink-0'
 											style={{
-												backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${item.imageUrl}')`,
+												backgroundImage: `url('https://api.tapta.online/${item.imageUrl}')`,
 											}}
 										></div>
 										<div className='ml-3 flex-grow'>
@@ -815,7 +815,7 @@ const CartComponent = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
 											<div
 												className='w-20 h-20 bg-cover bg-center rounded-md flex-shrink-0'
 												style={{
-													backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${item.imageUrl}')`,
+													backgroundImage: `url('https://api.tapta.online/${item.imageUrl}')`,
 												}}
 											></div>
 											<div className='ml-4 flex-grow'>
@@ -1011,7 +1011,7 @@ export default function AppHeader() {
 								className='bg-center bg-cover bg-no-repeat w-[40px] h-[40px] rounded-full bg-[#BBBBBB]'
 								style={{
 									backgroundImage: currentUser?.avatarUrl
-										? `url('${process.env.NEXT_PUBLIC_API_URL}/${currentUser.avatarUrl}')`
+										? `url('https://api.tapta.online/${currentUser.avatarUrl}')`
 										: 'none',
 								}}
 							/>

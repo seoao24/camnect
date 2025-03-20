@@ -11,7 +11,7 @@ export default function UserHero() {
 		const userString = Cookies.get('currentUser');
 		const user = JSON.parse(userString);
 		setCurrentUser(user);
-		setAvatarUrl(`${process.env.NEXT_PUBLIC_API_URL}/${currentUser?.avatarUrl}`);
+		setAvatarUrl(`https://api.tapta.online/${currentUser?.avatarUrl}`);
 	}, [currentUser?.avatarUrl]);
 	return (
 		<div

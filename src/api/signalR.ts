@@ -7,7 +7,7 @@ const useChat = (token) => {
 
     useEffect(() => {
         const newConnection = new signalR.HubConnectionBuilder()
-            .withUrl(`${process.env.NEXT_PUBLIC_API_URL}/chatHub`, {
+            .withUrl(`https://api.tapta.online/chatHub`, {
                 headers: {
                     Authorization: `Bearer ${token}`, // Thêm header Authorization
                 },

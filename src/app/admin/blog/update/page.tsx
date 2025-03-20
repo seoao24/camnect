@@ -36,7 +36,7 @@ export default function UpdateBlog() {
 			setContent(response.data?.content || '');
 
 			if (response.data?.imageUrl) {
-				const fullImageUrl = `${process.env.NEXT_PUBLIC_API_URL}/${response.data.imageUrl}`;
+				const fullImageUrl = `https://api.tapta.online/${response.data.imageUrl}`;
 				setOriginalImageUrl(response.data.imageUrl); // Lưu URL gốc từ API
 				setDisplayImageUrl(fullImageUrl); // URL hiển thị có thêm domain
 			} else {

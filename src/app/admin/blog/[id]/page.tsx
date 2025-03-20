@@ -128,7 +128,7 @@ const BlogDetail = () => {
 				className='w-full h-[400px] bg-center bg-cover relative'
 				style={{
 					backgroundImage: blog.imageUrl
-						? `url('${process.env.NEXT_PUBLIC_API_URL}/${blog.imageUrl}')`
+						? `url('https://api.tapta.online/${blog.imageUrl}')`
 						: 'linear-gradient(135deg, #f5a623, #f07202)',
 				}}
 			>
@@ -210,7 +210,7 @@ const BlogDetail = () => {
 											className='h-48 bg-cover bg-center'
 											style={{
 												backgroundImage: relatedBlog.imageUrl
-													? `url('${process.env.NEXT_PUBLIC_API_URL}/${relatedBlog.imageUrl}')`
+													? `url('https://api.tapta.online/${relatedBlog.imageUrl}')`
 													: 'linear-gradient(135deg, #f5a623, #f07202)',
 											}}
 										></div>

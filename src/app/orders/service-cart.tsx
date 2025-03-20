@@ -158,70 +158,12 @@ export default function ServiceCart(props: OrderDetailProps) {
 						<div>{props.price}đ</div>
 					</div>
 					<div className='flex items-center w-full mx-auto justify-center'>
-						<button
-							onClick={() => setQuantity(quantity + 1)}
-							className='group rounded-l-full px-3 py-[3px] border border-[#8E8B8B] flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50'
-						>
-							<svg
-								className='stroke-gray-900 transition-all duration-500 group-hover:stroke-black'
-								xmlns='http://www.w3.org/2000/svg'
-								width={22}
-								height={22}
-								viewBox='0 0 22 22'
-								fill='none'
-							>
-								<path d='M16.5 11H5.5' stroke='' strokeWidth='1.6' strokeLinecap='round' />
-								<path
-									d='M16.5 11H5.5'
-									stroke=''
-									strokeOpacity='0.2'
-									strokeWidth='1.6'
-									strokeLinecap='round'
-								/>
-								<path
-									d='M16.5 11H5.5'
-									stroke=''
-									strokeOpacity='0.2'
-									strokeWidth='1.6'
-									strokeLinecap='round'
-								/>
-							</svg>
-						</button>
 						<input
 							type='number'
 							className='border-y border-[#8E8B8B] outline-none text-gray-900 font-semibold text-[13px] w-[50px] placeholder:text-gray-900 py-[4.3px] text-center bg-transparent'
 							value={quantity}
 							onChange={(e) => setQuantity(Number.parseInt(e.target.value))}
 						/>
-						<button
-							onClick={() => setQuantity(quantity - 1 > 0 ? quantity - 1 : 1)}
-							className='group rounded-r-full px-3 py-[3px] border border-[#8E8B8B] flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50'
-						>
-							<svg
-								className='stroke-gray-900 transition-all duration-500 group-hover:stroke-black'
-								xmlns='http://www.w3.org/2000/svg'
-								width={22}
-								height={22}
-								viewBox='0 0 22 22'
-								fill='none'
-							>
-								<path d='M11 5.5V16.5M16.5 11H5.5' stroke='' strokeWidth='1.6' strokeLinecap='round' />
-								<path
-									d='M11 5.5V16.5M16.5 11H5.5'
-									stroke=''
-									strokeOpacity='0.2'
-									strokeWidth='1.6'
-									strokeLinecap='round'
-								/>
-								<path
-									d='M11 5.5V16.5M16.5 11H5.5'
-									stroke=''
-									strokeOpacity='0.2'
-									strokeWidth='1.6'
-									strokeLinecap='round'
-								/>
-							</svg>
-						</button>
 					</div>
 					<div className='font-manrope font-bold text-[13px] leading-2 text-[#F07202] w-full max-w-[150px] text-center'>
 						{(props.price ?? 0) * (props.quantity ?? 1)}đ

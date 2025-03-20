@@ -10,7 +10,7 @@ export default function VisitsChart() {
 	useEffect(() => {
 		const fetchVisitData = async () => {
 			try {
-				const response = await fetch('https://api.camnect.com.vn/api/v1/logger/total-visits-per-day');
+				const response = await fetch('https://api.tapta.online/api/v1/logger/total-visits-per-day');
 
 				if (!response.ok) {
 					throw new Error(`HTTP error! Status: ${response.status}`);

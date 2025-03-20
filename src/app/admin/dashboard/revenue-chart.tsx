@@ -12,7 +12,7 @@ export default function RevenueChart() {
 		const fetchRevenueData = async () => {
 			try {
 				const response = await fetch(
-					`https://api.camnect.com.vn/api/OrderService/get-total-revenue-in-year?year=${currentYear}`
+					`https://api.tapta.online/api/OrderService/get-total-revenue-in-year?year=${currentYear}`
 				);
 
 				if (!response.ok) {

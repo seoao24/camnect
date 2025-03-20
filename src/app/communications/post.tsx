@@ -41,8 +41,10 @@ export default function Post(props: PostProps) {
 		setIsLiking(true);
 		try {
 			if (hasLiked) {
-				// Nếu đã like thì gọi API dislike
-				await axiosInstance.delete(`/Post/dis-like?postID=${props.id}`);
+				// Nếu đã like thì gọi API dislike với method POST và body JSON
+				await axiosInstance.post(`/Post/dis-like`, {
+					postID: props.id,
+				});
 
 				// Cập nhật state local
 				setLikeCount((prev) => prev - 1);

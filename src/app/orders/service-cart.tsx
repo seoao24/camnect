@@ -159,9 +159,9 @@ export default function ServiceCart(props: OrderDetailProps) {
 					</div>
 					<div className='flex items-center w-full mx-auto justify-center'>
 						<input
-							type='number'
 							className='border-y border-[#8E8B8B] outline-none text-gray-900 font-semibold text-[13px] w-[50px] placeholder:text-gray-900 py-[4.3px] text-center bg-transparent'
 							value={quantity}
+							disabled
 							onChange={(e) => setQuantity(Number.parseInt(e.target.value))}
 						/>
 					</div>

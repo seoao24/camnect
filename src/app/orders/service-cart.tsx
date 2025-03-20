@@ -153,7 +153,7 @@ export default function ServiceCart(props: OrderDetailProps) {
 					</div>
 				</div>
 				<div className='flex items-center flex-col min-[450px]:flex-row w-full max-xl:max-w-xl max-xl:mx-auto gap-2'>
-					<div className='font-manrope font-bold text-[13px] leading-2 text-[#F07202] w-full max-w-[150px] text-center'>
+					{/* <div className='font-manrope font-bold text-[13px] leading-2 text-[#F07202] w-full max-w-[150px] text-center'>
 						<div className='text-[#6B716E] line-through'>{props.oldPrice}đ</div>
 						<div>{props.price}đ</div>
 					</div>
@@ -167,7 +167,7 @@ export default function ServiceCart(props: OrderDetailProps) {
 					</div>
 					<div className='font-manrope font-bold text-[13px] leading-2 text-[#F07202] w-full max-w-[150px] text-center'>
 						{(props.price ?? 0) * (props.quantity ?? 1)}đ
-					</div>
+					</div> */}
 					<div className=''>
 						<div
 							className='text-[#6B716E] text-[13px] text-center cursor-pointer'

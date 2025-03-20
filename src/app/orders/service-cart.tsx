@@ -66,7 +66,6 @@ export default function ServiceCart(props: OrderDetailProps) {
 	};
 
 	const handlePaymentClick = () => {
-		// Generate random billCode with 6 characters
 		const randomBillCode = Math.random().toString(36).substring(2, 8).toUpperCase();
 		setFormData({
 			...formData,

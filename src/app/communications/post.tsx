@@ -122,7 +122,7 @@ export default function Post(props: PostProps) {
 							key={'image' + index}
 							className='rounded-[10px] bg-cover bg-no-repeat w-full md:h-[500px] h-[152px]'
 							style={{
-								backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${url}')`,
+								backgroundImage: `url('https://api.tapta.online/${url}')`,
 							}}
 						></div>
 					);

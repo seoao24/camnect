@@ -6,6 +6,7 @@ export default function VisitsChart() {
 	const [visitData, setVisitData] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+	const [totalVisits, setTotalVisits] = useState(0);
 
 	useEffect(() => {
 		const fetchVisitData = async () => {
@@ -26,6 +27,10 @@ export default function VisitsChart() {
 					}),
 				}));
 
+				// Calculate total visits
+				const total = formattedData.reduce((sum, item) => sum + item.totalVisits, 0);
+				setTotalVisits(total);
+
 				setVisitData(formattedData);
 				setLoading(false);
 			} catch (err) {
@@ -43,7 +48,13 @@ export default function VisitsChart() {
 
 	return (
 		<div className='bg-white p-4 rounded-lg shadow-md'>
-			<h2 className='text-lg font-semibold mb-4'>Thống kê lượt truy cập website</h2>
+			<div className='flex justify-between items-center mb-4'>
+				<h2 className='text-lg font-semibold'>Thống kê lượt truy cập website</h2>
+				<div className='text-right'>
+					<p className='text-sm text-gray-500'>Tổng lượt truy cập:</p>
+					<p className='text-lg font-bold text-indigo-600'>{totalVisits.toLocaleString()}</p>
+				</div>
+			</div>
 			<div className='h-64'>
 				<ResponsiveContainer width='100%' height='100%'>
 					<LineChart
